@@ -48,43 +48,48 @@ const blogPosts: BlogPost[] = [
   },
 ];
 
-export const Blog = () => {
+export const Blog = ({ isPage = false }: { isPage?: boolean }) => {
   const featuredPost = blogPosts.find(post => post.featured);
   const regularPosts = blogPosts.filter(post => !post.featured);
 
   return (
-    <section id="blog" className="py-28 lg:py-32">
+    <section id="blog" className={isPage ? "" : "py-28 lg:py-32"}>
       <div className="container">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl mb-4">
-            Latest Thoughts & Insights
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Sharing my experiences, learnings, and insights about software development,
-            technology trends, and best practices.
-          </p>
-        </div>
+        {!isPage && (
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl mb-4">
+              Latest Thoughts & Insights
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Sharing my experiences, learnings, and insights about software development,
+              technology trends, and best practices.
+            </p>
+          </div>
+        )}
 
         {/* Featured Blog Post */}
         {featuredPost && (
           <div className="mb-16">
             <h3 className="text-2xl font-semibold mb-8 text-center">Featured Post</h3>
-            <Card className="overflow-hidden">
+            <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-muted/10">
               <div className="md:flex">
                 <div className="md:w-1/2">
-                  <div className="relative h-64 md:h-full">
+                  <div className="relative h-64 md:h-full group">
                     <Image
                       src={featuredPost.image}
                       alt={featuredPost.title}
                       fill
                       className="object-cover"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </div>
                 <div className="md:w-1/2 p-8">
-                  <div className="flex items-center gap-4 mb-4">
-                    <Badge variant="secondary">{featuredPost.category}</Badge>
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                    <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
+                      {featuredPost.category}
+                    </Badge>
                     <div className="flex items-center gap-1 text-sm text-muted-foreground">
                       <Calendar className="w-4 h-4" />
                       {new Date(featuredPost.date).toLocaleDateString('en-US', {
@@ -98,13 +103,14 @@ export const Blog = () => {
                       {featuredPost.readTime}
                     </div>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4">{featuredPost.title}</h3>
-                  <p className="text-muted-foreground mb-6">{featuredPost.excerpt}</p>
+                  <h3 className="text-2xl font-bold mb-4 hover:text-primary transition-colors">{featuredPost.title}</h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">{featuredPost.excerpt}</p>
                   <Link
                     href={`/blog/${featuredPost.id}`}
-                    className="text-primary hover:text-primary/80 font-medium"
+                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors"
                   >
-                    Read More →
+                    Read More
+                    <span className="text-lg transition-transform group-hover:translate-x-1">→</span>
                   </Link>
                 </div>
               </div>
@@ -115,40 +121,44 @@ export const Blog = () => {
         {/* Regular Blog Posts */}
         <div className="grid md:grid-cols-2 gap-8">
           {regularPosts.map((post) => (
-            <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="relative h-48">
+            <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-muted/5 group">
+              <div className="relative h-48 overflow-hidden">
                 <Image
                   src={post.image}
                   alt={post.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-300 group-hover:scale-110"
                 />
-              </div>
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-3">
-                  <Badge variant="outline" className="text-xs">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-4 left-4">
+                  <Badge variant="secondary" className="bg-white/90 text-gray-800 border-0 backdrop-blur-sm">
                     <Tag className="w-3 h-3 mr-1" />
                     {post.category}
                   </Badge>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-3 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
                     {new Date(post.date).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric'
                     })}
                   </div>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />
                     {post.readTime}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3 line-clamp-2">{post.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{post.excerpt}</p>
+                <h3 className="text-xl font-semibold mb-3 line-clamp-2 group-hover:text-primary transition-colors">{post.title}</h3>
+                <p className="text-muted-foreground text-sm mb-4 line-clamp-3 leading-relaxed">{post.excerpt}</p>
                 <Link
                   href={`/blog/${post.id}`}
-                  className="text-primary hover:text-primary/80 text-sm font-medium"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 text-sm font-medium transition-colors"
                 >
-                  Read More →
+                  Read More
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
                 </Link>
               </CardContent>
             </Card>
@@ -156,15 +166,17 @@ export const Blog = () => {
         </div>
 
         {/* View All Link */}
-        <div className="text-center mt-12">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
-          >
-            View All Posts
-            <span className="text-lg">→</span>
-          </Link>
-        </div>
+        {!isPage && (
+          <div className="text-center mt-12">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
+            >
+              View All Posts
+              <span className="text-lg">→</span>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
