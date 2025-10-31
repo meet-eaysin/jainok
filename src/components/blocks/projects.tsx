@@ -59,11 +59,11 @@ export const Projects = () => {
     <section id="projects" className="py-28 lg:py-32">
       <div className="container">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl mb-4">
+        <div className="mb-16">
+          <h2 className="mb-3 font-serif text-4xl font-medium leading-tight md:text-7xl">
             Featured Projects
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg font-light">
             A showcase of my recent work, featuring full-stack applications,
             libraries, and tools I've built using modern technologies.
           </p>

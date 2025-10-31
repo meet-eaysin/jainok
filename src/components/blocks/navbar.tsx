@@ -30,7 +30,7 @@ export const Navbar = () => {
   return (
     <section
       className={cn(
-        "bg-background/70 absolute left-1/2 z-50 w-[min(90%,700px)] -translate-x-1/2 rounded-4xl border backdrop-blur-md transition-all duration-300",
+        "bg-background/70 absolute left-1/2 z-50 w-[min(90%,1160px)] rounded-sm -translate-x-1/2 border backdrop-blur-md transition-all duration-300",
         "top-5 lg:top-12",
       )}
     >

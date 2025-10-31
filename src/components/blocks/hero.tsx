@@ -1,28 +1,37 @@
 
+import Link from "next/link";
+
 import {
   ArrowRight,
+  ArrowUpRight,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
   return (
-    <section className="py-28 lg:py-32 lg:pt-44">
-      <div className="container flex flex-col justify-between gap-8 md:gap-14 lg:flex-row lg:gap-20">
-        <div className="flex-1">
-          <h1 className="text-foreground max-w-160 text-3xl tracking-tight md:text-4xl lg:text-5xl xl:whitespace-nowrap">
-            Hi, I'm Eaysin Mia
-          </h1>
+    <section className="flex items-center justify-center py-32 min-h-screen">
+      <div className="container flex flex-col gap-7 mx-auto px-6">
+        <div className="flex flex-col items-start gap-2">
+          <h3 className="mb-2 font-serif text-4xl font-medium leading-tight md:text-7xl">
+            Eaysin Mia
+            <br className="inline" />
+            Full Stack Engineer
+          </h3>
 
-          <p className="text-muted-foreground text-1xl mt-5 md:text-3xl">
-            Full Stack Developer specializing in React, Node.js, and modern web technologies.
-            Building scalable applications with 2+ years of experience.
+          <p className=" text-lg text-zinc-700 sm:text-xl dark:text-zinc-400 font-light">
+            2+ years of experience in building scalable, user-facing web applications and backend systems. Experienced with the latest frontend technologies and state management, and backend development using relational and NoSQL databases.
           </p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-4 lg:flex-nowrap">
+        </div>
+        <div className="flex flex-wrap items-start gap-5 lg:gap-7">
             <Button asChild>
-              <a href="#projects">
-                View My Work
+              <a href="mailto:meet.eaysin@gmail.com">
+                <div className="flex items-center gap-2">
+                  <ArrowUpRight className="size-4" />
+                </div>
+                <span className="whitespace-nowrap pl-4 pr-6 text-sm lg:pl-6 lg:pr-8 lg:text-base">
+                  Get In Touch
+                </span>
               </a>
             </Button>
             <Button
@@ -39,8 +48,17 @@ export const Hero = () => {
               </a>
             </Button>
           </div>
-        </div>
-
+          
+        <p className="text-sm text-zinc-700 dark:text-zinc-400">
+          Connect with me on{" "}
+          <Link
+            href="https://github.com/eaysinmia"
+            className="font-bold underline underline-offset-4"
+          >
+            GitHub
+          </Link>{" "}
+          for my latest projects
+        </p>
       </div>
     </section>
   );

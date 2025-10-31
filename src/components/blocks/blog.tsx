@@ -57,11 +57,11 @@ export const Blog = ({ isPage = false }: { isPage?: boolean }) => {
       <div className="container">
         {/* Header */}
         {!isPage && (
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl mb-4">
-              Latest Thoughts & Insights
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <div className="mb-16">
+             <h2 className="mb-3 font-serif text-4xl font-medium leading-tight md:text-7xl">
+            Latest Thoughts & Insights
+          </h2>
+            <p className="text-muted-foreground text-lg font-light">
               Sharing my experiences, learnings, and insights about software development,
               technology trends, and best practices.
             </p>
@@ -71,7 +71,6 @@ export const Blog = ({ isPage = false }: { isPage?: boolean }) => {
         {/* Featured Blog Post */}
         {featuredPost && (
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold mb-8 text-center">Featured Post</h3>
             <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-muted/10">
               <div className="md:flex">
                 <div className="md:w-1/2">
