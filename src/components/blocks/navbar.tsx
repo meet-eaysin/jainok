@@ -30,7 +30,7 @@ export const Navbar = () => {
   return (
     <section
       className={cn(
-        "bg-background/70 sticky top-0 z-50 w-full border backdrop-blur-md transition-all duration-300",
+        "bg-background/70 sticky top-0 z-50 w-full backdrop-blur-md transition-all duration-300",
       )}
     >
       <div className="mx-auto w-[min(90%,1160px)] px-6 py-3">

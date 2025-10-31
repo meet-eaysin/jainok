@@ -7,14 +7,16 @@ import { Projects } from "@/components/blocks/projects";
 export default function Home() {
   return (
     <>
-      <Background >
+      <Background className="via-muted to-muted/80">
         <Hero />
+        <Experience />
       </Background>
-      <Experience />
+
       <Background variant="bottom">
         <Projects />
+        <Blog />
       </Background>
-      <Blog />
+
     </>
   );
 }
