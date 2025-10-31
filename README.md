@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website showcasing the work and experience of Eaysin Mia, a Full Stack Developer specializing in React, Node.js, and modern web technologies.
 
-- [Portfolio](https://eaysinmia.dev/)
+- [Portfolio](meet-eaysin.vercel.app/)
 - [GitHub](https://github.com/meet-eaysin)
 - [LinkedIn](https://www.linkedin.com/in/meet-eaysin/)
 
