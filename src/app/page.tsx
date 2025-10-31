@@ -1,8 +1,11 @@
+import Link from "next/link";
+
 import { Background } from "@/components/background";
 import { Blog } from "@/components/blocks/blog";
 import { Experience } from "@/components/blocks/experience";
 import { Hero } from "@/components/blocks/hero";
 import { Projects } from "@/components/blocks/projects";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -15,6 +18,21 @@ export default function Home() {
       <Background variant="bottom">
         <Projects />
         <Blog />
+
+        <section className="py-28 lg:py-32 lg:pt-10">
+          <div className="container">
+            <h2 className="mb-3 font-serif text-4xl font-medium leading-tight md:text-7xl">
+              Let's work together
+            </h2>
+            <p className="text-muted-foreground text-lg font-light mb-8">
+              I'm always interested in new opportunities and exciting projects.
+            </p>
+            
+            <Button asChild size="lg">
+              <Link href="/contact">Get in touch</Link>
+            </Button>
+          </div>
+        </section>
       </Background>
 
     </>

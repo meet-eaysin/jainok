@@ -37,7 +37,9 @@ export function ContactForm() {
       name: "",
       email: "",
       company: "",
-      employees: "",
+      projectType: "",
+      budget: "",
+      timeline: "",
       message: "",
       agree: false,
     } as unknown as Schema,
@@ -168,21 +170,94 @@ export function ContactForm() {
         <FormField
           control={form.control}
           rules={{ required: false }}
-          name="employees"
+          name="projectType"
           render={({ field }) => {
             const options = [
-              { value: "1", label: "1" },
-              { value: "2-10", label: "2-10" },
-              { value: "11-50", label: "11-50" },
-              { value: "51-500", label: "51-500" },
+              { value: "web-app", label: "Web Application" },
+              { value: "mobile-app", label: "Mobile Application" },
+              { value: "api", label: "API Development" },
+              { value: "consulting", label: "Technical Consulting" },
+              { value: "other", label: "Other" },
             ];
             return (
               <FormItem className="w-full">
-                <FormLabel>Number of employees </FormLabel>
+                <FormLabel>Project type</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="e.g. 11-50" />
+                      <SelectValue placeholder="Select project type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {options.map(({ label, value }) => (
+                      <SelectItem key={value} value={value}>
+                        {label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+
+        <FormField
+          control={form.control}
+          rules={{ required: false }}
+          name="budget"
+          render={({ field }) => {
+            const options = [
+              { value: "under-5k", label: "Under $5,000" },
+              { value: "5k-15k", label: "$5,000 - $15,000" },
+              { value: "15k-30k", label: "$15,000 - $30,000" },
+              { value: "30k-50k", label: "$30,000 - $50,000" },
+              { value: "over-50k", label: "Over $50,000" },
+            ];
+            return (
+              <FormItem className="w-full">
+                <FormLabel>Budget range</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select budget range" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {options.map(({ label, value }) => (
+                      <SelectItem key={value} value={value}>
+                        {label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+
+        <FormField
+          control={form.control}
+          rules={{ required: false }}
+          name="timeline"
+          render={({ field }) => {
+            const options = [
+              { value: "asap", label: "ASAP" },
+              { value: "1-month", label: "1 month" },
+              { value: "2-3-months", label: "2-3 months" },
+              { value: "3-6-months", label: "3-6 months" },
+              { value: "6-months-plus", label: "6+ months" },
+            ];
+            return (
+              <FormItem className="w-full">
+                <FormLabel>Timeline</FormLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select timeline" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>

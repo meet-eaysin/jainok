@@ -2,62 +2,76 @@ import React from "react";
 
 import Link from "next/link";
 
-import { Facebook, Linkedin, Twitter } from "lucide-react";
+import { Linkedin } from "lucide-react";
 
 import { ContactForm } from "@/components/blocks/contact-form";
 import { DashedLine } from "@/components/dashed-line";
 
 const contactInfo = [
   {
-    title: "Corporate office",
+    title: "Location",
     content: (
       <p className="text-muted-foreground mt-3">
-        1 Carlsberg Close
-        <br />
-        1260 Hillview, Australia
+        Rajshahi, Dhaka, Bangladesh
       </p>
     ),
   },
   {
-    title: "Email us",
+    title: "Contact",
     content: (
       <div className="mt-3">
         <div>
-          <p className="">Careers</p>
+          <p className="font-medium">Email</p>
           <Link
-            href="mailto:careers@example.com"
+            href="mailto:meet.eaysin@gmail.com"
             className="text-muted-foreground hover:text-foreground"
           >
-            careers@example.com
+            meet.eaysin@gmail.com
           </Link>
         </div>
-        <div className="mt-1">
-          <p className="">Press</p>
+        <div className="mt-2">
+          <p className="font-medium">Phone</p>
           <Link
-            href="mailto:press@example.com"
+            href="tel:+8801643226078"
             className="text-muted-foreground hover:text-foreground"
           >
-            press@example.com
+            (+880) 1643-226078
           </Link>
         </div>
       </div>
     ),
   },
   {
-    title: "Follow us",
+    title: "Connect",
     content: (
       <div className="mt-3 flex gap-6 lg:gap-10">
-        <Link href="#" className="text-muted-foreground hover:text-foreground">
-          <Facebook className="size-5" />
-        </Link>
         <Link
-          href="https://x.com/ausrobdev"
+          href="https://github.com/meet-eaysin"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-muted-foreground hover:text-foreground"
         >
-          <Twitter className="size-5" />
+          <svg className="size-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
         </Link>
-        <Link href="#" className="text-muted-foreground hover:text-foreground">
+        <Link
+          href="https://linkedin.com/in/eaysin-mia"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground"
+        >
           <Linkedin className="size-5" />
+        </Link>
+        <Link
+          href="https://portfolio-eaysin.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground"
+        >
+          <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
+          </svg>
         </Link>
       </div>
     ),
@@ -69,10 +83,10 @@ export default function Contact() {
     <section className="py-28 lg:py-32 lg:pt-44">
       <div className="container">
         <h2 className="mb-3 font-serif text-4xl font-medium leading-tight md:text-7xl">
-            Contact us
+            Let's work together
           </h2>
           <p className="text-muted-foreground text-lg font-light">
-            Hopefully this form gets through our spam filters.
+            I'm always interested in new opportunities and exciting projects. Let's discuss how we can collaborate.
           </p>
 
         <div className="mt-10 flex justify-between gap-8 max-sm:flex-col md:mt-14 lg:mt-20 lg:gap-12">
@@ -86,9 +100,9 @@ export default function Contact() {
 
         <DashedLine className="my-12" />
 
-        {/* Inquiry Form */}
+        {/* Contact Form */}
         <div className="mx-auto">
-          <h2 className="mb-4 text-lg font-semibold">Inquiries</h2>
+          <h2 className="mb-4 text-lg font-semibold">Send me a message</h2>
           <ContactForm />
         </div>
       </div>
