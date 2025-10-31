@@ -2,11 +2,14 @@
 
 import Link from "next/link";
 
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Facebook, Code } from "lucide-react";
 
 const social = [
-  { name: "GitHub", href: "https://github.com/eaysinmia", icon: Github },
-  { name: "LinkedIn", href: "https://linkedin.com/in/eaysinmia", icon: Linkedin },
+  { name: "GitHub", href: "https://github.com/meet-eaysin", icon: Github },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/meet-eaysin/", icon: Linkedin },
+  { name: "Facebook", href: "https://web.facebook.com/meet.eaysin/", icon: Facebook },
+  { name: "Twitter", href: "https://x.com/meet_eaysin", icon: Code },
+  { name: "LeetCode", href: "https://leetcode.com/u/meet-eaysin/", icon: Code },
   { name: "Email", href: "mailto:meet.eaysin@gmail.com", icon: Mail },
 ];
 
