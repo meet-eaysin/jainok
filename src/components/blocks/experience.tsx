@@ -49,7 +49,7 @@ const Experience = ({
   ],
 }: Experience5Props) => {
   return (
-    <section className="py-16 md:py-32">
+    <section id="experience" className="py-16 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-7xl">
           <h2 className="mb-12 font-serif text-4xl font-medium leading-tight md:text-7xl">
