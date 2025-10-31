@@ -93,7 +93,7 @@ export function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={handleSubmit}
-        className="flex w-full flex-col gap-2 space-y-4 rounded-md"
+        className="w-full grid grid-cols-2 gap-10 rounded-md"
       >
         <FormField
           control={form.control}

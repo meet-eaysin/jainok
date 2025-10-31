@@ -6,11 +6,11 @@ export default function BlogPage() {
     <Background className="via-muted to-muted/80">
       <div className="container py-28 lg:py-32">
         {/* Page Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl mb-4">
+        <div className="mb-16">
+          <h2 className="mb-3 font-serif text-4xl font-medium leading-tight md:text-7xl">
             Blog & Insights
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          </h2>
+          <p className="text-muted-foreground text-lg font-light">
             Sharing my experiences, learnings, and insights about software development,
             technology trends, and best practices.
           </p>
