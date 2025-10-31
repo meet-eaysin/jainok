@@ -47,7 +47,7 @@ const About = () => {
         <TextSection
           title="Education"
           paragraphs={[
-            "M.Sc in Geography & Environment - Ananda Mohan College, Mymensingh (GPA: 2.81/4.0)",
+            "M.Sc in Geography & Environment - Ananda Mohan College, Mymensingh (GPA: 2.88/4.0)",
             "Continuous learning through online platforms, staying updated with the latest technologies and best practices in software development.",
           ]}
         />

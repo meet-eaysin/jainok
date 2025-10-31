@@ -26,19 +26,19 @@ const projects: Project[] = [
     description: "A powerful note-taking and knowledge management application with multiple view types.",
     longDescription: "Database System: Multiple view types (table, board, calendar, gallery) with custom properties (text, number, select, multi-select, checkbox, date-range, url etc.), PARA Methodology Implementation, Calendars with event management. multiple workspaces.",
     techStack: ["React", "Node.js", "MongoDB", "Express", "TypeScript"],
-    githubUrl: "https://github.com/eaysinmia/second-brain",
+    githubUrl: "https://github.com/meet-eaysin/second-brain",
     liveUrl: "https://second-brain-demo.vercel.app",
-    image: "/projects/second-brain.webp",
+    image: "/projects/second-brain-property-create.png",
     featured: true,
   },
   {
     id: "react-form-interactions",
     title: "React Form Interactions",
     description: "A reusable React library for form state management and validation.",
-    longDescription: "Developed a reusable React library (react-form-interactions) to simplify form state management and validation in React applications. Define comprehensive validation rules for form fields including required fields, minimum/maximum lengths, patterns, and more.",
+    longDescription: "Developed a reusable React library (react-form-interactions) to simplify form state management and validation in React applications. Define comprehensive validation rules for form fields including required fields, minimum/maximum lengths, patterns, and more. Easily extend with custom validation rules and behaviors tailored to specific application requirements.",
     techStack: ["React", "TypeScript", "JavaScript"],
-    githubUrl: "https://github.com/eaysinmia/react-form-interactions",
-    image: "/projects/react-form-interactions.webp",
+    githubUrl: "https://github.com/meet-eaysin/react-form-interactions",
+    image: "/hero.webp", // Using existing hero image as placeholder
   },
   {
     id: "techconnect",
@@ -46,8 +46,8 @@ const projects: Project[] = [
     description: "Employee management platform for tracking performance and internal communication.",
     longDescription: "TechConnect is an employee management platform that helps organizations track employee performance, generate reports, and manage internal communication efficiently. It provides a detailed dashboard for managers to monitor team productivity.",
     techStack: ["React", "Node.js", "TypeScript", "Tailwind CSS"],
-    githubUrl: "https://github.com/eaysinmia/techconnect",
-    image: "/projects/techconnect.webp",
+    githubUrl: "https://github.com/meet-eaysin/techconnect",
+    image: "/hero.webp", // Using existing hero image as placeholder
   },
 ];
 
@@ -125,7 +125,7 @@ export const Projects = () => {
         </div>
 
         {/* Regular Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {regularProjects.map((project) => (
             <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow">
               <div className="relative h-48">

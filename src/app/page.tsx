@@ -27,7 +27,7 @@ export default function Home() {
             <p className="text-muted-foreground text-lg font-light mb-8">
               I'm always interested in new opportunities and exciting projects.
             </p>
-            
+
             <Button asChild size="lg">
               <Link href="/contact">Get in touch</Link>
             </Button>

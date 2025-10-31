@@ -127,6 +127,47 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Eaysin Mia",
+    "jobTitle": "Full Stack Engineer",
+    "description": "Full Stack Developer specializing in React, Node.js, and modern web technologies. Building scalable applications with 2+ years of experience.",
+    "url": "https://eaysinmia.dev",
+    "sameAs": [
+      "https://github.com/meet-eaysin",
+      "https://www.linkedin.com/in/meet-eaysin/",
+      "https://www.linkedin.com/in/meet-eaysin/"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rajshahi",
+      "addressRegion": "Dhaka",
+      "addressCountry": "Bangladesh"
+    },
+    "email": "meet.eaysin@gmail.com",
+    "telephone": "+8801643226078",
+    "knowsAbout": [
+      "JavaScript",
+      "TypeScript",
+      "React.js",
+      "Next.js",
+      "Node.js",
+      "MongoDB",
+      "PostgreSQL",
+      "Full Stack Development"
+    ],
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Full Stack Developer",
+      "occupationLocation": {
+        "@type": "City",
+        "name": "Rajshahi",
+        "addressCountry": "Bangladesh"
+      }
+    }
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -135,6 +176,13 @@ export default function RootLayout({
           crossOrigin="anonymous"
           src="https://tweakcn.com/live-preview.min.js"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+        <link rel="canonical" href="https://eaysinmia.dev" />
       </head>
       <body className={`${dmSans.variable} ${inter.variable} antialiased`}>
         <ThemeProvider

@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { Github } from "lucide-react";
+import { Github, LucideLinkedin } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
@@ -66,9 +66,16 @@ export const Navbar = () => {
             <a
               href="https://github.com/shadcnblocks/mainline-nextjs-template"
               className="text-muted-foreground hover:text-foreground transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Github className="size-4" />
               <span className="sr-only">GitHub</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/eaysin-mia/" className="text-muted-foreground hover:text-foreground transition-colors ms-2" target="_blank" rel="noopener noreferrer">
+              <LucideLinkedin className="size-4"/>
+              <span className="sr-only">LinkedIn</span>
             </a>
 
             {/* Hamburger Menu Button (Mobile Only) */}
