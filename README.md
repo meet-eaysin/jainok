@@ -6,8 +6,6 @@ A modern, responsive portfolio website showcasing the work and experience of Eay
 - [GitHub](https://github.com/meet-eaysin)
 - [LinkedIn](https://www.linkedin.com/in/meet-eaysin/)
 
-![Eaysin Mia Portfolio](./public/og-image.jpg)
-
 ## Getting Started
 
 ```bash
