@@ -2,50 +2,41 @@ import { DashedLine } from "@/components/dashed-line";
 
 const stats = [
   {
-    value: "$150M",
-    label: "Raised",
+    value: "2+",
+    label: "Years Experience",
   },
   {
-    value: "20K",
-    label: "Companies",
+    value: "15+",
+    label: "Projects Completed",
   },
   {
-    value: "1.3B",
-    label: "Monthly transactions",
+    value: "3",
+    label: "Companies Worked",
   },
   {
-    value: "1.5K",
-    label: "Connections per minute",
+    value: "10+",
+    label: "Technologies Mastered",
   },
 ];
 
 export function AboutHero() {
   return (
     <section className="">
-      <div className="container flex max-w-5xl flex-col justify-between gap-8 md:gap-20 lg:flex-row lg:items-center lg:gap-24 xl:gap-24">
+      <div className="container flex flex-col justify-between gap-8 md:gap-20 lg:flex-row lg:items-center lg:gap-24 xl:gap-24">
         <div className="flex-[1.5]">
           <h1 className="text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            Democratising quality software
+            Full Stack Developer
           </h1>
 
           <p className="text-muted-foreground mt-5 text-2xl md:text-3xl lg:text-4xl">
-            Mainline is bringing modern software to life with AI magic.
+            Building scalable web applications with modern technologies
           </p>
 
           <p className="text-muted-foreground mt-8 hidden max-w-lg space-y-6 text-lg text-balance md:block lg:mt-12">
-            At Mainline, we are dedicated to transforming the way teams plan,
-            execute, and deliver projects. Our mission is to provide our
-            customers with an unbeatable edge over delays, inefficiencies, and
-            disorganisation through actionable insights and seamless
-            collaboration. We’ll stop at nothing to give you the tools you need
-            to get every project across the finish line.
+            I'm a passionate full-stack developer with 2+ years of experience building scalable web applications using React.js, Next.js, TypeScript, Node.js, and modern databases. I specialize in creating efficient, user-friendly solutions for complex business problems.
             <br />
             <br />
-            We’re customer-obsessed — investing the time to understand every
-            aspect of your workflow so that we can help you operate better than
-            ever before. We’re all in this together because your success is our
-            success. In our history as a company, we’ve never lost a customer,
-            because when your projects succeed, so do we.
+            My expertise spans the entire development lifecycle, from concept to deployment. I love working on challenging projects that require innovative solutions and clean, maintainable code. When I'm not coding, you'll find me exploring new technologies and contributing to open-source projects.
           </p>
         </div>
 

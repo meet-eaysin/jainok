@@ -6,45 +6,50 @@ import { cn } from "@/lib/utils";
 
 const About = () => {
   return (
-    <section className="container mt-10 flex max-w-5xl flex-col-reverse gap-8 md:mt-14 md:gap-14 lg:mt-20 lg:flex-row lg:items-end">
-      {/* Images Left - Text Right */}
-      <div className="flex flex-col gap-8 lg:gap-16 xl:gap-20">
-        <ImageSection
-          images={[
-            { src: "/about/1.webp", alt: "Team collaboration" },
-            { src: "/about/2.webp", alt: "Team workspace" },
-          ]}
-          className="xl:-translate-x-10"
-        />
-
+    <section className="container mt-10 flex flex-col gap-8 md:mt-14 md:gap-14 lg:mt-20">
+      {/* Skills & Technologies */}
+      <div className="mb-16">
         <TextSection
-          title="The team"
+          title="Skills & Technologies"
           paragraphs={[
-            "We started building Mainline in 2019 and launched in 2022. Every endpoint has been designed from the ground up — with no technical debt or legacy systems. We are purpose-built to power project management innovation for the next hundred years.",
-            "We are 100% founder and team-owned, profitable, and we keep our team lean. Over time, this page will become more polished, but for now, we're focused on delivering for developers.",
-            "If you're interested in building the future of PM, check out our open roles below.",
+            "JavaScript (ES6+), TypeScript, React.js (19+), Next.js, Node.js, Express, MongoDB, PostgreSQL, Prisma, RESTful APIs, State Management (Redux/Zustand), Testing & Debugging, JWT, Socket.io, Docker, Git/GitHub",
+            "I specialize in full-stack development with expertise in modern JavaScript frameworks and scalable database solutions. My experience includes building ERP systems, healthcare platforms, and AI-driven applications.",
           ]}
-          ctaButton={{
-            href: "/careers",
-            text: "View open roles",
-          }}
         />
       </div>
 
-      {/* Text Left - Images Right */}
-      <div className="flex flex-col gap-8 lg:gap-16 xl:gap-20">
+      {/* Experience */}
+      <div className="mb-16">
         <TextSection
+          title="Professional Experience"
           paragraphs={[
-            "At Mainline, we are dedicated to transforming the way teams plan, execute, and deliver projects. Our mission is to provide our customers with an unbeatable edge over delays, inefficiencies, and disorganisation through actionable insights and seamless collaboration. We'll stop at nothing to give you the tools you need to get every project across the finish line.",
-            "We're customer-obsessed — investing the time to understand every aspect of your workflow so that we can help you operate better than ever before. We're all in this together because your success is our success. In our history as a company, we've never lost a customer, because when your projects succeed, so do we.",
+            "Full Stack Developer at Next Level Media (Bangladesh Branch) - Currently leading development of a large-scale ERP solution with MERN Stack, implementing Google Ads API integration, Twilio SMS automation, and dynamic reporting with AI-powered insights.",
+            "Software Engineer at BlackRock IT Solutions - Led the report module for a healthcare staff scheduling system, managing real-time provider schedules, patient flow, and location-based reports across multiple facilities.",
+            "Frontend Developer at Excel Technologies Ltd. - Contributed to SmartCare Pro healthcare platform, implementing ANC, Vitals, PEP, PrEP, Family Planning, HTS, and Medical Encounters modules.",
           ]}
         />
-        <ImageSection
-          images={[
-            { src: "/about/3.webp", alt: "Modern workspace" },
-            { src: "/about/4.webp", alt: "Team collaboration" },
+      </div>
+
+      {/* Projects */}
+      <div className="mb-16">
+        <TextSection
+          title="Featured Projects"
+          paragraphs={[
+            "Second Brain - A powerful note-taking application with multiple view types (table, board, calendar, gallery), custom properties, PARA methodology, and workspace management.",
+            "React Form Interactions - A reusable React library for form state management and validation with comprehensive validation rules and custom behaviors.",
+            "TechConnect - Employee management platform with timesheets, request management, and secure authentication systems.",
           ]}
-          className="hidden lg:flex xl:translate-x-10"
+        />
+      </div>
+
+      {/* Education */}
+      <div className="mb-16">
+        <TextSection
+          title="Education"
+          paragraphs={[
+            "M.Sc in Geography & Environment - Ananda Mohan College, Mymensingh (GPA: 2.81/4.0)",
+            "Continuous learning through online platforms, staying updated with the latest technologies and best practices in software development.",
+          ]}
         />
       </div>
     </section>
