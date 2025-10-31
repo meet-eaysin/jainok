@@ -30,67 +30,68 @@ export const Navbar = () => {
   return (
     <section
       className={cn(
-        "bg-background/70 absolute left-1/2 z-50 w-[min(90%,1160px)] rounded-sm -translate-x-1/2 border backdrop-blur-md transition-all duration-300",
-        "top-5 lg:top-12",
+        "bg-background/70 sticky top-0 z-50 w-full border backdrop-blur-md transition-all duration-300",
       )}
     >
-      <div className="flex items-center justify-between px-6 py-3">
-        <Link href={"/"} className="flex shrink-0 items-center gap-2 text-xl font-medium">
-          Eaysin
-        </Link>
+      <div className="mx-auto w-[min(90%,1160px)] px-6 py-3">
+        <div className="flex items-center justify-between">
+          <Link href={"/"} className="flex shrink-0 items-center gap-2 text-xl font-medium">
+            Eaysin
+          </Link>
 
-        {/* Desktop Navigation */}
-        <NavigationMenu className="max-lg:hidden">
-          <NavigationMenuList>
-            {ITEMS.map((link) => (
-              <NavigationMenuItem key={link.label} className="">
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "relative bg-transparent px-1.5 text-sm font-medium transition-opacity hover:opacity-75",
-                    pathname === link.href && "text-muted-foreground",
-                  )}
-                >
-                  {link.label}
-                </Link>
-              </NavigationMenuItem>
-            ))}
-          </NavigationMenuList>
-        </NavigationMenu>
+          {/* Desktop Navigation */}
+          <NavigationMenu className="max-lg:hidden">
+            <NavigationMenuList>
+              {ITEMS.map((link) => (
+                <NavigationMenuItem key={link.label} className="">
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      "relative bg-transparent px-1.5 text-sm font-medium transition-opacity hover:opacity-75",
+                      pathname === link.href && "text-muted-foreground",
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
 
-        {/* Auth Buttons */}
-        <div className="flex items-center gap-2.5">
-          <ThemeToggle />
-          
-          <a
-            href="https://github.com/shadcnblocks/mainline-nextjs-template"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Github className="size-4" />
-            <span className="sr-only">GitHub</span>
-          </a>
+          {/* Auth Buttons */}
+          <div className="flex items-center gap-2.5">
+            <ThemeToggle />
 
-          {/* Hamburger Menu Button (Mobile Only) */}
-          <button
-            className="text-muted-foreground relative flex size-8 lg:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <span className="sr-only">Open main menu</span>
-            <div className="absolute top-1/2 left-1/2 block w-[18px] -translate-x-1/2 -translate-y-1/2">
-              <span
-                aria-hidden="true"
-                className={`absolute block h-0.5 w-full rounded-full bg-current transition duration-500 ease-in-out ${isMenuOpen ? "rotate-45" : "-translate-y-1.5"}`}
-              ></span>
-              <span
-                aria-hidden="true"
-                className={`absolute block h-0.5 w-full rounded-full bg-current transition duration-500 ease-in-out ${isMenuOpen ? "opacity-0" : ""}`}
-              ></span>
-              <span
-                aria-hidden="true"
-                className={`absolute block h-0.5 w-full rounded-full bg-current transition duration-500 ease-in-out ${isMenuOpen ? "-rotate-45" : "translate-y-1.5"}`}
-              ></span>
-            </div>
-          </button>
+            <a
+              href="https://github.com/shadcnblocks/mainline-nextjs-template"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Github className="size-4" />
+              <span className="sr-only">GitHub</span>
+            </a>
+
+            {/* Hamburger Menu Button (Mobile Only) */}
+            <button
+              className="text-muted-foreground relative flex size-8 lg:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <span className="sr-only">Open main menu</span>
+              <div className="absolute top-1/2 left-1/2 block w-[18px] -translate-x-1/2 -translate-y-1/2">
+                <span
+                  aria-hidden="true"
+                  className={`absolute block h-0.5 w-full rounded-full bg-current transition duration-500 ease-in-out ${isMenuOpen ? "rotate-45" : "-translate-y-1.5"}`}
+                ></span>
+                <span
+                  aria-hidden="true"
+                  className={`absolute block h-0.5 w-full rounded-full bg-current transition duration-500 ease-in-out ${isMenuOpen ? "opacity-0" : ""}`}
+                ></span>
+                <span
+                  aria-hidden="true"
+                  className={`absolute block h-0.5 w-full rounded-full bg-current transition duration-500 ease-in-out ${isMenuOpen ? "-rotate-45" : "translate-y-1.5"}`}
+                ></span>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
