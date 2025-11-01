@@ -5,6 +5,7 @@ import { Calendar, Clock, Tag } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { blogPosts as defaultBlogPosts } from "@/data/blog-posts";
 import type { BlogPost } from "@/data/blog-posts";
 
 interface BlogProps {
@@ -17,7 +18,7 @@ export const Blog = ({
   blogPosts: propBlogPosts,
 }: BlogProps) => {
   // Use prop data if provided, otherwise fall back to default
-  const blogPosts = propBlogPosts || [];
+  const blogPosts = propBlogPosts || defaultBlogPosts;
   const featuredPost = blogPosts.find((post) => post.featured);
   const regularPosts = blogPosts.filter((post) => !post.featured);
 
