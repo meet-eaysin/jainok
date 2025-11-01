@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { Github, LucideLinkedin } from "lucide-react";
+import { Github, Linkedin, Menu, X } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
@@ -28,106 +28,151 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMenuOpen && !(event.target as Element).closest('.mobile-menu-container')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMenuOpen]);
+
   return (
-    <section
-      className={cn(
-        "bg-background/70 sticky top-0 z-50 w-full backdrop-blur-md transition-all duration-300",
-      )}
-    >
-      <div className="mx-auto w-[min(90%,1160px)] px-6 py-3">
-        <div className="flex items-center justify-between">
-          <Link href={"/"} className="flex shrink-0 items-center gap-2 text-xl font-medium">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="mx-auto w-[min(90%,1160px)] px-4 sm:px-6">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+           <Link href={"/"} className="flex shrink-0 items-center gap-2 text-xl font-medium">
             Eaysin
           </Link>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="max-lg:hidden">
-            <NavigationMenuList>
-              {ITEMS.map((link) => (
-                <NavigationMenuItem key={link.label} className="">
-                  <Link
-                    href={link.href}
-                    className={cn(
-                      "relative bg-transparent px-1.5 text-sm font-medium transition-opacity hover:opacity-75",
-                      pathname === link.href && "text-muted-foreground",
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                </NavigationMenuItem>
-              ))}
+          <NavigationMenu className="hidden lg:flex">
+            <NavigationMenuList className="gap-1">
+              {ITEMS.map((link) => {
+                const isActive = pathname === link.href || (link.href.startsWith('/#') && pathname === '/' && link.href.includes('#experience'));
+                return (
+                  <NavigationMenuItem key={link.label}>
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "group relative px-3 py-2 text-sm font-medium transition-all duration-200 hover:text-muted-foreground",
+                        isActive && "text-muted-foreground"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </NavigationMenuItem>
+                );
+              })}
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* Auth Buttons */}
-          <div className="flex items-center gap-2.5">
+          {/* Right Side Actions */}
+          <div className="flex items-center gap-2">
             <ThemeToggle />
 
-            <a
-              href="https://github.com/shadcnblocks/mainline-nextjs-template"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="size-4" />
-              <span className="sr-only">GitHub</span>
-            </a>
+            {/* Social Links - Hidden on very small screens */}
+            <div className="hidden items-center gap-1 sm:flex">
+              <a
+                href="https://github.com/meet-eaysin"
+                className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+              >
+                <Github className="h-4 w-4" />
+              </a>
 
-            <a href="https://www.linkedin.com/in/eaysin-mia/" className="text-muted-foreground hover:text-foreground transition-colors ms-2" target="_blank" rel="noopener noreferrer">
-              <LucideLinkedin className="size-4"/>
-              <span className="sr-only">LinkedIn</span>
-            </a>
+              <a
+                href="https://www.linkedin.com/in/meet-eaysin/"
+                className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+            </div>
 
-            {/* Hamburger Menu Button (Mobile Only) */}
+            {/* Mobile Menu Button */}
             <button
-              className="text-muted-foreground relative flex size-8 lg:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground lg:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
-              <span className="sr-only">Open main menu</span>
-              <div className="absolute top-1/2 left-1/2 block w-[18px] -translate-x-1/2 -translate-y-1/2">
-                <span
-                  aria-hidden="true"
-                  className={`absolute block h-0.5 w-full rounded-full bg-current transition duration-500 ease-in-out ${isMenuOpen ? "rotate-45" : "-translate-y-1.5"}`}
-                ></span>
-                <span
-                  aria-hidden="true"
-                  className={`absolute block h-0.5 w-full rounded-full bg-current transition duration-500 ease-in-out ${isMenuOpen ? "opacity-0" : ""}`}
-                ></span>
-                <span
-                  aria-hidden="true"
-                  className={`absolute block h-0.5 w-full rounded-full bg-current transition duration-500 ease-in-out ${isMenuOpen ? "-rotate-45" : "translate-y-1.5"}`}
-                ></span>
-              </div>
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu - Positioned as sibling to avoid sticky positioning issues */}
       </div>
 
-      {/*  Mobile Menu Navigation */}
-      <div
-        className={cn(
-          "bg-background fixed inset-x-0 top-[calc(100%+1rem)] flex flex-col rounded-2xl border p-6 transition-all duration-300 ease-in-out lg:hidden",
-          isMenuOpen
-            ? "visible translate-y-0 opacity-100"
-            : "invisible -translate-y-4 opacity-0",
-        )}
-      >
-        <nav className="divide-border flex flex-1 flex-col divide-y">
-          {ITEMS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className={cn(
-                "text-primary hover:text-primary/80 py-4 text-base font-medium transition-colors first:pt-0 last:pb-0",
-                pathname === link.href && "text-muted-foreground",
-              )}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      </div>
-    </section>
+      {/* Mobile Menu - Outside header to prevent sticky positioning conflicts */}
+      {isMenuOpen && (
+        <div className="mobile-menu-container fixed inset-x-0 top-16 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90 lg:hidden">
+          <nav className="flex flex-col space-y-1 px-4 py-4">
+            {ITEMS.map((link) => {
+              const isActive = pathname === link.href || (link.href.startsWith('/#') && pathname === '/' && link.href.includes('#experience'));
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={cn(
+                    "flex items-center rounded-md px-3 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
+                    isActive ? "bg-accent text-accent-foreground" : "text-muted-foreground"
+                  )}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+
+            {/* Mobile Social Links */}
+            <div className="flex items-center justify-center gap-4 border-t pt-4 mt-4">
+              <a
+                href="https://github.com/meet-eaysin"
+                className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Github className="h-4 w-4" />
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/meet-eaysin/"
+                className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Linkedin className="h-4 w-4" />
+                LinkedIn
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
+
+      {/* Overlay for mobile menu */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 top-16 z-30 bg-background/80 backdrop-blur-sm lg:hidden"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+    </header>
   );
 };
