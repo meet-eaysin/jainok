@@ -9,9 +9,7 @@ export const contactInfo = [
   {
     title: "Location",
     content: (
-      <p className="text-muted-foreground mt-3">
-        Rajshahi, Dhaka, Bangladesh
-      </p>
+      <p className="text-muted-foreground mt-3">Rajshahi, Dhaka, Bangladesh</p>
     ),
   },
   {
@@ -45,12 +43,13 @@ export default function Contact() {
   return (
     <section className="py-28 lg:py-32 lg:pt-44">
       <div className="container">
-        <h2 className="mb-3 font-serif text-4xl font-medium leading-tight md:text-7xl">
-            Let's work together
-          </h2>
-          <p className="text-muted-foreground text-lg font-light">
-            I'm always interested in new opportunities and exciting projects. Let's discuss how we can collaborate.
-          </p>
+        <h2 className="mb-3 font-serif text-4xl leading-tight font-medium md:text-7xl">
+          Let's work together
+        </h2>
+        <p className="text-muted-foreground text-lg font-light">
+          I'm always interested in new opportunities and exciting projects.
+          Let's discuss how we can collaborate.
+        </p>
 
         <div className="mt-10 flex justify-between gap-8 max-sm:flex-col md:mt-14 lg:mt-20 lg:gap-12">
           {contactInfo.map((info, index) => (

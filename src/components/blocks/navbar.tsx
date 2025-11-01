@@ -36,21 +36,27 @@ export const Navbar = () => {
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (isMenuOpen && !(event.target as Element).closest('.mobile-menu-container')) {
+      if (
+        isMenuOpen &&
+        !(event.target as Element).closest(".mobile-menu-container")
+      ) {
         setIsMenuOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full backdrop-blur">
       <div className="mx-auto w-[min(90%,1160px)] px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-           <Link href={"/"} className="flex shrink-0 items-center gap-2 text-xl font-medium">
+          <Link
+            href={"/"}
+            className="flex shrink-0 items-center gap-2 text-xl font-medium"
+          >
             Eaysin
           </Link>
 
@@ -58,14 +64,18 @@ export const Navbar = () => {
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList className="gap-1">
               {ITEMS.map((link) => {
-                const isActive = pathname === link.href || (link.href.startsWith('/#') && pathname === '/' && link.href.includes('#experience'));
+                const isActive =
+                  pathname === link.href ||
+                  (link.href.startsWith("/#") &&
+                    pathname === "/" &&
+                    link.href.includes("#experience"));
                 return (
                   <NavigationMenuItem key={link.label}>
                     <Link
                       href={link.href}
                       className={cn(
-                        "group relative px-3 py-2 text-sm font-medium transition-all duration-200 hover:text-muted-foreground",
-                        isActive && "text-muted-foreground"
+                        "group hover:text-muted-foreground relative px-3 py-2 text-sm font-medium transition-all duration-200",
+                        isActive && "text-muted-foreground",
                       )}
                     >
                       {link.label}
@@ -84,7 +94,7 @@ export const Navbar = () => {
             <div className="hidden items-center gap-1 sm:flex">
               <a
                 href="https://github.com/meet-eaysin"
-                className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                className="text-muted-foreground hover:bg-accent hover:text-accent-foreground rounded-md p-2 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -94,7 +104,7 @@ export const Navbar = () => {
 
               <a
                 href="https://www.linkedin.com/in/meet-eaysin/"
-                className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                className="text-muted-foreground hover:bg-accent hover:text-accent-foreground rounded-md p-2 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -105,12 +115,16 @@ export const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground lg:hidden"
+              className="text-muted-foreground hover:bg-accent hover:text-accent-foreground inline-flex h-9 w-9 items-center justify-center rounded-md transition-colors lg:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </button>
           </div>
         </div>
@@ -120,17 +134,23 @@ export const Navbar = () => {
 
       {/* Mobile Menu - Outside header to prevent sticky positioning conflicts */}
       {isMenuOpen && (
-        <div className="mobile-menu-container fixed inset-x-0 top-16 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90 lg:hidden">
+        <div className="mobile-menu-container bg-background/95 supports-[backdrop-filter]:bg-background/90 fixed inset-x-0 top-16 z-40 border-b backdrop-blur lg:hidden">
           <nav className="flex flex-col space-y-1 px-4 py-4">
             {ITEMS.map((link) => {
-              const isActive = pathname === link.href || (link.href.startsWith('/#') && pathname === '/' && link.href.includes('#experience'));
+              const isActive =
+                pathname === link.href ||
+                (link.href.startsWith("/#") &&
+                  pathname === "/" &&
+                  link.href.includes("#experience"));
               return (
                 <Link
                   key={link.label}
                   href={link.href}
                   className={cn(
-                    "flex items-center rounded-md px-3 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                    isActive ? "bg-accent text-accent-foreground" : "text-muted-foreground"
+                    "hover:bg-accent hover:text-accent-foreground flex items-center rounded-md px-3 py-3 text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-accent text-accent-foreground"
+                      : "text-muted-foreground",
                   )}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -140,10 +160,10 @@ export const Navbar = () => {
             })}
 
             {/* Mobile Social Links */}
-            <div className="flex items-center justify-center gap-4 border-t pt-4 mt-4">
+            <div className="mt-4 flex items-center justify-center gap-4 border-t pt-4">
               <a
                 href="https://github.com/meet-eaysin"
-                className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                className="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
@@ -153,7 +173,7 @@ export const Navbar = () => {
               </a>
               <a
                 href="https://www.linkedin.com/in/meet-eaysin/"
-                className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                className="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
@@ -169,7 +189,7 @@ export const Navbar = () => {
       {/* Overlay for mobile menu */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 top-16 z-30 bg-background/80 backdrop-blur-sm lg:hidden"
+          className="bg-background/80 fixed inset-0 top-16 z-30 backdrop-blur-sm lg:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
       )}

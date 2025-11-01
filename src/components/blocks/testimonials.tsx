@@ -14,7 +14,8 @@ import { cn } from "@/lib/utils";
 
 const items = [
   {
-    quote: "Working with Eaysin has been a pleasure. As a frontend developer specializing in React.js, his technical skills are top-notch, but what really sets him apart is his commitment to delivering great user experiences. Eaysin approaches each project with care, writing clean and efficient code while always thinking about the end user. Eaysin is a collaborative and thoughtful team member, always willing to offer support and share insights. I highly recommend him to any team looking for a skilled and dedicated frontend developer.",
+    quote:
+      "Working with Eaysin has been a pleasure. As a frontend developer specializing in React.js, his technical skills are top-notch, but what really sets him apart is his commitment to delivering great user experiences. Eaysin approaches each project with care, writing clean and efficient code while always thinking about the end user. Eaysin is a collaborative and thoughtful team member, always willing to offer support and share insights. I highly recommend him to any team looking for a skilled and dedicated frontend developer.",
     author: "Parthasarathy Shanmugam",
     role: "UX UI Designer",
     company: "BRITS",

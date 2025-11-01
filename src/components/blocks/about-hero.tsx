@@ -33,10 +33,17 @@ export function AboutHero() {
           </p>
 
           <p className="text-muted-foreground mt-8 hidden max-w-lg space-y-6 text-lg text-balance md:block lg:mt-12">
-            I'm a passionate full-stack developer with 2+ years of experience building scalable web applications using React.js, Next.js, TypeScript, Node.js, and modern databases. I specialize in creating efficient, user-friendly solutions for complex business problems.
+            I'm a passionate full-stack developer with 2+ years of experience
+            building scalable web applications using React.js, Next.js,
+            TypeScript, Node.js, and modern databases. I specialize in creating
+            efficient, user-friendly solutions for complex business problems.
             <br />
             <br />
-            My expertise spans the entire development lifecycle, from concept to deployment. I love working on challenging projects that require innovative solutions and clean, maintainable code. When I'm not coding, you'll find me exploring new technologies and contributing to open-source projects.
+            My expertise spans the entire development lifecycle, from concept to
+            deployment. I love working on challenging projects that require
+            innovative solutions and clean, maintainable code. When I'm not
+            coding, you'll find me exploring new technologies and contributing
+            to open-source projects.
           </p>
         </div>
 

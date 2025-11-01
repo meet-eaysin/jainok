@@ -6,8 +6,16 @@ import { Github, Linkedin, Mail, MapPin, Facebook, Code } from "lucide-react";
 
 const social = [
   { name: "GitHub", href: "https://github.com/meet-eaysin", icon: Github },
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/meet-eaysin/", icon: Linkedin },
-  { name: "Facebook", href: "https://web.facebook.com/meet.eaysin/", icon: Facebook },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/meet-eaysin/",
+    icon: Linkedin,
+  },
+  {
+    name: "Facebook",
+    href: "https://web.facebook.com/meet.eaysin/",
+    icon: Facebook,
+  },
   { name: "Twitter", href: "https://x.com/meet_eaysin", icon: Code },
   { name: "LeetCode", href: "https://leetcode.com/u/meet-eaysin/", icon: Code },
   { name: "Email", href: "mailto:meet.eaysin@gmail.com", icon: Mail },
@@ -16,16 +24,16 @@ const social = [
 export function Footer() {
   return (
     <footer className="bg-background">
-      <div className="container py-8 md:py-12 px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-4">
+      <div className="container px-4 py-8 sm:px-6 md:py-12">
+        <div className="flex flex-col justify-between gap-8 md:flex-row md:gap-4">
           {/* Brand Info */}
-          <div className="space-y-3 flex-1">
+          <div className="flex-1 space-y-3">
             <h3 className="text-lg font-semibold">Eaysin Mia</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+            <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
               Full Stack Developer specializing in modern web technologies.
               Building scalable applications with 2+ years of experience.
             </p>
-            <div className="flex items-center gap-2 text-muted-foreground text-sm">
+            <div className="text-muted-foreground flex items-center gap-2 text-sm">
               <MapPin className="size-4 flex-shrink-0" />
               <span>Rajshahi, Bangladesh</span>
             </div>
@@ -39,7 +47,7 @@ export function Footer() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors p-2 rounded-md hover:bg-muted/50"
+                  className="text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md p-2 transition-colors"
                   aria-label={item.name}
                 >
                   <item.icon className="size-4" />
@@ -50,17 +58,23 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-5 pt-5 border-t border-border/50">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="border-border/50 mt-5 border-t pt-5">
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p className="text-muted-foreground text-sm">
               © {new Date().getFullYear()} Eaysin Mia. All rights reserved.
             </p>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <Link href="/privacy" className="hover:text-foreground transition-colors">
+            <div className="text-muted-foreground flex items-center gap-4 text-sm">
+              <Link
+                href="/privacy"
+                className="hover:text-foreground transition-colors"
+              >
                 Privacy Policy
               </Link>
               <span className="hidden sm:inline">•</span>
-              <Link href="/contact" className="hover:text-foreground transition-colors">
+              <Link
+                href="/contact"
+                className="hover:text-foreground transition-colors"
+              >
                 Contact
               </Link>
             </div>
