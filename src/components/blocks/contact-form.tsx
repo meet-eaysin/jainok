@@ -93,231 +93,184 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={handleSubmit}
-        className="w-full grid grid-cols-2 gap-10 rounded-md"
-      >
-        <FormField
-          control={form.control}
-          name="name"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Full name * </FormLabel>
-              <FormControl>
-                <Input
-                  type="text"
-                  value={field.value}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    field.onChange(val);
-                  }}
-                  placeholder="First and last name"
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Email address * </FormLabel>
-              <FormControl>
-                <Input
-                  type="text"
-                  value={field.value}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    field.onChange(val);
-                  }}
-                  placeholder="me@company.com"
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="company"
-          rules={{ required: false }}
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel>Company name </FormLabel>
-              <FormControl>
-                <Input
-                  type="text"
-                  value={field.value}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    field.onChange(val);
-                  }}
-                  placeholder="Company name"
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          rules={{ required: false }}
-          name="projectType"
-          render={({ field }) => {
-            const options = [
-              { value: "web-app", label: "Web Application" },
-              { value: "mobile-app", label: "Mobile Application" },
-              { value: "api", label: "API Development" },
-              { value: "consulting", label: "Technical Consulting" },
-              { value: "other", label: "Other" },
-            ];
-            return (
-              <FormItem className="w-full">
-                <FormLabel>Project type</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select project type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {options.map(({ label, value }) => (
-                      <SelectItem key={value} value={value}>
-                        {label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
+      <form onSubmit={handleSubmit} className="w-full space-y-6">
+        {/* Name and Email Row */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="name"
+            rules={{ required: true }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Full name *</FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    value={field.value}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      field.onChange(val);
+                    }}
+                    placeholder="First and last name"
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
-            );
-          }}
-        />
-
-        <FormField
-          control={form.control}
-          rules={{ required: false }}
-          name="budget"
-          render={({ field }) => {
-            const options = [
-              { value: "under-5k", label: "Under $5,000" },
-              { value: "5k-15k", label: "$5,000 - $15,000" },
-              { value: "15k-30k", label: "$15,000 - $30,000" },
-              { value: "30k-50k", label: "$30,000 - $50,000" },
-              { value: "over-50k", label: "Over $50,000" },
-            ];
-            return (
-              <FormItem className="w-full">
-                <FormLabel>Budget range</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select budget range" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {options.map(({ label, value }) => (
-                      <SelectItem key={value} value={value}>
-                        {label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            rules={{ required: true }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email address *</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    value={field.value}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      field.onChange(val);
+                    }}
+                    placeholder="me@company.com"
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
-            );
-          }}
-        />
+            )}
+          />
+        </div>
 
-        <FormField
-          control={form.control}
-          rules={{ required: false }}
-          name="timeline"
-          render={({ field }) => {
-            const options = [
-              { value: "asap", label: "ASAP" },
-              { value: "1-month", label: "1 month" },
-              { value: "2-3-months", label: "2-3 months" },
-              { value: "3-6-months", label: "3-6 months" },
-              { value: "6-months-plus", label: "6+ months" },
-            ];
-            return (
-              <FormItem className="w-full">
-                <FormLabel>Timeline</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select timeline" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {options.map(({ label, value }) => (
-                      <SelectItem key={value} value={value}>
-                        {label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
+        {/* Optional Fields Row */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="company"
+            rules={{ required: false }}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Company/Organization{" "}
+                  <span className="text-muted-foreground">(optional)</span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    value={field.value}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      field.onChange(val);
+                    }}
+                    placeholder="Where do you work?"
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
-            );
-          }}
-        />
+            )}
+          />
 
+          <FormField
+            control={form.control}
+            rules={{ required: false }}
+            name="projectType"
+            render={({ field }) => {
+              const options = [
+                { value: "general", label: "General Inquiry" },
+                { value: "collaboration", label: "Collaboration" },
+                { value: "consulting", label: "Technical Consulting" },
+                { value: "speaking", label: "Speaking Engagement" },
+                { value: "networking", label: "Networking" },
+                { value: "project", label: "Project Discussion" },
+                { value: "other", label: "Something Else" },
+              ];
+              return (
+                <FormItem>
+                  <FormLabel>
+                    What's this about?{" "}
+                    <span className="text-muted-foreground">(optional)</span>
+                  </FormLabel>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a topic" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {options.map(({ label, value }) => (
+                        <SelectItem key={value} value={value}>
+                          {label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+        </div>
+
+        {/* Message Field - Full Width */}
         <FormField
           control={form.control}
           name="message"
           rules={{ required: true }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Your message * </FormLabel>
+              <FormLabel>Your message *</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
-                  placeholder="Write your message"
-                  className="resize-none"
+                  placeholder="What's on your mind? Feel free to ask anything..."
+                  className="min-h-[120px] resize-none"
+                  rows={5}
                 />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          rules={{ required: true }}
-          name="agree"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-y-0 space-x-1">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                  required
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel>I agree to the terms and conditions</FormLabel>
 
-                <FormMessage />
-              </div>
-            </FormItem>
-          )}
-        />
-        <div className="flex w-full items-center justify-end pt-3">
-          <Button className="rounded-lg" size="sm">
-            {isExecuting ? "Submitting..." : "Submit"}
+        {/* Terms and Submit */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <FormField
+            control={form.control}
+            rules={{ required: true }}
+            name="agree"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-y-0 space-x-2">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    required
+                  />
+                </FormControl>
+                <div className="grid gap-1.5 leading-none">
+                  <FormLabel className="text-sm font-normal">
+                    I agree to the{" "}
+                    <a
+                      href="/privacy"
+                      className="text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      terms and conditions
+                    </a>
+                  </FormLabel>
+                  <FormMessage />
+                </div>
+              </FormItem>
+            )}
+          />
+
+          <Button
+            type="submit"
+            className="w-full sm:w-auto"
+            disabled={isExecuting}
+          >
+            {isExecuting ? "Submitting..." : "Send Message"}
           </Button>
         </div>
       </form>

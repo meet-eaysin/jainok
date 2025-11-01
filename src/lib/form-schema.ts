@@ -9,12 +9,12 @@ export interface ActionResponse<T = unknown> {
   inputs?: T;
 }
 export const formSchema = z.object({
-  name: z.string({ message: "This field is required" }),
-  email: z.string({ message: "This field is required" }),
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Please enter a valid email address"),
   company: z.string().optional(),
-  projectType: z.string().min(1, "Please select a project type").optional(),
-  budget: z.string().min(1, "Please select a budget range").optional(),
-  timeline: z.string().min(1, "Please select a timeline").optional(),
-  message: z.string({ message: "This field is required" }),
-  agree: z.literal(true, { message: "This field is required" }),
+  projectType: z.string().optional(),
+  budget: z.string().optional(),
+  timeline: z.string().optional(),
+  message: z.string().min(1, "Message is required"),
+  agree: z.literal(true, "You must agree to the terms and conditions"),
 });
