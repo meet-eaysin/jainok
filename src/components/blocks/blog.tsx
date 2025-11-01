@@ -54,7 +54,7 @@ export const Blog = ({ isPage = false }: { isPage?: boolean }) => {
 
   return (
     <section id="blog" className={isPage ? "" : "py-28 lg:py-32"}>
-      <div className="container px-0">
+      <div className="container">
         {/* Header */}
         {!isPage && (
           <div className="mb-16">
