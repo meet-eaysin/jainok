@@ -65,15 +65,19 @@ const Experience = ({
                 >
                   <div className="flex flex-col gap-4 md:flex-row md:items-start">
                     <div className="md:w-2/3">
-                      <div className="mb-2 flex items-center gap-3">
-                        <Image
-                          src={logo}
-                          alt={`${company} logo`}
-                          width={20}
-                          height={20}
-                          className="h-5 object-contain"
-                        />
-                        <h3 className="text-xl">{title}</h3>
+                      <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+                        <div className="flex items-center gap-3">
+                          <Image
+                            src={logo}
+                            alt={`${company} logo`}
+                            width={20}
+                            height={20}
+                            className="h-5 w-5 object-contain flex-shrink-0"
+                          />
+                          <h3 className="text-lg md:text-xl">{title}</h3>
+                        </div>
+                        {/* Mobile: Show company name below title */}
+                        <p className="text-muted-foreground text-sm sm:hidden">{company}</p>
                       </div>
                       <p className="text-muted-foreground mb-3 text-sm">
                         {details}
@@ -82,9 +86,10 @@ const Experience = ({
                         {description}
                       </p>
                     </div>
-                    <div className="text-right md:w-1/3 md:text-right">
-                      <p className="mb-1 text-sm font-medium">{period}</p>
-                      <p className="text-muted-foreground text-sm">{company}</p>
+                    <div className="text-left md:text-right md:w-1/3">
+                      <p className="mb-1 text-sm font-medium md:text-foreground">{period}</p>
+                      {/* Desktop: Show company name in right column */}
+                      <p className="text-muted-foreground text-sm hidden md:block">{company}</p>
                     </div>
                   </div>
                 </div>
