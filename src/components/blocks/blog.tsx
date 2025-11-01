@@ -5,48 +5,7 @@ import { Calendar, Clock, Tag } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  readTime: string;
-  image: string;
-  featured?: boolean;
-}
-
-const blogPosts: BlogPost[] = [
-  {
-    id: "1",
-    title: "Why Redis is Efficient and Memory-Friendly",
-    excerpt: "Exploring Redis internals and understanding how SDS (Simple Dynamic String) and smart memory management make Redis so efficient.",
-    category: "Technology",
-    date: "2024-12-01",
-    readTime: "5 min read",
-    image: "/blog/redis-efficiency.webp",
-    featured: true,
-  },
-  {
-    id: "2",
-    title: "Building Scalable React Applications",
-    excerpt: "Best practices for creating maintainable and performant React applications with modern patterns and state management.",
-    category: "React",
-    date: "2024-11-15",
-    readTime: "8 min read",
-    image: "/blog/react-scalable.webp",
-  },
-  {
-    id: "3",
-    title: "Node.js Performance Optimization",
-    excerpt: "Techniques and strategies for optimizing Node.js applications for better performance and scalability.",
-    category: "Node.js",
-    date: "2024-10-28",
-    readTime: "6 min read",
-    image: "/blog/nodejs-performance.webp",
-  },
-];
+import { blogPosts } from "@/data/blog-posts";
 
 export const Blog = ({ isPage = false }: { isPage?: boolean }) => {
   const featuredPost = blogPosts.find(post => post.featured);

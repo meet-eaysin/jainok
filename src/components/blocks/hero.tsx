@@ -54,19 +54,6 @@ export const Hero = () => {
                 <ArrowRight className="stroke-3" />
               </a>
             </Button>
-            <Button
-              variant="outline"
-              className="from-background h-auto gap-2 bg-linear-to-r to-transparent shadow-md"
-              asChild
-            >
-              <a
-                href="https://www.linkedin.com/in/meet-eaysin/"
-                className="max-w-56 truncate text-start md:max-w-none"
-              >
-                LinkedIn Profile
-                <ArrowRight className="stroke-3" />
-              </a>
-            </Button>
           </div>
           
         <p className="text-sm text-zinc-700 dark:text-zinc-400">
