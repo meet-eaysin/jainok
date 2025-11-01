@@ -19,9 +19,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const { id } = await params;
   const post = blogPosts.find(p => p.id === id);
 
-  if (!post) {
-    notFound();
-  }
+  if (!post)  notFound();
 
   return (
     <Background className="via-muted to-muted/80">
