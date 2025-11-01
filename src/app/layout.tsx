@@ -114,9 +114,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Eaysin Mia - Full Stack Developer",
+    title: "Eaysin Mia - Full Stack Engineer",
     description:
-      "Full Stack Developer specializing in React, Node.js, and modern web technologies. Building scalable applications with 2+ years of experience.",
+      "Full Stack Engineer specializing in React, Node.js, and modern web technologies. Building scalable applications with 2+ years of experience.",
     images: ["/og-image.jpg"],
     creator: "@eaysinmia",
   },
@@ -130,24 +130,25 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Eaysin Mia",
-    "jobTitle": "Full Stack Engineer",
-    "description": "Full Stack Developer specializing in React, Node.js, and modern web technologies. Building scalable applications with 2+ years of experience.",
-    "url": "https://eaysinmia.dev",
-    "sameAs": [
+    name: "Eaysin Mia",
+    jobTitle: "Full Stack Engineer",
+    description:
+      "Full Stack Developer specializing in React, Node.js, and modern web technologies. Building scalable applications with 2+ years of experience.",
+    url: "https://eaysinmia.dev",
+    sameAs: [
       "https://github.com/meet-eaysin",
       "https://www.linkedin.com/in/meet-eaysin/",
-      "https://www.linkedin.com/in/meet-eaysin/"
+      "https://www.linkedin.com/in/meet-eaysin/",
     ],
-    "address": {
+    address: {
       "@type": "PostalAddress",
-      "addressLocality": "Rajshahi",
-      "addressRegion": "Dhaka",
-      "addressCountry": "Bangladesh"
+      addressLocality: "Rajshahi",
+      addressRegion: "Dhaka",
+      addressCountry: "Bangladesh",
     },
-    "email": "meet.eaysin@gmail.com",
-    "telephone": "+8801643226078",
-    "knowsAbout": [
+    email: "meet.eaysin@gmail.com",
+    telephone: "+8801643226078",
+    knowsAbout: [
       "JavaScript",
       "TypeScript",
       "React.js",
@@ -155,17 +156,17 @@ export default function RootLayout({
       "Node.js",
       "MongoDB",
       "PostgreSQL",
-      "Full Stack Development"
+      "Full Stack Development",
     ],
-    "hasOccupation": {
+    hasOccupation: {
       "@type": "Occupation",
-      "name": "Full Stack Developer",
-      "occupationLocation": {
+      name: "Full Stack Developer",
+      occupationLocation: {
         "@type": "City",
-        "name": "Rajshahi",
-        "addressCountry": "Bangladesh"
-      }
-    }
+        name: "Rajshahi",
+        addressCountry: "Bangladesh",
+      },
+    },
   };
 
   return (
