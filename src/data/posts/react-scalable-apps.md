@@ -4,7 +4,7 @@ excerpt: "Best practices for creating maintainable and performant React applicat
 category: "React"
 date: "2024-11-15"
 readTime: "8 min read"
-image: "/blog/react-scalable.webp"
+image: ""
 ---
 
 # Building Scalable React Applications

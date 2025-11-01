@@ -45,13 +45,14 @@ export const Blog = ({
               <div className="md:flex">
                 <div className="md:w-1/2">
                   <div className="group relative h-64 md:h-full">
-                    <Image
-                      src={featuredPost.image}
-                      alt={featuredPost.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    {featuredPost?.image ? (
+                      <Image
+                        src={featuredPost.image}
+                        alt={featuredPost.title}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : null}
                   </div>
                 </div>
                 <div className="p-8 md:w-1/2">
@@ -86,9 +87,7 @@ export const Blog = ({
                     className="text-primary hover:text-primary/80 inline-flex items-center gap-2 font-medium transition-colors"
                   >
                     Read More
-                    <span className="text-lg transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
+                    <span className="text-lg">→</span>
                   </Link>
                 </div>
               </div>
@@ -104,13 +103,14 @@ export const Blog = ({
               className="from-background to-muted/5 group overflow-hidden border-0 bg-gradient-to-br transition-all duration-300 hover:shadow-xl"
             >
               <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                {post?.image !== "" ? (
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                  />
+                ) : null}
                 <div className="absolute top-4 left-4">
                   <Badge
                     variant="secondary"
@@ -146,9 +146,7 @@ export const Blog = ({
                   className="text-primary hover:text-primary/80 inline-flex items-center gap-2 text-sm font-medium transition-colors"
                 >
                   Read More
-                  <span className="transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
+                  <span className="">→</span>
                 </Link>
               </CardContent>
             </Card>

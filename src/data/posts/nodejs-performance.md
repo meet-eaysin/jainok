@@ -4,7 +4,7 @@ excerpt: "Techniques and strategies for optimizing Node.js applications for bett
 category: "Node.js"
 date: "2024-10-28"
 readTime: "6 min read"
-image: "/blog/nodejs-performance.webp"
+image: ""
 ---
 
 # Node.js Performance Optimization
