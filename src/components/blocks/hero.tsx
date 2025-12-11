@@ -50,6 +50,7 @@ export const Hero = () => {
           >
             <a
               href="https://github.com/meet-eaysin"
+              target="_blank"
               className="max-w-56 truncate text-start md:max-w-none"
             >
               GitHub Profile

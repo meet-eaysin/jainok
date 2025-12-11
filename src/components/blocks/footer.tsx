@@ -47,6 +47,7 @@ export function Footer() {
                 <Link
                   key={item.name}
                   href={item.href}
+                  target="_blank"
                   className="text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md p-2 transition-colors"
                   aria-label={item.name}
                 >
