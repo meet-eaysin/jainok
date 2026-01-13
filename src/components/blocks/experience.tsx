@@ -2,14 +2,8 @@ import React from "react";
 
 import Image from "next/image";
 
-interface ExperienceItem {
-  title: string;
-  details: string;
-  period: string;
-  company: string;
-  logo: string;
-  description: string;
-}
+import { experiences as defaultExperiences } from "@/data/experience";
+import type { ExperienceItem } from "@/data/experience";
 
 interface Experience5Props {
   title?: string;
@@ -18,35 +12,7 @@ interface Experience5Props {
 
 const Experience = ({
   title = "Work Experience",
-  experience = [
-    {
-      title: "Full Stack Developer",
-      details: "Full-Time • Onsite • Rajshahi, Bangladesh",
-      period: "April 2025 - Present",
-      company: "Next Level Media (Bangladesh Branch)",
-      logo: "https://media.licdn.com/dms/image/v2/C4D0BAQFRqB7VmCSbiA/company-logo_200_200/company-logo_200_200/0/1631368475046/nextlevelmedia1_logo?e=1763596800&v=beta&t=Sj2-CurarlFYAqlKw5o_oHscB-lhd6_Z3LtXMqDJIio",
-      description:
-        "My Manager - A Large Scale ERP solution built with MERN Stack. I've contributed to all modules here. Mostly responsible for Google Ads manager using Google REST APIs, Twilio A2P 10DLC SMS automation, and optimized employee schedule management. Implement dynamic reporting and analytics with AI-powered insights and multiple chart visualizations.",
-    },
-    {
-      title: "Software Engineer",
-      details: "Contract • Remote • Mesa, Arizona, US",
-      period: "March 2024 - December 2024",
-      company: "Blackrock IT Solutions",
-      logo: "https://media.licdn.com/dms/image/v2/D560BAQG9F7Bk0c0IQQ/company-logo_200_200/company-logo_200_200/0/1689275603535?e=1763596800&v=beta&t=yBH7B-3Abuh787b8ycekLHK2rxGTXlEAmEACCE-x6Sk",
-      description:
-        "Hybrid Chart Evolve - Worked on most modules and led the report module, including a real-time healthcare staff scheduling system. TechConnect - Implement employee timesheets management records, request and file management module.",
-    },
-    {
-      title: "Frontend Developer",
-      details: "Full-Time • Onsite • Banani, Dhaka-1213",
-      period: "Jan 2023 - Feb 2024",
-      company: "Excel Technologies Ltd.",
-      logo: "https://media.licdn.com/dms/image/v2/C510BAQGszHiLyap5Dg/company-logo_200_200/company-logo_200_200/0/1630571920833?e=1763596800&v=beta&t=h6yZafAi-X6O4WAabNcl2RsrqoeaNwaoo41mdsBxFa4",
-      description:
-        "SmartCare Pro - I contributed to most of the modules, including Beds, Birth Records, COVAX, COVID, Death Records, Diagnosis, Investigations, Medical Encounters. I was mainly responsible for the ANC, Vitals, PEP, PrEP, Family Planning, HTS, Medical Encounters (IPD & OPD), TB Constitutional Symptoms, Treatment Plans, and Wards modules. Tuso - Implement User Authentication, User Management, Ticket management with multiple rule based access, Remote Desktop Protocol (RDP) modules.",
-    },
-  ],
+  experience = defaultExperiences,
 }: Experience5Props) => {
   return (
     <section id="experience" className="py-16 md:py-32">

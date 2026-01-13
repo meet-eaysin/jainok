@@ -4,21 +4,15 @@ import Link from "next/link";
 
 import { Github, Linkedin, Mail, MapPin, Facebook, Code } from "lucide-react";
 
+import { profile } from "@/data/profile";
+
 const social = [
-  { name: "GitHub", href: "https://github.com/meet-eaysin", icon: Github },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/meet-eaysin/",
-    icon: Linkedin,
-  },
-  {
-    name: "Facebook",
-    href: "https://web.facebook.com/meet.eaysin/",
-    icon: Facebook,
-  },
-  { name: "Twitter", href: "https://x.com/meet_eaysin", icon: Code },
-  { name: "LeetCode", href: "https://leetcode.com/u/meet-eaysin/", icon: Code },
-  { name: "Email", href: "mailto:meet.eaysin@gmail.com", icon: Mail },
+  { name: "GitHub", href: profile.social.github, icon: Github },
+  { name: "LinkedIn", href: profile.social.linkedin, icon: Linkedin },
+  { name: "Facebook", href: profile.social.facebook, icon: Facebook },
+  { name: "Twitter", href: profile.social.twitter, icon: Code },
+  { name: "LeetCode", href: profile.social.leetcode, icon: Code },
+  { name: "Email", href: `mailto:${profile.email}`, icon: Mail },
 ];
 
 export function Footer() {
@@ -28,14 +22,14 @@ export function Footer() {
         <div className="flex flex-col justify-between gap-8 md:flex-row md:gap-4">
           {/* Brand Info */}
           <div className="flex-1 space-y-3">
-            <h3 className="text-lg font-semibold">Eaysin Mia</h3>
+            <h3 className="text-lg font-semibold">{profile.name}</h3>
             <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
-              Full Stack Developer specializing in modern web technologies.
+              {profile.role} specializing in modern web technologies.
               Building scalable applications with 2+ years of experience.
             </p>
             <div className="text-muted-foreground flex items-center gap-2 text-sm">
               <MapPin className="size-4 flex-shrink-0" />
-              <span>Rajshahi, Bangladesh</span>
+              <span>{profile.location}</span>
             </div>
           </div>
 

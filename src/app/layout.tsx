@@ -7,6 +7,7 @@ import { Footer } from "@/components/blocks/footer";
 import { Navbar } from "@/components/blocks/navbar";
 import { StyleGlideProvider } from "@/components/styleglide-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { profile } from "@/data/profile";
 import "@/styles/globals.css";
 
 const dmSans = localFont({
@@ -61,28 +62,17 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+
 export const metadata: Metadata = {
   title: {
-    default: "Eaysin Mia - Full Stack Developer",
-    template: "%s | Eaysin Mia",
+    default: `${profile.name} - ${profile.role}`,
+    template: `%s | ${profile.name}`,
   },
-  description:
-    "Full Stack Developer specializing in React, Node.js, and modern web technologies. Building scalable applications with 2+ years of experience.",
-  keywords: [
-    "Full Stack Developer",
-    "React",
-    "Node.js",
-    "TypeScript",
-    "Next.js",
-    "MongoDB",
-    "PostgreSQL",
-    "JavaScript",
-    "Web Development",
-    "Portfolio",
-  ],
-  authors: [{ name: "Eaysin Mia" }],
-  creator: "Eaysin Mia",
-  publisher: "Eaysin Mia",
+  description: profile.metadata.description,
+  keywords: profile.metadata.keywords,
+  authors: [{ name: profile.name }],
+  creator: profile.name,
+  publisher: profile.name,
   robots: {
     index: true,
     follow: true,
@@ -99,26 +89,24 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title: "Eaysin Mia - Full Stack Developer",
-    description:
-      "Full Stack Developer specializing in React, Node.js, and modern web technologies. Building scalable applications with 2+ years of experience.",
-    siteName: "Eaysin Mia Portfolio",
+    title: `${profile.name} - ${profile.role}`,
+    description: profile.metadata.description,
+    siteName: `${profile.name} Portfolio`,
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Eaysin Mia - Full Stack Developer Portfolio",
+        alt: `${profile.name} - ${profile.role} Portfolio`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Eaysin Mia - Full Stack Engineer",
-    description:
-      "Full Stack Engineer specializing in React, Node.js, and modern web technologies. Building scalable applications with 2+ years of experience.",
+    title: `${profile.name} - ${profile.role}`,
+    description: profile.metadata.description,
     images: ["/og-image.jpg"],
-    creator: "@eaysinmia",
+    creator: profile.social.twitterHandle,
   },
 };
 
@@ -130,41 +118,30 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Eaysin Mia",
-    jobTitle: "Full Stack Engineer",
-    description:
-      "Full Stack Developer specializing in React, Node.js, and modern web technologies. Building scalable applications with 2+ years of experience.",
-    url: "https://eaysinmia.dev",
+    name: profile.name,
+    jobTitle: profile.role,
+    description: profile.metadata.description,
+    url: profile.metadata.url,
     sameAs: [
-      "https://github.com/meet-eaysin",
-      "https://www.linkedin.com/in/meet-eaysin/",
-      "https://www.linkedin.com/in/meet-eaysin/",
+      profile.social.github,
+      profile.social.linkedin,
     ],
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Rajshahi",
-      addressRegion: "Dhaka",
-      addressCountry: "Bangladesh",
+      addressLocality: profile.locationDetails.city,
+      addressRegion: profile.locationDetails.region,
+      addressCountry: profile.locationDetails.country,
     },
-    email: "meet.eaysin@gmail.com",
-    telephone: "+8801643226078",
-    knowsAbout: [
-      "JavaScript",
-      "TypeScript",
-      "React.js",
-      "Next.js",
-      "Node.js",
-      "MongoDB",
-      "PostgreSQL",
-      "Full Stack Development",
-    ],
+    email: profile.email,
+    telephone: profile.phone,
+    knowsAbout: profile.metadata.keywords,
     hasOccupation: {
       "@type": "Occupation",
-      name: "Full Stack Developer",
+      name: profile.role,
       occupationLocation: {
         "@type": "City",
-        name: "Rajshahi",
-        addressCountry: "Bangladesh",
+        name: profile.locationDetails.city,
+        addressCountry: profile.locationDetails.country,
       },
     },
   };
@@ -183,7 +160,7 @@ export default function RootLayout({
             __html: JSON.stringify(structuredData),
           }}
         />
-        <link rel="canonical" href="https://eaysinmia.dev" />
+        <link rel="canonical" href={profile.metadata.url} />
       </head>
       <body className={`${dmSans.variable} ${inter.variable} antialiased`}>
         <ThemeProvider

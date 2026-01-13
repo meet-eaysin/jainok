@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { profile } from "@/data/profile";
 
 export const Hero = () => {
   return (
@@ -10,31 +11,22 @@ export const Hero = () => {
       <div className="container mx-auto flex flex-col gap-7 px-6">
         <div className="flex flex-col items-start gap-2">
           <h3 className="mb-2 font-serif text-3xl leading-tight font-medium md:text-5xl lg:text-7xl">
-            Eaysin Mia
+            {profile.name}
             <br className="inline" />
-            Full Stack Engineer
+            {profile.role}
           </h3>
 
           <p className="text-base font-light text-zinc-700 md:text-lg dark:text-zinc-400">
-            2+ years of experience in building scalable, user-facing web
-            applications and backend systems.
+            {profile.bio}
           </p>
 
           <p className="text-base font-light text-zinc-700 md:text-lg dark:text-zinc-400">
-            Experienced with containerization, CI/CD practices, and
-            service-oriented architectures, with hands-on experience through
-            projects and ongoing learning of best practices.
-          </p>
-
-          <p className="text-base font-light text-zinc-700 md:text-lg dark:text-zinc-400">
-            Work on the project entails ERP systems, healthcare platforms, and
-            AI-based dashboards, including end-to-end deployment, and system
-            integration.
+            {profile.detailedBio}
           </p>
         </div>
         <div className="flex flex-wrap items-start gap-5 lg:gap-7">
           <Button asChild>
-            <a href="mailto:meet.eaysin@gmail.com">
+            <a href={`mailto:${profile.email}`}>
               <div className="flex items-center gap-2">
                 <ArrowUpRight className="size-4" />
               </div>
@@ -49,7 +41,7 @@ export const Hero = () => {
             asChild
           >
             <a
-              href="https://github.com/meet-eaysin"
+              href={profile.social.github}
               target="_blank"
               className="max-w-56 truncate text-start md:max-w-none"
             >
@@ -62,7 +54,7 @@ export const Hero = () => {
         <p className="text-sm text-zinc-700 dark:text-zinc-400">
           Connect with me on{" "}
           <Link
-            href="https://github.com/meet-eaysin"
+            href={profile.social.github}
             target="_blank"
             className="font-bold underline underline-offset-4"
           >

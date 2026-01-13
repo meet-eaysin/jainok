@@ -13,6 +13,7 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { profile } from "@/data/profile";
 import { cn } from "@/lib/utils";
 
 const ITEMS = [
@@ -57,7 +58,7 @@ export const Navbar = () => {
             href={"/"}
             className="flex shrink-0 items-center gap-2 text-xl font-medium"
           >
-            Eaysin
+            {profile.name.split(" ")[0]}
           </Link>
 
           {/* Desktop Navigation */}
@@ -93,7 +94,7 @@ export const Navbar = () => {
             {/* Social Links - Hidden on very small screens */}
             <div className="hidden items-center gap-1 sm:flex">
               <a
-                href="https://github.com/meet-eaysin"
+                href={profile.social.github}
                 className="text-muted-foreground hover:bg-accent hover:text-accent-foreground rounded-md p-2 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -103,7 +104,7 @@ export const Navbar = () => {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/meet-eaysin/"
+                href={profile.social.linkedin}
                 className="text-muted-foreground hover:bg-accent hover:text-accent-foreground rounded-md p-2 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -162,7 +163,7 @@ export const Navbar = () => {
             {/* Mobile Social Links */}
             <div className="mt-4 flex items-center justify-center gap-4 border-t pt-4">
               <a
-                href="https://github.com/meet-eaysin"
+                href={profile.social.github}
                 className="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -172,7 +173,7 @@ export const Navbar = () => {
                 GitHub
               </a>
               <a
-                href="https://www.linkedin.com/in/meet-eaysin/"
+                href={profile.social.linkedin}
                 className="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"

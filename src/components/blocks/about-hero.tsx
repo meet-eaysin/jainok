@@ -33,17 +33,18 @@ export function AboutHero() {
           </p>
 
           <p className="text-muted-foreground mt-8 hidden max-w-lg space-y-6 text-lg text-balance md:block lg:mt-12">
-            I'm a passionate full-stack developer with 2+ years of experience
-            building scalable web applications using React.js, Next.js,
-            TypeScript, Node.js, and modern databases. I specialize in creating
-            efficient, user-friendly solutions for complex business problems.
+            I am a Full Stack Engineer with a unique background in Geography &
+            Environment. This interdisciplinary path has shaped my approach to
+            problem-solving—viewing technical challenges as complex,
+            interconnected systems rather than isolated issues.
             <br />
             <br />
-            My expertise spans the entire development lifecycle, from concept to
-            deployment. I love working on challenging projects that require
-            innovative solutions and clean, maintainable code. When I'm not
-            coding, you'll find me exploring new technologies and contributing
-            to open-source projects.
+            Transitioning from environmental science to software engineering was
+            driven by a passion for building tangible solutions. I leverage my
+            analytical skills to architect scalable web applications, focusing
+            on clean code, performance, and user-centric design. From optimizing
+            ERP systems to orchestrating microservices, I bring a holistic
+            perspective to every project.
           </p>
         </div>
 

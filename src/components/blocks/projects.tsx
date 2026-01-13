@@ -1,63 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, ArrowRight } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  longDescription: string;
-  techStack: string[];
-  githubUrl?: string;
-  liveUrl?: string;
-  image: string;
-  featured?: boolean;
-}
-
-const projects: Project[] = [
-  {
-    id: "second-brain",
-    title: "Second Brain",
-    description:
-      "A powerful note-taking and knowledge management application with multiple view types.",
-    longDescription:
-      "Database System: Multiple view types (table, board, calendar, gallery) with custom properties (text, number, select, multi-select, checkbox, date-range, url etc.), PARA Methodology Implementation, Calendars with event management. multiple workspaces.",
-    techStack: ["React", "Node.js", "MongoDB", "Express", "TypeScript"],
-    githubUrl: "https://github.com/meet-eaysin/second-brain",
-    liveUrl: "https://second-brain-demo.vercel.app",
-    image: "/projects/second-brain-property-create.png",
-    featured: true,
-  },
-  {
-    id: "react-form-interactions",
-    title: "React Form Interactions",
-    description:
-      "A reusable React library for form state management and validation.",
-    longDescription:
-      "Developed a reusable React library (react-form-interactions) to simplify form state management and validation in React applications. Define comprehensive validation rules for form fields including required fields, minimum/maximum lengths, patterns, and more. Easily extend with custom validation rules and behaviors tailored to specific application requirements.",
-    techStack: ["React", "TypeScript", "JavaScript"],
-    githubUrl: "https://github.com/meet-eaysin/react-form-interactions",
-    image: "",
-  },
-  {
-    id: "techconnect",
-    title: "TechConnect - Employee Management",
-    description:
-      "Employee management platform for tracking performance and internal communication.",
-    longDescription:
-      "TechConnect is an employee management platform that helps organizations track employee performance, generate reports, and manage internal communication efficiently. It provides a detailed dashboard for managers to monitor team productivity.",
-    techStack: ["React", "Node.js", "TypeScript", "Tailwind CSS"],
-    githubUrl: "https://github.com/meet-eaysin/techconnect",
-    image: "",
-  },
-];
+import { projects as defaultProjects } from "@/data/projects";
 
 export const Projects = () => {
+  const projects = defaultProjects;
   const featuredProjects = projects.filter((project) => project.featured);
   const regularProjects = projects.filter((project) => !project.featured);
 
@@ -82,12 +34,20 @@ export const Projects = () => {
               <div className="lg:flex">
                 <div className="lg:w-1/2">
                   <div className="relative h-64 lg:h-full">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                    />
+                    {project.image ? (
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="bg-muted/30 flex h-full w-full items-center justify-center">
+                        <span className="text-4xl font-bold opacity-10">
+                          {project.title.slice(0, 2).toUpperCase()}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="p-8 lg:w-1/2">
@@ -135,6 +95,12 @@ export const Projects = () => {
                         </Link>
                       </Button>
                     )}
+                    <Button variant="secondary" size="sm" asChild>
+                      <Link href={`/projects/${project.id}`}>
+                        View Details
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -150,14 +116,20 @@ export const Projects = () => {
               className="overflow-hidden transition-shadow hover:shadow-lg"
             >
               <div className="relative h-48">
-                {project?.image ? (
+                {project.image ? (
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
                     className="object-cover"
                   />
-                ) : null}
+                ) : (
+                  <div className="bg-muted/30 flex h-full w-full items-center justify-center">
+                    <span className="text-3xl font-bold opacity-10">
+                      {project.title.slice(0, 2).toUpperCase()}
+                    </span>
+                  </div>
+                )}
               </div>
               <CardContent className="p-6">
                 <CardHeader className="mb-3 p-0">
@@ -209,6 +181,12 @@ export const Projects = () => {
                       </Link>
                     </Button>
                   )}
+                  <Button variant="ghost" size="sm" className="ml-auto" asChild>
+                    <Link href={`/projects/${project.id}`}>
+                      Details
+                      <ArrowRight className="ml-1 h-3 w-3" />
+                    </Link>
+                  </Button>
                 </div>
               </CardContent>
             </Card>
