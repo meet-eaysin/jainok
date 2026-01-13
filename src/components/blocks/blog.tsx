@@ -28,8 +28,8 @@ export const Blog = ({
         {/* Header */}
         {!isPage && (
           <div className="mb-16">
-            <h2 className="mb-3 font-serif text-4xl leading-tight font-medium md:text-7xl">
-              Latest Thoughts & Insights
+            <h2 className="font-display mb-4 text-4xl leading-tight font-bold md:text-6xl lg:text-7xl">
+              Latest Thoughts
             </h2>
             <p className="text-muted-foreground text-lg font-light">
               Sharing my experiences, learnings, and insights about software
@@ -41,7 +41,7 @@ export const Blog = ({
         {/* Featured Blog Post */}
         {featuredPost && (
           <div className="mb-16">
-            <Card className="from-background to-muted/10 overflow-hidden border-0 bg-gradient-to-br transition-all duration-300 hover:shadow-xl">
+            <Card className="group bg-muted/10 overflow-hidden border transition-all duration-300 hover:shadow-md">
               <div className="md:flex">
                 <div className="md:w-1/2">
                   <div className="group relative h-64 md:h-full">
@@ -95,12 +95,11 @@ export const Blog = ({
           </div>
         )}
 
-        {/* Regular Blog Posts */}
         <div className="grid gap-8 md:grid-cols-2">
           {regularPosts.map((post) => (
             <Card
               key={post.id}
-              className="from-background to-muted/5 group overflow-hidden border-0 bg-gradient-to-br transition-all duration-300 hover:shadow-xl"
+              className="group bg-muted/5 overflow-hidden border transition-all duration-300 hover:shadow-md"
             >
               <div className="relative h-48 overflow-hidden">
                 {post?.image !== "" ? (

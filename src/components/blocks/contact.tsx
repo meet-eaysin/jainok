@@ -43,10 +43,10 @@ export default function Contact() {
   return (
     <section className="py-28 lg:py-32 lg:pt-44">
       <div className="container">
-        <h2 className="mb-3 font-serif text-4xl leading-tight font-medium md:text-7xl">
+        <h2 className="font-display mb-4 text-4xl leading-tight font-bold md:text-7xl">
           Let's work together
         </h2>
-        <p className="text-muted-foreground text-lg font-light">
+        <p className="text-muted-foreground max-w-2xl text-lg font-light md:text-xl">
           I'm always interested in new opportunities and exciting projects.
           Let's discuss how we can collaborate.
         </p>

@@ -22,10 +22,10 @@ export function Footer() {
         <div className="flex flex-col justify-between gap-8 md:flex-row md:gap-4">
           {/* Brand Info */}
           <div className="flex-1 space-y-3">
-            <h3 className="text-lg font-semibold">{profile.name}</h3>
+            <h3 className="text-xl font-bold tracking-tight">{profile.name}</h3>
             <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
-              {profile.role} specializing in modern web technologies.
-              Building scalable applications with 2+ years of experience.
+              {profile.role} specializing in modern web technologies. Building
+              scalable applications with 2+ years of experience.
             </p>
             <div className="text-muted-foreground flex items-center gap-2 text-sm">
               <MapPin className="size-4 flex-shrink-0" />

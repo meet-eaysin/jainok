@@ -62,7 +62,6 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-
 export const metadata: Metadata = {
   title: {
     default: `${profile.name} - ${profile.role}`,
@@ -122,10 +121,7 @@ export default function RootLayout({
     jobTitle: profile.role,
     description: profile.metadata.description,
     url: profile.metadata.url,
-    sameAs: [
-      profile.social.github,
-      profile.social.linkedin,
-    ],
+    sameAs: [profile.social.github, profile.social.linkedin],
     address: {
       "@type": "PostalAddress",
       addressLocality: profile.locationDetails.city,
@@ -149,11 +145,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          async
-          crossOrigin="anonymous"
-          src="https://tweakcn.com/live-preview.min.js"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

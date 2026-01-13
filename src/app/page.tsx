@@ -21,10 +21,10 @@ export default function Home() {
 
         <section className="py-28 lg:py-32 lg:pt-10">
           <div className="container">
-            <h2 className="mb-3 font-serif text-4xl leading-tight font-medium md:text-7xl">
+            <h2 className="mb-4 font-sans text-4xl leading-tight font-bold md:text-6xl lg:text-7xl">
               Let's work together
             </h2>
-            <p className="text-muted-foreground mb-8 text-lg font-light">
+            <p className="text-muted-foreground mb-10 max-w-2xl text-lg font-light md:text-xl">
               I'm always interested in new opportunities and exciting projects.
             </p>
 

@@ -51,12 +51,12 @@ export const Navbar = () => {
 
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full backdrop-blur">
-      <div className="mx-auto w-[min(90%,1160px)] px-4 sm:px-6">
+      <div className="container">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
             href={"/"}
-            className="flex shrink-0 items-center gap-2 text-xl font-medium"
+            className="flex shrink-0 items-center gap-2 text-xl font-bold tracking-tight"
           >
             {profile.name.split(" ")[0]}
           </Link>

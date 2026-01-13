@@ -15,52 +15,64 @@ const Experience = ({
   experience = defaultExperiences,
 }: Experience5Props) => {
   return (
-    <section id="experience" className="py-16 md:py-32">
+    <section id="experience" className="py-24 md:py-32">
       <div className="container">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="mb-12 font-serif text-4xl leading-tight font-medium md:text-7xl">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="font-display mb-16 text-4xl leading-tight font-bold md:text-6xl">
             {title}
           </h2>
 
-          <div className="space-y-8">
+          <div className="flex flex-col gap-12">
             {experience.map(
               ({ title, details, period, company, logo, description }, idx) => (
                 <div
                   key={idx}
-                  className="border-border border-b pb-6 last:border-b-0"
+                  className="group relative flex flex-col gap-4 md:flex-row md:gap-12"
                 >
-                  <div className="flex flex-col gap-4 md:flex-row md:items-start">
-                    <div className="md:w-2/3">
-                      <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
-                        <div className="flex items-center gap-3">
-                          <Image
-                            src={logo}
-                            alt={`${company} logo`}
-                            width={20}
-                            height={20}
-                            className="h-5 w-5 flex-shrink-0 object-contain"
-                          />
-                          <h3 className="text-lg md:text-xl">{title}</h3>
-                        </div>
-                        {/* Mobile: Show company name below title */}
-                        <p className="text-muted-foreground text-sm sm:hidden">
+                  <div className="flex flex-col md:w-1/4 md:text-right">
+                    <p className="text-muted-foreground text-sm font-semibold tracking-wide uppercase">
+                      {period}
+                    </p>
+                    <div className="mt-2 hidden items-center justify-end gap-2 md:flex">
+                      <span className="text-foreground text-sm font-medium">
+                        {company}
+                      </span>
+                      <Image
+                        src={logo}
+                        alt={`${company} logo`}
+                        width={16}
+                        height={16}
+                        className="opacity-50 grayscale transition-all group-hover:opacity-100 group-hover:grayscale-0"
+                      />
+                    </div>
+                  </div>
+                  <div className="relative flex-grow pb-12 last:pb-0 md:w-3/4">
+                    {/* Timeline dot and line */}
+                    <div className="bg-border absolute top-1.5 -left-6 hidden h-full w-px md:block">
+                      <div className="border-primary bg-background absolute top-0 -left-1 h-2 w-2 rounded-full border-2 transition-transform group-hover:scale-125" />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2 md:hidden">
+                        <Image
+                          src={logo}
+                          alt={`${company} logo`}
+                          width={16}
+                          height={16}
+                          className="h-4 w-4"
+                        />
+                        <span className="text-muted-foreground text-sm font-medium">
                           {company}
-                        </p>
+                        </span>
                       </div>
-                      <p className="text-muted-foreground mb-3 text-sm">
+                      <h3 className="text-xl font-bold tracking-tight md:text-2xl">
+                        {title}
+                      </h3>
+                      <p className="text-primary group-hover:text-primary/80 text-sm font-medium transition-colors">
                         {details}
                       </p>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <p className="text-muted-foreground mt-2 max-w-2xl text-base leading-relaxed">
                         {description}
-                      </p>
-                    </div>
-                    <div className="text-left md:w-1/3 md:text-right">
-                      <p className="md:text-foreground mb-1 text-sm font-medium">
-                        {period}
-                      </p>
-                      {/* Desktop: Show company name in right column */}
-                      <p className="text-muted-foreground hidden text-sm md:block">
-                        {company}
                       </p>
                     </div>
                   </div>

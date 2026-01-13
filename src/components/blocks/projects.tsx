@@ -17,176 +17,179 @@ export const Projects = () => {
     <section id="projects" className="py-28 lg:py-32">
       <div className="container">
         {/* Header */}
-        <div className="mb-16">
-          <h2 className="mb-3 font-serif text-4xl leading-tight font-medium md:text-7xl">
+        <div className="mb-20">
+          <h2 className="font-display mb-4 text-4xl leading-tight font-bold md:text-6xl lg:text-7xl">
             Featured Projects
           </h2>
-          <p className="text-muted-foreground text-lg font-light">
+          <p className="text-muted-foreground max-w-3xl text-lg font-light md:text-xl">
             A showcase of my recent work, featuring full-stack applications,
             libraries, and tools I've built using modern technologies.
           </p>
         </div>
 
         {/* Featured Projects */}
-        <div className="mb-16">
+        <div className="flex flex-col gap-12 lg:gap-20">
           {featuredProjects.map((project) => (
-            <Card key={project.id} className="mb-8 overflow-hidden">
-              <div className="lg:flex">
-                <div className="lg:w-1/2">
-                  <div className="relative h-64 lg:h-full">
+            <div key={project.id} className="group relative">
+              <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+                <div className="lg:col-span-7">
+                  <div className="bg-muted/20 relative aspect-video overflow-hidden rounded-xl border transition-all group-hover:shadow-md">
                     {project.image ? (
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="bg-muted/30 flex h-full w-full items-center justify-center">
-                        <span className="text-4xl font-bold opacity-10">
+                      <div className="from-muted/50 to-muted/20 flex h-full w-full items-center justify-center bg-linear-to-br">
+                        <span className="text-foreground/5 text-6xl font-black tracking-tighter">
                           {project.title.slice(0, 2).toUpperCase()}
                         </span>
                       </div>
                     )}
                   </div>
                 </div>
-                <div className="p-8 lg:w-1/2">
-                  <CardHeader className="mb-4 p-0">
-                    <CardTitle className="text-2xl font-bold">
+                <div className="lg:col-span-5">
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl font-bold tracking-tight md:text-4xl">
                       {project.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <p className="text-muted-foreground mb-4">
-                    {project.longDescription}
-                  </p>
+                    </h3>
+                    <p className="text-muted-foreground text-lg leading-relaxed">
+                      {project.longDescription}
+                    </p>
 
-                  {/* Tech Stack */}
-                  <div className="mb-6 flex flex-wrap gap-2">
-                    {project.techStack.map((tech) => (
-                      <Badge key={tech} variant="secondary">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {project.techStack.map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="secondary"
+                          className="rounded-full px-3 py-0.5 text-xs font-medium"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
 
-                  {/* Links */}
-                  <div className="flex gap-4">
-                    {project.githubUrl && (
-                      <Button variant="outline" size="sm" asChild>
-                        <Link
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                    {/* Links */}
+                    <div className="flex flex-wrap gap-3 pt-6">
+                      {project.githubUrl && (
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="rounded-full px-6"
+                          asChild
                         >
-                          <Github className="mr-2 h-4 w-4" />
-                          Code
-                        </Link>
-                      </Button>
-                    )}
-                    {project.liveUrl && (
-                      <Button size="sm" asChild>
-                        <Link
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          <Link
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Github className="mr-2 h-4 w-4" />
+                            Source Code
+                          </Link>
+                        </Button>
+                      )}
+                      {project.liveUrl && (
+                        <Button
+                          size="lg"
+                          className="rounded-full px-6 shadow-sm"
+                          asChild
                         >
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          Live Demo
-                        </Link>
-                      </Button>
-                    )}
-                    <Button variant="secondary" size="sm" asChild>
-                      <Link href={`/projects/${project.id}`}>
-                        View Details
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
+                          <Link
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            Live Demo
+                          </Link>
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
 
         {/* Regular Projects Grid */}
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 md:gap-8">
+        <div className="mt-24 grid gap-8 sm:grid-cols-2 lg:mt-32">
           {regularProjects.map((project) => (
             <Card
               key={project.id}
-              className="overflow-hidden transition-shadow hover:shadow-lg"
+              className="group flex flex-col border-none bg-transparent shadow-none"
             >
-              <div className="relative h-48">
+              <div className="bg-muted/20 relative mb-6 aspect-video overflow-hidden rounded-xl border transition-all group-hover:shadow-sm">
                 {project.image ? (
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
-                  <div className="bg-muted/30 flex h-full w-full items-center justify-center">
-                    <span className="text-3xl font-bold opacity-10">
+                  <div className="from-muted/50 to-muted/20 flex h-full w-full items-center justify-center bg-linear-to-br">
+                    <span className="text-foreground/5 text-3xl font-black tracking-tighter">
                       {project.title.slice(0, 2).toUpperCase()}
                     </span>
                   </div>
                 )}
               </div>
-              <CardContent className="p-6">
-                <CardHeader className="mb-3 p-0">
-                  <CardTitle className="text-xl font-semibold">
-                    {project.title}
-                  </CardTitle>
-                </CardHeader>
-                <p className="text-muted-foreground mb-4 line-clamp-3 text-sm">
+              <CardHeader className="p-0">
+                <CardTitle className="mb-2 text-xl font-bold md:text-2xl">
+                  {project.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow p-0">
+                <p className="text-muted-foreground mb-6 line-clamp-2 text-base">
                   {project.description}
                 </p>
 
                 {/* Tech Stack */}
-                <div className="mb-4 flex flex-wrap gap-1">
-                  {project.techStack.slice(0, 3).map((tech) => (
-                    <Badge key={tech} variant="outline" className="text-xs">
+                <div className="mb-6 flex flex-wrap gap-1.5">
+                  {project.techStack.slice(0, 4).map((tech) => (
+                    <Badge
+                      key={tech}
+                      variant="outline"
+                      className="rounded-full px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase"
+                    >
                       {tech}
                     </Badge>
                   ))}
-                  {project.techStack.length > 3 && (
-                    <Badge variant="outline" className="text-xs">
-                      +{project.techStack.length - 3}
-                    </Badge>
-                  )}
                 </div>
 
                 {/* Links */}
-                <div className="flex gap-2">
+                <div className="flex items-center gap-4">
                   {project.githubUrl && (
-                    <Button variant="outline" size="sm" asChild>
-                      <Link
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Github className="mr-1 h-3 w-3" />
-                        Code
-                      </Link>
-                    </Button>
+                    <Link
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Github className="h-5 w-5" />
+                    </Link>
                   )}
                   {project.liveUrl && (
-                    <Button size="sm" asChild>
-                      <Link
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <ExternalLink className="mr-1 h-3 w-3" />
-                        Demo
-                      </Link>
-                    </Button>
-                  )}
-                  <Button variant="ghost" size="sm" className="ml-auto" asChild>
-                    <Link href={`/projects/${project.id}`}>
-                      Details
-                      <ArrowRight className="ml-1 h-3 w-3" />
+                    <Link
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <ExternalLink className="h-5 w-5" />
                     </Link>
-                  </Button>
+                  )}
+                  <Link
+                    href={`/projects/${project.id}`}
+                    className="decoration-primary ml-auto inline-flex items-center text-sm font-semibold underline-offset-4 hover:underline"
+                  >
+                    View Details
+                    <ArrowRight className="ml-1 h-3 w-3" />
+                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -194,15 +197,15 @@ export const Projects = () => {
         </div>
 
         {/* View More Link */}
-        <div className="mt-12 text-center">
+        <div className="mt-20 border-t pt-10 text-center">
           <Link
             href="https://github.com/eaysinmia"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary hover:text-primary/80 inline-flex items-center gap-2 font-medium"
+            className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm font-medium transition-colors"
           >
-            View More on GitHub
-            <ExternalLink className="h-4 w-4" />
+            Explore more projects on GitHub
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
