@@ -169,9 +169,14 @@
 @utility container {
   margin-inline: auto;
   padding-inline: 1.5rem;
-  @media (width >= 1400px) {
-    max-width: 1220px;
+  width: 100%;
+  @media (width >= 1280px) {
+    max-width: 1200px;
   }
+}
+
+@utility section-padding {
+  @apply py-24 lg:py-32;
 }
 
 @layer base {
@@ -181,6 +186,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    line-height: 1.6;
   }
   h1,
   h2,
@@ -188,7 +194,9 @@
   h4,
   h5,
   h6 {
+    @apply font-display tracking-tight;
     font-family: var(--font-display);
+    line-height: 1.2;
   }
   *,
   ::after,

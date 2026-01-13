@@ -27,7 +27,7 @@ export const Blog = ({
       <div className="container">
         {/* Header */}
         {!isPage && (
-          <div className="mb-16">
+          <div className="mb-20">
             <h2 className="font-display mb-4 text-4xl leading-tight font-bold md:text-6xl lg:text-7xl">
               Latest Thoughts
             </h2>
@@ -40,11 +40,11 @@ export const Blog = ({
 
         {/* Featured Blog Post */}
         {featuredPost && (
-          <div className="mb-16">
+          <div className="mb-20">
             <Card className="group bg-muted/10 overflow-hidden border transition-all duration-300 hover:shadow-md">
               <div className="md:flex">
                 <div className="md:w-1/2">
-                  <div className="group relative h-64 md:h-full">
+                  <div className="group relative aspect-video md:aspect-auto md:h-full">
                     {featuredPost?.image ? (
                       <Image
                         src={featuredPost.image}
@@ -76,7 +76,7 @@ export const Blog = ({
                       {featuredPost.readTime}
                     </div>
                   </div>
-                  <h3 className="hover:text-primary mb-4 text-2xl font-bold transition-colors">
+                  <h3 className="hover:text-primary font-display mb-4 text-2xl font-bold transition-colors">
                     {featuredPost.title}
                   </h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -95,13 +95,13 @@ export const Blog = ({
           </div>
         )}
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-10 md:grid-cols-2">
           {regularPosts.map((post) => (
             <Card
               key={post.id}
-              className="group bg-muted/5 overflow-hidden border transition-all duration-300 hover:shadow-md"
+              className="group bg-muted/5 flex flex-col overflow-hidden border transition-all duration-300 hover:shadow-md"
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative aspect-video overflow-hidden">
                 {post?.image !== "" ? (
                   <Image
                     src={post.image}
@@ -134,7 +134,7 @@ export const Blog = ({
                     {post.readTime}
                   </div>
                 </div>
-                <h3 className="group-hover:text-primary mb-3 line-clamp-2 text-xl font-semibold transition-colors">
+                <h3 className="group-hover:text-primary font-display mb-3 line-clamp-2 text-xl font-bold transition-colors">
                   {post.title}
                 </h3>
                 <p className="text-muted-foreground mb-4 line-clamp-3 text-sm leading-relaxed">

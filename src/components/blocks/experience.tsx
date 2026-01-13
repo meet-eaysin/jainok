@@ -18,7 +18,7 @@ const Experience = ({
     <section id="experience" className="py-24 md:py-32">
       <div className="container">
         <div className="mx-auto max-w-5xl">
-          <h2 className="font-display mb-16 text-4xl leading-tight font-bold md:text-6xl">
+          <h2 className="font-display mb-20 text-4xl font-bold md:text-6xl">
             {title}
           </h2>
 
@@ -65,10 +65,10 @@ const Experience = ({
                           {company}
                         </span>
                       </div>
-                      <h3 className="text-xl font-bold tracking-tight md:text-2xl">
+                      <h3 className="font-display text-xl font-bold tracking-tight md:text-2xl">
                         {title}
                       </h3>
-                      <p className="text-primary group-hover:text-primary/80 text-sm font-medium transition-colors">
+                      <p className="text-primary group-hover:text-primary/80 text-sm font-semibold transition-colors">
                         {details}
                       </p>
                       <p className="text-muted-foreground mt-2 max-w-2xl text-base leading-relaxed">

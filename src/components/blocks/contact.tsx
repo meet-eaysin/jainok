@@ -43,10 +43,10 @@ export default function Contact() {
   return (
     <section className="py-28 lg:py-32 lg:pt-44">
       <div className="container">
-        <h2 className="font-display mb-4 text-4xl leading-tight font-bold md:text-7xl">
+        <h2 className="font-display mb-6 text-4xl font-bold md:text-7xl">
           Let's work together
         </h2>
-        <p className="text-muted-foreground max-w-2xl text-lg font-light md:text-xl">
+        <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed md:text-xl">
           I'm always interested in new opportunities and exciting projects.
           Let's discuss how we can collaborate.
         </p>
@@ -54,7 +54,9 @@ export default function Contact() {
         <div className="mt-10 flex justify-between gap-8 max-sm:flex-col md:mt-14 lg:mt-20 lg:gap-12">
           {contactInfo.map((info, index) => (
             <div key={index}>
-              <h2 className="font-medium">{info.title}</h2>
+              <h2 className="font-display text-primary/80 mb-3 text-sm font-bold tracking-widest uppercase">
+                {info.title}
+              </h2>
               {info.content}
             </div>
           ))}
@@ -63,8 +65,10 @@ export default function Contact() {
         <DashedLine className="my-12" />
 
         {/* Contact Form */}
-        <div className="mx-auto">
-          <h2 className="mb-4 text-lg font-semibold">Send me a message</h2>
+        <div className="mx-auto max-w-4xl">
+          <h2 className="font-display mb-8 text-2xl font-bold">
+            Send me a message
+          </h2>
           <ContactForm />
         </div>
       </div>

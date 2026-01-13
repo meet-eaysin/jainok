@@ -18,8 +18,8 @@ const CaseStudies = ({ caseStudies }: CaseStudiesProps) => {
   return (
     <section className="container">
       {/* Header */}
-      <div className="mb-16">
-        <h1 className="mb-6 font-serif text-4xl leading-tight font-medium md:text-6xl lg:text-7xl">
+      <div className="mb-20">
+        <h1 className="font-display mb-6 text-4xl leading-tight font-bold md:text-6xl lg:text-7xl">
           Case Studies
         </h1>
         <p className="text-muted-foreground max-w-3xl text-lg">
@@ -29,13 +29,13 @@ const CaseStudies = ({ caseStudies }: CaseStudiesProps) => {
       </div>
 
       {/* Case Studies Grid */}
-      <div className="mb-20 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         {caseStudies.map((study) => (
           <Card
             key={study.id}
-            className="from-background to-muted/5 group flex h-full flex-col overflow-hidden border-0 bg-gradient-to-br transition-all duration-300 hover:shadow-xl"
+            className="group bg-muted/5 flex h-full flex-col overflow-hidden border transition-all duration-300 hover:shadow-md"
           >
-            <div className="relative h-48 shrink-0 overflow-hidden">
+            <div className="relative aspect-video shrink-0 overflow-hidden">
               {study.image ? (
                 <Image
                   src={study.image}
@@ -68,7 +68,7 @@ const CaseStudies = ({ caseStudies }: CaseStudiesProps) => {
                 </div>
               </div>
 
-              <h3 className="group-hover:text-primary mb-3 line-clamp-2 text-xl font-semibold transition-colors">
+              <h3 className="group-hover:text-primary font-display mb-3 line-clamp-2 text-xl font-bold transition-colors">
                 {study.title}
               </h3>
 
