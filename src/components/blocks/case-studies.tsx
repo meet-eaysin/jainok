@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
-
+import Image from "next/image";
 import Link from "next/link";
+
+import { ArrowRight, Calendar } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import type { CaseStudy } from "@/lib/case-studies-utils";
 
 interface CaseStudiesProps {
@@ -14,12 +15,6 @@ interface CaseStudiesProps {
 }
 
 const CaseStudies = ({ caseStudies }: CaseStudiesProps) => {
-  const [expandedStudy, setExpandedStudy] = useState<string | null>(null);
-
-  const toggleExpanded = (studyId: string) => {
-    setExpandedStudy(expandedStudy === studyId ? null : studyId);
-  };
-
   return (
     <section className="container">
       {/* Header */}
@@ -34,207 +29,60 @@ const CaseStudies = ({ caseStudies }: CaseStudiesProps) => {
       </div>
 
       {/* Case Studies Grid */}
-      <div className="mb-20 grid gap-8">
+      <div className="mb-20 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {caseStudies.map((study) => (
           <Card
             key={study.id}
-            className="group overflow-hidden transition-all duration-300 hover:shadow-lg"
+            className="from-background to-muted/5 group flex h-full flex-col overflow-hidden border-0 bg-gradient-to-br transition-all duration-300 hover:shadow-xl"
           >
-            {/* Card Content */}
-            <CardContent className="p-6">
-              <div className="mb-3 flex items-center gap-2">
-                <Badge variant="secondary" className="text-xs">
+            <div className="relative h-48 shrink-0 overflow-hidden">
+              {study.image ? (
+                <Image
+                  src={study.image}
+                  alt={study.title}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="bg-muted/50 text-muted-foreground flex h-full w-full items-center justify-center">
+                  <span className="text-4xl font-bold opacity-20">
+                    {study.title.substring(0, 2).toUpperCase()}
+                  </span>
+                </div>
+              )}
+              <div className="absolute top-4 left-4">
+                <Badge
+                  variant="secondary"
+                  className="border-0 bg-white/90 text-gray-800 backdrop-blur-sm hover:bg-white/90"
+                >
                   {study.company}
                 </Badge>
-                <span className="text-muted-foreground text-xs">
+              </div>
+            </div>
+
+            <CardContent className="flex flex-1 flex-col p-6">
+              <div className="text-muted-foreground mb-3 flex items-center gap-2 text-xs">
+                <div className="flex items-center gap-1">
+                  <Calendar className="h-3 w-3" />
                   {study.duration}
-                </span>
+                </div>
               </div>
 
-              <CardTitle className="group-hover:text-primary mb-3 text-xl transition-colors">
+              <h3 className="group-hover:text-primary mb-3 line-clamp-2 text-xl font-semibold transition-colors">
                 {study.title}
-              </CardTitle>
+              </h3>
 
-              <p className="text-muted-foreground mb-4 line-clamp-3 text-sm">
+              <p className="text-muted-foreground mb-4 line-clamp-3 flex-1 text-sm leading-relaxed">
                 {study.description}
               </p>
 
-              {/* Key Results Preview */}
-              <div className="mb-4">
-                <h4 className="mb-2 text-sm font-semibold">Key Results:</h4>
-                <ul className="space-y-1">
-                  {study.results.slice(0, 2).map((result, idx) => (
-                    <li
-                      key={idx}
-                      className="text-muted-foreground flex items-start gap-2 text-xs"
-                    >
-                      <svg
-                        className="text-primary mt-0.5 h-3 w-3 flex-shrink-0"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <span className="line-clamp-1">{result}</span>
-                    </li>
-                  ))}
-                  {study.results.length > 2 && (
-                    <li className="text-muted-foreground ml-5 text-xs">
-                      +{study.results.length - 2} more results
-                    </li>
-                  )}
-                </ul>
-              </div>
-
-              {/* Technologies Preview */}
-              <div className="mb-6">
-                <div className="flex flex-wrap gap-1">
-                  {study.technologies.slice(0, 3).map((tech) => (
-                    <Badge key={tech} variant="outline" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                  {study.technologies.length > 3 && (
-                    <Badge variant="outline" className="text-xs">
-                      +{study.technologies.length - 3}
-                    </Badge>
-                  )}
-                </div>
-              </div>
-
-              {/* View Details Button */}
-              <Button
-                className="group-hover:bg-primary/90 w-full transition-colors"
-                size="sm"
-                onClick={() => toggleExpanded(study.id)}
+              <Link
+                href={`/case-studies/${study.slug}`}
+                className="text-primary hover:text-primary/80 mt-auto inline-flex items-center gap-2 text-sm font-medium transition-colors"
               >
-                {expandedStudy === study.id
-                  ? "Hide Details"
-                  : "View Case Study"}
-                <svg
-                  className={`ml-2 h-4 w-4 transition-transform ${expandedStudy === study.id ? "rotate-90" : ""}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </Button>
-
-              {/* Expanded Details */}
-              {expandedStudy === study.id && (
-                <div className="slide-in-from-top-2 mt-6 space-y-6 border-t pt-6">
-                  {/* Challenge */}
-                  <div>
-                    <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold">
-                      <svg
-                        className="text-primary h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
-                        />
-                      </svg>
-                      Challenge
-                    </h4>
-                    <p className="text-muted-foreground">{study.challenge}</p>
-                  </div>
-
-                  {/* Solution */}
-                  <div>
-                    <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold">
-                      <svg
-                        className="text-primary h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                        />
-                      </svg>
-                      Solution
-                    </h4>
-                    <p className="text-muted-foreground">{study.solution}</p>
-                  </div>
-
-                  {/* Full Technologies */}
-                  <div>
-                    <h4 className="mb-3 text-lg font-semibold">
-                      Technologies Used
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {study.technologies.map((tech) => (
-                        <Badge key={tech} variant="outline">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Full Results */}
-                  <div>
-                    <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold">
-                      <svg
-                        className="text-primary h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      Key Results
-                    </h4>
-                    <ul className="space-y-3">
-                      {study.results.map((result, idx) => (
-                        <li
-                          key={idx}
-                          className="text-muted-foreground flex items-start gap-3"
-                        >
-                          <svg
-                            className="text-primary mt-0.5 h-5 w-5 flex-shrink-0"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
-                          {result}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
+                Read Case Study
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </CardContent>
           </Card>
         ))}

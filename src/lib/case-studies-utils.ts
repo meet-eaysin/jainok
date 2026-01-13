@@ -15,6 +15,7 @@ export interface CaseStudy {
   image?: string;
   featured?: boolean;
   slug: string;
+  content: string;
 }
 
 const caseStudiesDirectory = path.join(process.cwd(), "src/data/case-studies");
@@ -32,7 +33,7 @@ export function getAllCaseStudies(): CaseStudy[] {
       const slug = fileName.replace(/\.md$/, "");
       const fullPath = path.join(caseStudiesDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data } = matter(fileContents);
+      const { data, content } = matter(fileContents);
 
       return {
         id: slug,
@@ -47,6 +48,7 @@ export function getAllCaseStudies(): CaseStudy[] {
         results: Array.isArray(data.results) ? data.results : [],
         image: data.image || "",
         featured: data.featured || false,
+        content: content || "",
       } as CaseStudy;
     });
 

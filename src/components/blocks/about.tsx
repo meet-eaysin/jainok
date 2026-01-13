@@ -6,10 +6,9 @@ import { cn } from "@/lib/utils";
 
 const About = () => {
   return (
-    <section className="container mt-10 flex flex-col gap-8 md:mt-14 md:gap-14 lg:mt-20">
+    <section className="container flex flex-col gap-8 md:gap-14">
       <div className="mb-16">
         <TextSection
-          title="About Me"
           paragraphs={[
             "I'm Eaysin Mia, a self-taught Full Stack Engineer with over 2 years of professional experience working with JavaScript and TypeScript across both frontend and backend development. I focus on understanding why things work, not just how—which drives me to build deeper technical knowledge through continuous learning and experimentation.",
             "I specialize in building scalable web applications and backend solutions, working with modern technology stacks involving both relational and NoSQL databases. My experience spans ERP systems, healthcare platforms, and AI-powered reporting with end-to-end deployment and system integration.",
