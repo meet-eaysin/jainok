@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Clock } from "lucide-react";
-
 import type { BlogPost } from "@/lib/blog-types";
 import { cn } from "@/lib/utils";
 
@@ -16,12 +14,12 @@ export function BlogMiniCard({ post, className }: BlogMiniCardProps) {
     <Link
       href={`/blog/${post.slug}`}
       className={cn(
-        "group hover:bg-muted/50 flex flex-col gap-3 rounded-xl border p-3 transition-all",
+        "group hover:bg-muted/50 hover:border-border flex items-center gap-4 rounded-xl border border-transparent p-1 transition-all",
         className,
       )}
     >
       {post.image && (
-        <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+        <div className="relative aspect-square w-20 shrink-0 overflow-hidden rounded-lg sm:w-24">
           <Image
             src={post.image}
             alt={post.title}
@@ -30,15 +28,14 @@ export function BlogMiniCard({ post, className }: BlogMiniCardProps) {
           />
         </div>
       )}
-      <div className="flex flex-col gap-2">
-        <h4 className="group-hover:text-primary line-clamp-2 text-sm leading-snug font-semibold transition-colors">
+      <div className="flex flex-col gap-1 overflow-hidden">
+        <h4 className="group-hover:text-primary line-clamp-2 text-sm leading-snug font-bold transition-colors">
           {post.title}
         </h4>
-        <div className="text-muted-foreground flex items-center gap-2 text-[10px] font-medium tracking-wider uppercase">
-          <Clock className="size-3" />
-          <span>{post.readTime}</span>
+        <div className="text-muted-foreground flex items-center gap-2 text-[10px] font-medium tracking-tight uppercase">
+          <span className="text-primary/70">{post.category}</span>
           <span>•</span>
-          <span>{post.date}</span>
+          <span>{post.readTime}</span>
         </div>
       </div>
     </Link>
