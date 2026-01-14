@@ -5,7 +5,7 @@ import { ExternalLink, Github } from "lucide-react";
 
 import { ProjectPlaceholder } from "@/components/blocks/project-placeholder";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { projects as defaultProjects } from "@/data/projects";
 
 export const Projects = () => {
@@ -17,7 +17,6 @@ export const Projects = () => {
   return (
     <section id="projects" className="py-24 lg:py-32">
       <div className="container">
-        {/* Header */}
         <div className="mb-16 md:mb-24">
           <h2 className="font-display mb-6 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
             Featured Projects
@@ -28,18 +27,81 @@ export const Projects = () => {
           </p>
         </div>
 
-        {/* Featured Projects */}
-        <div className="flex flex-col gap-16 lg:gap-24">
-          {featuredProjects.map((project, index) => (
-            <div key={project.id} className="group">
-              <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-                {/* Image Section - Alternating Order on Large Screens */}
-                <div
-                  className={`lg:col-span-7 ${
-                    index % 2 === 1 ? "lg:order-last" : ""
-                  }`}
+        <div className="flex flex-col gap-8 lg:gap-12">
+          {featuredProjects[0] && (
+            <Card className="group bg-muted/5 overflow-hidden border transition-all duration-300 hover:shadow-md">
+              <div className="grid md:grid-cols-2">
+                <div className="bg-muted/10 relative aspect-video min-h-[300px] overflow-hidden border-b md:aspect-auto md:h-full md:border-b-0">
+                  {featuredProjects[0].image ? (
+                    <Image
+                      src={featuredProjects[0].image}
+                      alt={featuredProjects[0].title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <ProjectPlaceholder title={featuredProjects[0].title} />
+                  )}
+                </div>
+
+                <div className="flex flex-col justify-center p-6 md:p-8">
+                  <h3 className="group-hover:text-primary font-display mb-3 text-2xl font-bold transition-colors md:text-3xl">
+                    {featuredProjects[0].title}
+                  </h3>
+                  <p className="text-muted-foreground mb-6 text-base leading-relaxed">
+                    {featuredProjects[0].longDescription ||
+                      featuredProjects[0].description}
+                  </p>
+
+                  <div className="mb-6 flex flex-wrap gap-2">
+                    {featuredProjects[0].techStack.map((tech) => (
+                      <Badge
+                        key={tech}
+                        variant="secondary"
+                        className="px-2.5 py-1 text-[11px] font-medium"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto flex items-center gap-4">
+                    {featuredProjects[0].githubUrl && (
+                      <Link
+                        href={featuredProjects[0].githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm font-medium transition-colors"
+                      >
+                        <Github className="mr-2 size-4" />
+                        Code
+                      </Link>
+                    )}
+                    {featuredProjects[0].liveUrl && (
+                      <Link
+                        href={featuredProjects[0].liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm font-medium transition-colors"
+                      >
+                        <ExternalLink className="mr-2 size-4" />
+                        Demo
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </Card>
+          )}
+
+          {featuredProjects.length > 1 && (
+            <div className="grid gap-8 sm:grid-cols-2">
+              {featuredProjects.slice(1).map((project) => (
+                <Card
+                  key={project.id}
+                  className="group bg-muted/5 flex flex-col overflow-hidden border transition-all duration-300 hover:shadow-md"
                 >
-                  <div className="bg-muted/10 relative aspect-[16/10] overflow-hidden rounded-lg border shadow-sm transition-all duration-300 group-hover:shadow-md">
+                  <div className="bg-muted/10 relative aspect-video overflow-hidden border-b">
                     {project.image ? (
                       <Image
                         src={project.image}
@@ -51,63 +113,64 @@ export const Projects = () => {
                       <ProjectPlaceholder title={project.title} />
                     )}
                   </div>
-                </div>
 
-                {/* Content Section */}
-                <div className="flex flex-col justify-center lg:col-span-5">
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
-                        {project.title}
-                      </h3>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {project.techStack.map((tech) => (
-                          <Badge
-                            key={tech}
-                            variant="secondary"
-                            className="px-2.5 py-1 text-[11px] font-medium"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    <p className="text-muted-foreground text-lg leading-relaxed">
-                      {project.longDescription}
+                  <CardContent className="flex grow flex-col p-6">
+                    <h3 className="group-hover:text-primary font-display mb-3 line-clamp-1 text-xl font-bold transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-4 line-clamp-3 text-sm leading-relaxed">
+                      {project.description}
                     </p>
 
-                    <div className="flex items-center gap-4 pt-4">
-                      {project.githubUrl && (
-                        <Button variant="outline" size="sm" asChild>
-                          <Link
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <Github className="mr-2 size-4" />
-                            Source
-                          </Link>
-                        </Button>
-                      )}
-                      {project.liveUrl && (
-                        <Button size="sm" asChild>
-                          <Link
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <ExternalLink className="mr-2 size-4" />
-                            Visit Site
-                          </Link>
-                        </Button>
+                    <div className="mt-auto flex flex-wrap gap-2">
+                      {project.techStack.slice(0, 3).map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="secondary"
+                          className="px-2 py-0.5 text-[10px] font-medium"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                      {project.techStack.length > 3 && (
+                        <Badge
+                          variant="secondary"
+                          className="px-2 py-0.5 text-[10px] font-medium"
+                        >
+                          +{project.techStack.length - 3}
+                        </Badge>
                       )}
                     </div>
-                  </div>
-                </div>
-              </div>
+
+                    <div className="mt-6 flex items-center gap-4 border-t pt-4">
+                      {project.githubUrl && (
+                        <Link
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted-foreground hover:text-foreground inline-flex items-center text-xs font-medium transition-colors"
+                        >
+                          <Github className="mr-1.5 size-3.5" />
+                          Code
+                        </Link>
+                      )}
+                      {project.liveUrl && (
+                        <Link
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted-foreground hover:text-foreground inline-flex items-center text-xs font-medium transition-colors"
+                        >
+                          <ExternalLink className="mr-1.5 size-3.5" />
+                          Demo
+                        </Link>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
-          ))}
+          )}
         </div>
 
         {featuredProjects.length && (
