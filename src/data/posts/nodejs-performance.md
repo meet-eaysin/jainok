@@ -2,9 +2,18 @@
 title: "Node.js Performance Optimization"
 excerpt: "Techniques and strategies for optimizing Node.js applications for better performance and scalability."
 category: "Node.js"
+tags: ["performance", "optimization", "backend", "nodejs"]
 date: "2024-10-28"
 readTime: "6 min read"
 image: ""
+featured: false
+contentType: "blog"
+author: "Eaysin Mia"
+relatedPosts: ["why-redis-efficient"]
+seo:
+  metaTitle: "Node.js Performance Optimization - Best Practices"
+  metaDescription: "Learn proven techniques and strategies for optimizing Node.js applications for better performance and scalability."
+  keywords: ["nodejs", "performance", "optimization", "backend"]
 ---
 
 # Node.js Performance Optimization

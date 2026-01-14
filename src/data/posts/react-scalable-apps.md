@@ -2,9 +2,18 @@
 title: "Building Scalable React Applications"
 excerpt: "Best practices for creating maintainable and performant React applications with modern patterns and state management."
 category: "React"
+tags: ["react", "frontend", "architecture", "state-management"]
 date: "2024-11-15"
 readTime: "8 min read"
 image: ""
+featured: false
+contentType: "blog"
+author: "Eaysin Mia"
+relatedPosts: ["nodejs-performance"]
+seo:
+  metaTitle: "Building Scalable React Applications - Best Practices"
+  metaDescription: "Learn best practices for creating maintainable and performant React applications with modern patterns and state management."
+  keywords: ["react", "frontend", "scalability", "architecture"]
 ---
 
 # Building Scalable React Applications

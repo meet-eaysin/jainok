@@ -5,8 +5,7 @@ import { Calendar, Clock, Tag } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { blogPosts as defaultBlogPosts } from "@/data/blog-posts";
-import type { BlogPost } from "@/data/blog-posts";
+import type { BlogPost } from "@/lib/blog-types";
 
 interface BlogProps {
   isPage?: boolean;
@@ -17,10 +16,10 @@ export const Blog = ({
   isPage = false,
   blogPosts: propBlogPosts,
 }: BlogProps) => {
-  // Use prop data if provided, otherwise fall back to default
-  const blogPosts = propBlogPosts || defaultBlogPosts;
-  const featuredPost = blogPosts.find((post) => post.featured);
-  const regularPosts = blogPosts.filter((post) => !post.featured);
+  // Blog posts must be provided as props (from API or server component)
+  const blogPosts = propBlogPosts || [];
+  const featuredPost = blogPosts.find((post: BlogPost) => post.featured);
+  const regularPosts = blogPosts.filter((post: BlogPost) => !post.featured);
 
   return (
     <section id="blog" className={isPage ? "" : "py-28 lg:py-32"}>
@@ -96,7 +95,7 @@ export const Blog = ({
         )}
 
         <div className="grid gap-10 md:grid-cols-2">
-          {regularPosts.map((post) => (
+          {regularPosts.map((post: BlogPost) => (
             <Card
               key={post.id}
               className="group bg-muted/5 flex flex-col overflow-hidden border transition-all duration-300 hover:shadow-md"
