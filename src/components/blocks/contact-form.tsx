@@ -267,7 +267,7 @@ export function ContactForm() {
 
           <Button
             type="submit"
-            className="w-full rounded-full px-8 sm:w-auto"
+            className="w-full sm:w-auto"
             disabled={isExecuting}
           >
             {isExecuting ? "Submitting..." : "Send Message"}

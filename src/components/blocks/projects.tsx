@@ -75,12 +75,7 @@ export const Projects = () => {
                     {/* Links */}
                     <div className="flex flex-wrap gap-3 pt-6">
                       {project.githubUrl && (
-                        <Button
-                          variant="outline"
-                          size="lg"
-                          className="rounded-full px-6"
-                          asChild
-                        >
+                        <Button variant="outline" size="lg" asChild>
                           <Link
                             href={project.githubUrl}
                             target="_blank"
@@ -92,11 +87,7 @@ export const Projects = () => {
                         </Button>
                       )}
                       {project.liveUrl && (
-                        <Button
-                          size="lg"
-                          className="rounded-full px-6 shadow-sm"
-                          asChild
-                        >
+                        <Button size="lg" asChild>
                           <Link
                             href={project.liveUrl}
                             target="_blank"

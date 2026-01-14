@@ -37,17 +37,9 @@ const Experience = ({
                       <span className="text-foreground text-sm font-medium">
                         {company}
                       </span>
-                      <Image
-                        src={logo}
-                        alt={`${company} logo`}
-                        width={16}
-                        height={16}
-                        className="opacity-50 grayscale transition-all group-hover:opacity-100 group-hover:grayscale-0"
-                      />
                     </div>
                   </div>
                   <div className="relative flex-grow pb-12 last:pb-0 md:w-3/4">
-                    {/* Timeline dot and line */}
                     <div className="bg-border absolute top-1.5 -left-6 hidden h-full w-px md:block">
                       <div className="border-primary bg-background absolute top-0 -left-1 h-2 w-2 rounded-full border-2 transition-transform group-hover:scale-125" />
                     </div>

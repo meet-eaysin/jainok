@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { Github, Linkedin, Menu, X } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -93,30 +94,44 @@ export const Navbar = () => {
 
             {/* Social Links - Hidden on very small screens */}
             <div className="hidden items-center gap-1 sm:flex">
-              <a
-                href={profile.social.github}
-                className="text-muted-foreground hover:bg-accent hover:text-accent-foreground rounded-md p-2 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
+              <Button
+                variant="ghost"
+                size="icon"
+                asChild
+                className="text-muted-foreground"
               >
-                <Github className="h-4 w-4" />
-              </a>
+                <a
+                  href={profile.social.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                >
+                  <Github className="h-4 w-4" />
+                </a>
+              </Button>
 
-              <a
-                href={profile.social.linkedin}
-                className="text-muted-foreground hover:bg-accent hover:text-accent-foreground rounded-md p-2 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
+              <Button
+                variant="ghost"
+                size="icon"
+                asChild
+                className="text-muted-foreground"
               >
-                <Linkedin className="h-4 w-4" />
-              </a>
+                <a
+                  href={profile.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              </Button>
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              className="text-muted-foreground hover:bg-accent hover:text-accent-foreground inline-flex h-9 w-9 items-center justify-center rounded-md transition-colors lg:hidden"
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-muted-foreground lg:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
@@ -126,7 +141,7 @@ export const Navbar = () => {
               ) : (
                 <Menu className="h-5 w-5" />
               )}
-            </button>
+            </Button>
           </div>
         </div>
 

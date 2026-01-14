@@ -23,18 +23,13 @@ export const Hero = () => {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
-          <Button asChild size="lg" className="rounded-full px-8">
+          <Button asChild size="lg">
             <a href={`mailto:${profile.email}`}>
               <span className="text-base">Get In Touch</span>
               <ArrowUpRight className="ml-2 size-4" />
             </a>
           </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="hover:bg-accent rounded-full px-8 shadow-sm transition-all"
-            asChild
-          >
+          <Button variant="outline" size="lg" asChild>
             <a
               href={profile.social.github}
               target="_blank"

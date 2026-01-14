@@ -129,7 +129,7 @@ const About = () => {
         </div>
 
         <div className="mt-16">
-          <Button size="lg" className="h-14 rounded-full px-8 text-lg" asChild>
+          <Button size="lg" asChild>
             <a href="/cv.pdf" download>
               <FileDown className="mr-2 h-5 w-5" />
               Download my CV
