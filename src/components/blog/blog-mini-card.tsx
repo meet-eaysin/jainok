@@ -14,7 +14,7 @@ export function BlogMiniCard({ post, className }: BlogMiniCardProps) {
     <Link
       href={`/blog/${post.slug}`}
       className={cn(
-        "group hover:bg-muted/50 hover:border-border flex items-center gap-4 rounded-xl border border-transparent p-1 transition-all",
+        "group hover:bg-muted/50 hover:border-border flex items-center gap-4 rounded-xl border border-transparent p-3 transition-all",
         className,
       )}
     >

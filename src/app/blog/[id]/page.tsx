@@ -221,16 +221,12 @@ export default async function BlogPostPage({ params }: PageProps) {
               </ReactMarkdown>
             </article>
 
-            <div className="mt-12 flex flex-col gap-8 border-t pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-8 flex flex-col gap-6 border-t pt-4 sm:flex-row sm:items-center sm:justify-between">
               <BlogReactions postId={post.id} />
               <SocialShare url={`/blog/${post.slug}`} title={post.title} />
             </div>
 
-            <Separator className="mt-12 mb-8" />
-
             <PostNavigation newerPost={newer} olderPost={older} />
-
-            <Separator className="my-12" />
 
             <RelatedPosts currentPost={post} allPosts={allPosts} />
           </div>
