@@ -6,25 +6,25 @@
 @variant dark (&:is(.dark *));
 
 :root {
-  /* Portfolio-optimized light theme - Cleaner Neutrals */
-  --background: oklch(0.99 0.01 0);
-  --foreground: oklch(0.15 0.01 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.01 0);
+  --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.01 0);
-  --primary: oklch(0.4 0.15 250); /* Primary blue remains */
-  --primary-foreground: oklch(0.98 0.01 0);
-  --secondary: oklch(0.96 0.01 0);
-  --secondary-foreground: oklch(0.25 0.01 0);
-  --muted: oklch(0.94 0.01 0);
-  --muted-foreground: oklch(0.45 0.01 0);
-  --accent: oklch(0.92 0.01 250);
-  --accent-foreground: oklch(0.15 0.01 0);
-  --destructive: oklch(0.6 0.18 25);
-  --border: oklch(0.9 0.01 0);
-  --input: oklch(0.9 0.01 0);
-  --ring: oklch(0.4 0.15 250);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.556 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.4 0.15 250);
   --chart-2: oklch(0.5 0.12 320);
   --chart-3: oklch(0.6 0.1 180);
@@ -39,13 +39,11 @@
   --sidebar-border: oklch(0.9 0.01 0);
   --sidebar-ring: oklch(0.4 0.15 250);
 
-  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
 
   --radius: 0.5rem;
 
-  /* Subtle, modern shadows */
   --shadow-2xs: 0 1px 2px 0 oklch(0 0 0 / 0.05);
   --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.05);
   --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
@@ -57,25 +55,25 @@
 }
 
 .dark {
-  /* Portfolio-optimized dark theme - Higher Contrast, Less Saturation */
-  --background: oklch(0.15 0.01 0);
-  --foreground: oklch(0.95 0.01 0);
-  --card: oklch(0.18 0.01 0);
-  --card-foreground: oklch(0.95 0.01 0);
-  --popover: oklch(0.18 0.01 0);
-  --popover-foreground: oklch(0.95 0.01 0);
-  --primary: oklch(0.65 0.15 250);
-  --primary-foreground: oklch(0.15 0.01 0);
-  --secondary: oklch(0.22 0.01 0);
-  --secondary-foreground: oklch(0.9 0.01 0);
-  --muted: oklch(0.2 0.01 0);
-  --muted-foreground: oklch(0.6 0.01 0);
-  --accent: oklch(0.25 0.02 250);
-  --accent-foreground: oklch(0.95 0.01 0);
-  --destructive: oklch(0.5 0.18 25);
-  --border: oklch(0.25 0.01 0);
-  --input: oklch(0.25 0.01 0);
-  --ring: oklch(0.65 0.15 250);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.65 0.15 250);
   --chart-2: oklch(0.75 0.12 320);
   --chart-3: oklch(0.55 0.1 180);
@@ -131,7 +129,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
+  --font-display: var(--font-sans);
   --font-mono: var(--font-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -253,6 +251,116 @@ body {
   position: relative;
 }
 
-#preact-border-shadow-host {
-  display: none !important;
+@layer components {
+  .prose {
+    @apply text-foreground text-base leading-7;
+
+    :where(p):not(:where(.not-prose, .not-prose *)) {
+      @apply text-foreground/80 my-5;
+    }
+
+    :where(h1, h2, h3, h4, h5, h6):not(:where(.not-prose, .not-prose *)) {
+      @apply text-foreground scroll-mt-32 font-medium xl:scroll-mt-20;
+    }
+
+    :first-child:not(:where(.not-prose, .not-prose *)) {
+      @apply mt-0;
+    }
+
+    /* Don't use an <h1> in your posts, one is already generated in blog/[...id].astro */
+    :where(h1):not(:where(.not-prose, .not-prose *)) {
+      @apply mt-8 mb-6 text-4xl;
+    }
+
+    :where(h2):not(:where(.not-prose, .not-prose *)) {
+      @apply mt-8 mb-4 text-2xl;
+    }
+
+    :where(h3):not(:where(.not-prose, .not-prose *)) {
+      @apply mt-8 mb-4 text-xl;
+    }
+
+    :where(h4):not(:where(.not-prose, .not-prose *)) {
+      @apply mt-7 mb-3 text-lg;
+    }
+
+    :where(h5, h6):not(:where(.not-prose, .not-prose *)) {
+      @apply mt-5 mb-3;
+    }
+
+    :where(a):not(:where(.not-prose, .not-prose *)) {
+      @apply text-foreground decoration-muted-foreground hover:decoration-foreground font-medium break-words underline underline-offset-[3px] transition-colors;
+    }
+
+    :where(strong):not(:where(.not-prose, .not-prose *)) {
+      @apply text-foreground font-medium;
+    }
+
+    :where(ul):not(:where(.not-prose, .not-prose *)) {
+      @apply marker:text-foreground/30 my-5 ml-6 list-disc [&>li]:mt-2;
+    }
+
+    :where(ol):not(:where(.not-prose, .not-prose *)) {
+      @apply marker:text-foreground/30 my-5 ml-6 list-decimal [&>li]:mt-2;
+      @apply [&[type='A']]:list-[upper-alpha] [&[type='I']]:list-[upper-roman] [&[type='a']]:list-[lower-alpha] [&[type='i']]:list-[lower-roman];
+    }
+
+    :where(li):not(:where(.not-prose, .not-prose *)) {
+      @apply text-foreground/80 pl-2 [&>p]:my-0;
+    }
+
+    :where(ul ul, ol ol, ul ol, ol ul):not(:where(.not-prose, .not-prose *)) {
+      @apply marker:text-foreground/30 my-2 ml-6;
+    }
+
+    :where(code):not(:where(.not-prose, .not-prose *)) {
+      @apply bg-muted/50 text-foreground relative rounded-sm px-[0.3rem] py-[0.2rem] text-sm font-medium break-words;
+    }
+
+    :where(blockquote):not(:where(.not-prose, .not-prose *)) {
+      @apply [&_*]:text-muted-foreground my-6 border-l-2 pl-6;
+    }
+
+    :where(hr):not(:where(.not-prose, .not-prose *)) {
+      @apply my-8 border-t;
+    }
+
+    :where(table):not(:where(.not-prose, .not-prose *)) {
+      @apply mx-auto my-6 block max-w-fit overflow-x-auto text-sm;
+    }
+
+    :where(thead):not(:where(.not-prose, .not-prose *)) {
+      @apply border-muted-foreground/30 border-b;
+    }
+
+    :where(th):not(:where(.not-prose, .not-prose *)) {
+      @apply px-4 py-2 font-medium;
+      @apply text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+    }
+
+    :where(tr):not(:where(.not-prose, .not-prose *)) {
+      @apply border-muted-foreground/30 border-y first:border-t-0 last:border-b-0;
+    }
+
+    :where(td):not(:where(.not-prose, .not-prose *)) {
+      @apply text-foreground/80 px-4 py-2 align-top break-words [&>*]:first:!mt-0 [&>*]:last:!mb-0;
+      @apply text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+    }
+
+    :where(img, video, figure, .expressive-code):not(:where(.not-prose, .not-prose *)) {
+      @apply mx-auto my-6;
+    }
+
+    :where(pre):not(:where(.not-prose, .not-prose *)) {
+      @apply !max-h-[min(68vh,1000px)] overflow-y-auto [&::-webkit-scrollbar-corner]:hidden;
+    }
+
+    :where(summary):not(:where(.not-prose, .not-prose *)) {
+      @apply [&~*>*]:first:!mt-0 [&~*>*]:last:!mb-0;
+    }
+
+    :where(kbd):not(:where(.not-prose, .not-prose *)) {
+      @apply text-foreground bg-muted rounded-md border px-2 py-1 text-xs font-medium;
+    }
+  }
 }

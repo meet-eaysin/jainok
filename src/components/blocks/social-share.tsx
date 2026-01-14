@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Copy, Facebook, Linkedin, Share2, Twitter } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface SocialShareProps {
   url: string;
@@ -46,43 +47,56 @@ export const SocialShare = ({ url, title }: SocialShareProps) => {
   };
 
   return (
-    <div className="border-border my-8 border-y py-6">
-      <p className="text-muted-foreground mb-4 text-sm font-medium">
+    <div className="flex flex-col gap-y-4">
+      <p className="text-muted-foreground text-sm font-medium">
         Share this post
       </p>
       <div className="flex flex-wrap gap-2">
         <Button
           variant="outline"
-          size="sm"
+          size="icon"
+          className="rounded-full"
           onClick={() => window.open(shareLinks.twitter, "_blank")}
+          title="Share on Twitter"
         >
-          <Twitter className="mr-2 h-4 w-4" />
-          Twitter
+          <Twitter className="size-4" />
         </Button>
         <Button
           variant="outline"
-          size="sm"
+          size="icon"
+          className="rounded-full"
           onClick={() => window.open(shareLinks.linkedin, "_blank")}
+          title="Share on LinkedIn"
         >
-          <Linkedin className="mr-2 h-4 w-4" />
-          LinkedIn
+          <Linkedin className="size-4" />
         </Button>
         <Button
           variant="outline"
-          size="sm"
+          size="icon"
+          className="rounded-full"
           onClick={() => window.open(shareLinks.facebook, "_blank")}
+          title="Share on Facebook"
         >
-          <Facebook className="mr-2 h-4 w-4" />
-          Facebook
+          <Facebook className="size-4" />
         </Button>
-        <Button variant="outline" size="sm" onClick={handleCopyLink}>
-          <Copy className="mr-2 h-4 w-4" />
-          {copied ? "Copied!" : "Copy Link"}
+        <Button
+          variant="outline"
+          size="icon"
+          className="rounded-full"
+          onClick={handleCopyLink}
+          title={copied ? "Copied!" : "Copy Link"}
+        >
+          <Copy className={cn("size-4", copied && "text-primary")} />
         </Button>
         {typeof window !== "undefined" && "share" in navigator && (
-          <Button variant="outline" size="sm" onClick={handleNativeShare}>
-            <Share2 className="mr-2 h-4 w-4" />
-            Share
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full"
+            onClick={handleNativeShare}
+            title="Share"
+          >
+            <Share2 className="size-4" />
           </Button>
         )}
       </div>

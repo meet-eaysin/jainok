@@ -45,6 +45,7 @@ const eslintConfig = [
       "@typescript-eslint/no-empty-object-type": "off",
       "react/no-unescaped-entities": "off",
       "no-console": "warn",
+      "import/no-unresolved": ["error", { ignore: ["^geist/"] }],
       "import/order": [
         "error",
         {

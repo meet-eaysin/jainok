@@ -113,6 +113,16 @@ export function getRelatedPosts(
   return related;
 }
 
+// Helper to slugify text like github-slugger
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "") // Remove non-word chars (except spaces and hyphens)
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/-+/g, "-") // Replace multiple hyphens with single hyphen
+    .trim();
+}
+
 // Generate table of contents from markdown content
 export function generateTableOfContents(content: string): TOCItem[] {
   const headingRegex = /^(#{1,3})\s+(.+)$/gm;
@@ -122,10 +132,7 @@ export function generateTableOfContents(content: string): TOCItem[] {
   while ((match = headingRegex.exec(content)) !== null) {
     const level = match[1].length;
     const title = match[2].trim();
-    const id = title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
+    const id = slugify(title);
 
     toc.push({ id, title, level });
   }
@@ -174,4 +181,27 @@ export function getPostsByCategory(
   return posts.filter(
     (post) => post.category.toLowerCase() === category.toLowerCase(),
   );
+}
+
+// Group posts by year
+export function groupPostsByYear(
+  posts: BlogPost[],
+): Record<string, BlogPost[]> {
+  const grouped: Record<string, BlogPost[]> = {};
+
+  posts.forEach((post) => {
+    // Assuming date is in a format parseable by Date, or stick to simple string check if strict
+    // We'll trust new Date(post.date) works as the existing code uses it.
+    const d = new Date(post.date);
+    const year = isNaN(d.getFullYear())
+      ? "Unknown"
+      : d.getFullYear().toString();
+
+    if (!grouped[year]) {
+      grouped[year] = [];
+    }
+    grouped[year].push(post);
+  });
+
+  return grouped;
 }

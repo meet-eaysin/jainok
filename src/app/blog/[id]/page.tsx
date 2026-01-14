@@ -1,21 +1,39 @@
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ArrowLeft, Calendar, Clock, Tag, User } from "lucide-react";
+import { format } from "date-fns";
+import { BookText, Calendar, Clock } from "lucide-react";
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
+import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
-import { Background } from "@/components/background";
 import { BlogReactions } from "@/components/blocks/blog-reactions";
 import { ReadingProgress } from "@/components/blocks/reading-progress";
 import { SocialShare } from "@/components/blocks/social-share";
+import { PostNavigation } from "@/components/blog/post-navigation";
+import { RelatedPosts } from "@/components/blog/related-posts";
+import { TableOfContents } from "@/components/blog/table-of-contents";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Separator } from "@/components/ui/separator";
+import {
+  getPostBySlugFromFiles,
+  getAllPostsFromFiles,
+} from "@/lib/blog-server";
 import type { BlogPost } from "@/lib/blog-types";
-import { getRelatedPosts } from "@/lib/blog-utils";
+import { generateTableOfContents } from "@/lib/blog-utils";
+import { cn } from "@/lib/utils";
+
+// Helper to get adjacent posts
+function getAdjacentPosts(currentId: string, allPosts: BlogPost[]) {
+  const index = allPosts.findIndex((p) => p.id === currentId);
+  if (index === -1) return { newer: null, older: null };
+  const newer = index > 0 ? allPosts[index - 1] : null;
+  const older = index < allPosts.length - 1 ? allPosts[index + 1] : null;
+  return { newer, older };
+}
 
 interface PageProps {
   params: Promise<{
@@ -27,19 +45,9 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { id } = await params;
-
-  // Fetch post from API
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/blog/posts/${id}`,
-  );
-  if (!response.ok) return {};
-
-  const post: BlogPost = await response.json();
+  const post = getPostBySlugFromFiles(id);
 
   if (!post) return {};
-
-  const siteUrl = "https://eaysinmia.dev";
-  const postUrl = `${siteUrl}/blog/${post.slug}`;
 
   return {
     title: post.seo?.metaTitle || post.title,
@@ -49,187 +57,197 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: [post.seo?.ogImage || post.image || `${siteUrl}/og-image.jpg`],
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
       tags: post.tags,
-      url: postUrl,
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: [post.seo?.ogImage || post.image || `${siteUrl}/og-image.jpg`],
-    },
-    alternates: {
-      canonical: postUrl,
     },
   };
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { id } = await params;
+  const post = getPostBySlugFromFiles(id);
 
-  // Fetch post from API
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/blog/posts/${id}`,
-    {
-      cache: "no-store",
-    },
-  );
-  if (!response.ok) notFound();
+  if (!post) notFound();
 
-  const post: BlogPost = await response.json();
-
-  // Fetch all posts for related posts
-  const allPostsResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/blog/posts`,
-  );
-  const allPostsData = await allPostsResponse.json();
-  const allPosts: BlogPost[] = allPostsData.posts || [];
-
-  const relatedPosts = getRelatedPosts(post, allPosts, 3);
+  const allPosts = getAllPostsFromFiles();
+  const { newer, older } = getAdjacentPosts(post.id, allPosts);
+  const toc = generateTableOfContents(post.content);
 
   return (
     <>
       <ReadingProgress />
-      <Background className="via-muted to-muted/80">
-        <div className="container py-28 lg:py-32">
-          <div className="mx-auto max-w-4xl">
-            {/* Back Button */}
-            <div className="mb-8">
-              <Link href="/blog">
-                <Button variant="ghost" className="gap-2">
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to Blog
-                </Button>
-              </Link>
+      <div className="container px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[240px_1fr]">
+          {/* Left Sidebar: TOC */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-24">
+              <TableOfContents items={toc} />
             </div>
+          </aside>
 
-            {/* Blog Post Header */}
-            <div className="mb-8">
-              <div className="mb-4 flex flex-wrap items-center gap-3">
-                <Badge
-                  variant="secondary"
-                  className="bg-primary/10 text-primary border-primary/20"
-                >
-                  <Tag className="mr-1 h-3 w-3" />
-                  {post.category}
-                </Badge>
-                <div className="text-muted-foreground flex items-center gap-1 text-sm">
-                  <Calendar className="h-4 w-4" />
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </div>
-                <div className="text-muted-foreground flex items-center gap-1 text-sm">
-                  <Clock className="h-4 w-4" />
-                  {post.readTime}
-                </div>
-                <div className="text-muted-foreground flex items-center gap-1 text-sm">
-                  <User className="h-4 w-4" />
-                  {post.author}
-                </div>
+          {/* Main Content Column */}
+          <div className="mx-auto flex w-full max-w-3xl flex-col gap-y-8 lg:mx-0">
+            {/* Breadcrumbs */}
+            <Breadcrumbs
+              items={[
+                { label: "Blog", href: "/blog", icon: BookText },
+                { label: post.title, href: `/blog/${post.slug}` },
+              ]}
+            />
+
+            {/* Hero Image */}
+            {post.image && (
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
-              <h1 className="font-display mb-6 text-4xl leading-tight font-bold md:text-6xl">
+            )}
+
+            <header className="flex flex-col gap-y-6">
+              <h1 className="text-3xl leading-tight font-medium sm:text-4xl md:text-5xl">
                 {post.title}
               </h1>
-              <p className="text-muted-foreground text-xl leading-relaxed">
-                {post.excerpt}
-              </p>
 
-              {/* Tags */}
-              {post.tags && post.tags.length > 0 && (
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {post.tags.map((tag: string) => (
-                    <Badge key={tag} variant="secondary" className="text-xs">
+              <div className="text-muted-foreground flex flex-wrap items-center gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <Avatar className="size-6">
+                    <AvatarImage src={post.authorImage} />
+                    <AvatarFallback>{post.author[0]}</AvatarFallback>
+                  </Avatar>
+                  <span className="text-foreground">{post.author}</span>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <Calendar className="size-4" />
+                  <span>{format(new Date(post.date), "MMMM d, yyyy")}</span>
+                </div>
+
+                <Separator
+                  orientation="vertical"
+                  className="hidden h-4 sm:block"
+                />
+
+                <div className="flex items-center gap-1.5">
+                  <Clock className="size-4" />
+                  <span>{post.readTime}</span>
+                </div>
+              </div>
+
+              {post.tags && (
+                <div className="flex flex-wrap gap-2">
+                  {post.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="secondary"
+                      className="font-normal"
+                    >
                       #{tag}
                     </Badge>
                   ))}
                 </div>
               )}
-            </div>
+            </header>
 
-            {/* Featured Image */}
-            {post.image && (
-              <div className="mb-8">
-                <div className="relative h-64 overflow-hidden rounded-lg md:h-96">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-            )}
+            <Separator />
 
-            {/* Blog Content */}
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <article className="prose prose-lg dark:prose-invert max-w-none">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeSlug]}
+                components={{
+                  img: ({ ...props }) => (
+                    <div className="my-8 flex flex-col items-center gap-2">
+                      <div className="relative aspect-video w-full overflow-hidden rounded-xl border shadow-sm">
+                        <Image
+                          src={props.src || ""}
+                          alt={props.alt || ""}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      {props.alt && (
+                        <span className="text-muted-foreground text-center text-sm italic">
+                          {props.alt}
+                        </span>
+                      )}
+                    </div>
+                  ),
+                  code: ({ className, children, ...props }) => {
+                    const match = /language-(\w+)/.exec(className || "");
+                    const isInline = !match;
+                    return isInline ? (
+                      <code
+                        className={cn(
+                          "bg-muted/50 rounded-md px-1.5 py-0.5 font-mono text-sm font-medium",
+                          className,
+                        )}
+                        {...props}
+                      >
+                        {children}
+                      </code>
+                    ) : (
+                      <div className="group relative my-6">
+                        <div className="bg-muted absolute top-0 right-0 flex items-center rounded-tr-lg rounded-bl-lg px-3 py-1 text-[10px] font-bold tracking-widest text-zinc-400 uppercase">
+                          {match[1]}
+                        </div>
+                        <pre
+                          className={cn(
+                            "bg-muted/30 max-h-[600px] overflow-auto rounded-lg border p-4 font-mono text-sm leading-relaxed",
+                            className,
+                          )}
+                        >
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        </pre>
+                      </div>
+                    );
+                  },
+                }}
+              >
                 {post.content}
               </ReactMarkdown>
+            </article>
+
+            <Separator className="my-12" />
+
+            <div className="bg-muted/30 flex flex-col gap-10 rounded-2xl border p-8 sm:flex-row sm:items-start sm:justify-between">
+              <BlogReactions postId={post.id} />
+              <Separator
+                orientation="vertical"
+                className="hidden h-20 sm:block"
+              />
+              <SocialShare url={`/blog/${post.slug}`} title={post.title} />
             </div>
 
-            {/* Reactions */}
-            <BlogReactions postId={post.id} />
+            <PostNavigation newerPost={newer} olderPost={older} />
 
-            {/* Social Share */}
-            <SocialShare url={`/blog/${post.slug}`} title={post.title} />
+            <Separator className="my-12" />
 
-            {/* Related Posts */}
-            {relatedPosts.length > 0 && (
-              <div className="border-border mt-12 border-t pt-12">
-                <h2 className="font-display mb-6 text-2xl font-bold">
-                  Related Posts
-                </h2>
-                <div className="grid gap-6 md:grid-cols-3">
-                  {relatedPosts.map((relatedPost) => (
-                    <Link key={relatedPost.id} href={`/blog/${relatedPost.id}`}>
-                      <Card className="group h-full transition-all duration-300 hover:shadow-md">
-                        {relatedPost.image && (
-                          <div className="relative aspect-video overflow-hidden">
-                            <Image
-                              src={relatedPost.image}
-                              alt={relatedPost.title}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        )}
-                        <CardContent className="p-4">
-                          <Badge variant="secondary" className="mb-2 text-xs">
-                            {relatedPost.category}
-                          </Badge>
-                          <h3 className="group-hover:text-primary font-display mb-2 line-clamp-2 text-base font-bold transition-colors">
-                            {relatedPost.title}
-                          </h3>
-                          <p className="text-muted-foreground line-clamp-2 text-sm">
-                            {relatedPost.excerpt}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
+            <RelatedPosts currentPost={post} allPosts={allPosts} />
           </div>
         </div>
-      </Background>
+      </div>
     </>
   );
 }
 
-// Generate static params for all blog posts
+// Static Params
 export async function generateStaticParams() {
-  // Use server-side function during build (no API call needed)
-  const { getAllPostsFromFiles } = await import("@/lib/blog-server");
-  const blogPosts = getAllPostsFromFiles();
-  return blogPosts.map((post: BlogPost) => ({
+  const posts = getAllPostsFromFiles();
+  return posts.map((post) => ({
     id: post.id,
   }));
 }

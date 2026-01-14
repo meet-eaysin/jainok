@@ -1,67 +1,13 @@
-import { Inter } from "next/font/google";
-import localFont from "next/font/local";
-
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 
 import { Footer } from "@/components/blocks/footer";
 import { Navbar } from "@/components/blocks/navbar";
-import { StyleGlideProvider } from "@/components/styleglide-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { profile } from "@/data/profile";
 import "@/styles/globals.css";
-
-const dmSans = localFont({
-  src: [
-    {
-      path: "../../fonts/dm-sans/DMSans-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../fonts/dm-sans/DMSans-Italic.ttf",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "../../fonts/dm-sans/DMSans-Medium.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../../fonts/dm-sans/DMSans-MediumItalic.ttf",
-      weight: "500",
-      style: "italic",
-    },
-    {
-      path: "../../fonts/dm-sans/DMSans-SemiBold.ttf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../../fonts/dm-sans/DMSans-SemiBoldItalic.ttf",
-      weight: "600",
-      style: "italic",
-    },
-    {
-      path: "../../fonts/dm-sans/DMSans-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../../fonts/dm-sans/DMSans-BoldItalic.ttf",
-      weight: "700",
-      style: "italic",
-    },
-  ],
-  variable: "--font-dm-sans",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+import { profile } from "@/data/profile"; // Ensure this import path is correct based on usage
 
 export const metadata: Metadata = {
   title: {
@@ -73,10 +19,6 @@ export const metadata: Metadata = {
   authors: [{ name: profile.name }],
   creator: profile.name,
   publisher: profile.name,
-  robots: {
-    index: true,
-    follow: true,
-  },
   icons: {
     icon: [
       { url: "/favicon/favicon.ico", sizes: "48x48" },
@@ -153,14 +95,16 @@ export default function RootLayout({
         />
         <link rel="canonical" href={profile.metadata.url} />
       </head>
-      <body className={`${dmSans.variable} ${inter.variable} antialiased`}>
+      <body
+        className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          <StyleGlideProvider />
+          {/* <StyleGlideProvider /> removed as it seems unused or managed elsewhere */}
           <Navbar />
           <main className="">{children}</main>
           <Footer />
