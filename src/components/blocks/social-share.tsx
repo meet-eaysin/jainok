@@ -47,56 +47,61 @@ export const SocialShare = ({ url, title }: SocialShareProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-y-4">
-      <p className="text-muted-foreground text-sm font-medium">
-        Share this post
-      </p>
-      <div className="flex flex-wrap gap-2">
+    <div className="flex items-center gap-2">
+      <span className="text-muted-foreground mr-2 text-xs font-medium tracking-tight uppercase">
+        Share
+      </span>
+      <div className="flex items-center gap-1">
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
-          className="rounded-full"
+          className="size-8 rounded-md"
           onClick={() => window.open(shareLinks.twitter, "_blank")}
           title="Share on Twitter"
         >
-          <Twitter className="size-4" />
+          <Twitter className="text-muted-foreground group-hover:text-foreground size-4" />
         </Button>
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
-          className="rounded-full"
+          className="size-8 rounded-md"
           onClick={() => window.open(shareLinks.linkedin, "_blank")}
           title="Share on LinkedIn"
         >
-          <Linkedin className="size-4" />
+          <Linkedin className="text-muted-foreground group-hover:text-foreground size-4" />
         </Button>
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
-          className="rounded-full"
+          className="size-8 rounded-md"
           onClick={() => window.open(shareLinks.facebook, "_blank")}
           title="Share on Facebook"
         >
-          <Facebook className="size-4" />
+          <Facebook className="text-muted-foreground group-hover:text-foreground size-4" />
         </Button>
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
-          className="rounded-full"
+          className="size-8 rounded-md"
           onClick={handleCopyLink}
           title={copied ? "Copied!" : "Copy Link"}
         >
-          <Copy className={cn("size-4", copied && "text-primary")} />
+          <Copy
+            className={cn(
+              "text-muted-foreground size-4",
+              copied && "text-primary",
+            )}
+          />
         </Button>
         {typeof window !== "undefined" && "share" in navigator && (
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="rounded-full"
+            className="size-8 rounded-md"
             onClick={handleNativeShare}
             title="Share"
           >
-            <Share2 className="size-4" />
+            <Share2 className="text-muted-foreground size-4" />
           </Button>
         )}
       </div>
