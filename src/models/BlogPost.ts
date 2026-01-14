@@ -24,6 +24,7 @@ const blogPostSchema = new Schema<BlogPostType>(
     },
     externalUrl: { type: String, default: "" },
     platform: { type: String, default: "" },
+    views: { type: Number, default: 0 },
     relatedPosts: [{ type: String }],
     seo: {
       metaTitle: String,

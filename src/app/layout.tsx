@@ -7,6 +7,7 @@ import { Footer } from "@/components/blocks/footer";
 import { Navbar } from "@/components/blocks/navbar";
 import { StyleGlideProvider } from "@/components/styleglide-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { profile } from "@/data/profile";
 import "@/styles/globals.css";
 
@@ -163,6 +164,7 @@ export default function RootLayout({
           <Navbar />
           <main className="">{children}</main>
           <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
