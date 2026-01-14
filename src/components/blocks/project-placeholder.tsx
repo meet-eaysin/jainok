@@ -1,12 +1,10 @@
 import { Code2 } from "lucide-react";
 
 export const ProjectPlaceholder = ({ title }: { title: string }) => {
-  // Create a safe ID for the pattern
   const patternId = `grid-pattern-${title.toLowerCase().replace(/\s+/g, "-")}`;
 
   return (
     <div className="bg-muted/30 relative flex h-full w-full items-center justify-center overflow-hidden border">
-      {/* Abstract Pattern Background */}
       <svg
         className="absolute inset-0 h-full w-full opacity-[0.03]"
         xmlns="http://www.w3.org/2000/svg"
