@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { Users, Eye, ThumbsUp } from "lucide-react";
+import { Users, Eye } from "lucide-react";
 import { toast } from "sonner";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,7 +11,6 @@ export default function AdminDashboardPage() {
   const [stats, setStats] = useState({
     posts: 0,
     subscribers: 0,
-    reactions: 0,
     views: 0,
   });
 
@@ -30,7 +29,6 @@ export default function AdminDashboardPage() {
           setStats({
             posts: data.posts,
             subscribers: data.subscribers,
-            reactions: data.reactions,
             views: data.views,
           });
         }
@@ -46,7 +44,7 @@ export default function AdminDashboardPage() {
     <div className="space-y-6">
       <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Posts</CardTitle>
@@ -83,19 +81,6 @@ export default function AdminDashboardPage() {
             </p>
           </CardContent>
         </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Reactions</CardTitle>
-            <ThumbsUp className="text-muted-foreground h-4 w-4" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.reactions}</div>
-            <p className="text-muted-foreground text-xs">
-              Total reactions across posts
-            </p>
-          </CardContent>
-        </Card>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
@@ -105,7 +90,7 @@ export default function AdminDashboardPage() {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground text-sm">
-              Recent verified subscribers and new comments will appear here.
+              Recent verified subscribers will appear here.
             </p>
           </CardContent>
         </Card>

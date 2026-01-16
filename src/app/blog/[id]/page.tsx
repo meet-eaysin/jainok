@@ -8,7 +8,6 @@ import ReactMarkdown from "react-markdown";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
-import { BlogReactions } from "@/components/blocks/blog-reactions";
 import { ReadingProgress } from "@/components/blocks/reading-progress";
 import { SocialShare } from "@/components/blocks/social-share";
 import { PostNavigation } from "@/components/blog/post-navigation";
@@ -222,7 +221,6 @@ export default async function BlogPostPage({ params }: PageProps) {
             </article>
 
             <div className="mt-8 flex flex-col gap-6 border-t pt-4 sm:flex-row sm:items-center sm:justify-between">
-              <BlogReactions postId={post.id} />
               <SocialShare url={`/blog/${post.slug}`} title={post.title} />
             </div>
 
