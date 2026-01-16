@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
+import { Background } from "@/components/background";
 import { ReadingProgress } from "@/components/blocks/reading-progress";
 import { SocialShare } from "@/components/blocks/social-share";
 import { PostNavigation } from "@/components/blog/post-navigation";
@@ -80,9 +81,9 @@ export default async function BlogPostPage({ params }: PageProps) {
   const toc = generateTableOfContents(post.content);
 
   return (
-    <>
+    <Background>
       <ReadingProgress />
-      <div className="container px-4 py-12 sm:px-6 lg:px-8">
+      <div className="container px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[240px_1fr]">
           {/* Left Sidebar: TOC */}
           <aside className="hidden lg:block">
@@ -92,7 +93,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </aside>
 
           {/* Main Content Column */}
-          <div className="mx-auto flex w-full max-w-3xl flex-col gap-y-8 lg:mx-0">
+          <div className="mx-auto flex w-full max-w-3xl flex-col gap-y-6 lg:mx-0">
             {/* Breadcrumbs */}
             <Breadcrumbs
               items={[
@@ -103,7 +104,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* Hero Image */}
             {post.image && (
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+              <div className="relative aspect-[21/9] w-full overflow-hidden rounded-lg">
                 <Image
                   src={post.image}
                   alt={post.title}
@@ -114,8 +115,8 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
             )}
 
-            <header className="flex flex-col gap-y-6">
-              <h1 className="text-3xl leading-tight font-medium sm:text-4xl md:text-5xl">
+            <header className="flex flex-col gap-y-4">
+              <h1 className="text-3xl leading-tight font-medium sm:text-4xl">
                 {post.title}
               </h1>
 
@@ -145,7 +146,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
 
               {post.tags && (
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 pt-1">
                   {post.tags.map((tag) => (
                     <Badge
                       key={tag}
@@ -230,7 +231,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </div>
       </div>
-    </>
+    </Background>
   );
 }
 

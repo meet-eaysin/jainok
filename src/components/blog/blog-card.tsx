@@ -18,7 +18,7 @@ export function BlogCard({ post, className }: BlogCardProps) {
   return (
     <div
       className={cn(
-        "group hover:bg-muted/50 rounded-xl border p-4 transition-colors duration-300 ease-in-out",
+        "group hover:bg-muted/30 hover:border-primary/20 rounded-xl border p-4 transition-all duration-300 hover:shadow-md",
         className,
       )}
     >

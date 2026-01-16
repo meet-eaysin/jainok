@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 
+import { Background } from "@/components/background";
 import { BlogListContent } from "@/components/blog/blog-list-content";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getAllPostsFromFiles } from "@/lib/blog-server";
@@ -10,21 +11,30 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  // Fetch posts directly from server (filesystem)
   const posts = await getAllPostsFromFiles();
 
   return (
-    <div className="container mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="sr-only">Blog</h1>
+    <Background>
+      <div className="container pt-12 pb-20 lg:pt-16 lg:pb-28">
+        {/* Breadcrumbs */}
         <Breadcrumbs
           items={[{ label: "Blog", href: "/blog" }]}
-          className="mb-4"
+          className="mb-6"
         />
-      </div>
 
-      <BlogListContent initialPosts={posts} />
-    </div>
+        {/* Header */}
+        <div className="mb-12">
+          <h1 className="font-display mb-3 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
+            Latest Thoughts
+          </h1>
+          <p className="text-muted-foreground max-w-2xl text-base font-light sm:text-lg">
+            Sharing my experiences, learnings, and insights about software
+            development, technology trends, and best practices.
+          </p>
+        </div>
+
+        <BlogListContent initialPosts={posts} />
+      </div>
+    </Background>
   );
 }
