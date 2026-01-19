@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const About = () => {
   return (
-    <div className="section-padding container">
+    <div className="container">
       {/* Intro Section */}
       <div className="mb-24">
         <h2 className="font-display mb-12 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">

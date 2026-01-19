@@ -8,7 +8,6 @@ const Page = () => {
   return (
     <Background>
       <div className="container pt-12 pb-20 lg:pt-16 lg:pb-28">
-        {/* Header */}
         <div className="mb-12">
           <h1 className="font-display mb-3 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
             Privacy Policy
@@ -19,7 +18,6 @@ const Page = () => {
           </p>
         </div>
 
-        {/* Content */}
         <article className="prose prose-lg dark:prose-invert max-w-none">
           <Privacy />
         </article>

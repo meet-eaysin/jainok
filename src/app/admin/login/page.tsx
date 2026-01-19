@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
     if (!key) return;
 
     try {
-      const res = await fetch("/api/blog/posts", {
+      const res = await fetch("/api/admin/stats", {
         headers: {
           "x-api-key": key,
         },

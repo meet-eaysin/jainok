@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import fs from "fs";
+import path from "path";
+
+import { getAllPostsFromFiles } from "@/lib/blog-server";
 import type { SortOption, ContentType } from "@/lib/blog-types";
 import { filterPosts, sortPosts } from "@/lib/blog-utils";
-import connectDB from "@/lib/db";
-import BlogPost from "@/models/BlogPost";
 
 export async function GET(request: NextRequest) {
   try {
-    await connectDB();
-
     const { searchParams } = new URL(request.url);
     const category = searchParams.get("category");
     const tags = searchParams.get("tags")?.split(",").filter(Boolean);
@@ -18,10 +18,8 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "10");
 
-    // Fetch all posts from database
-    const allPosts = await BlogPost.find({}).lean();
+    const allPosts = getAllPostsFromFiles();
 
-    // Apply filters using existing utility functions
     let filteredPosts = filterPosts(allPosts, {
       category: category || undefined,
       tags: tags || undefined,
@@ -29,10 +27,8 @@ export async function GET(request: NextRequest) {
       searchQuery: searchQuery || undefined,
     });
 
-    // Apply sorting
     filteredPosts = sortPosts(filteredPosts, sortBy);
 
-    // Apply pagination
     const total = filteredPosts.length;
     const totalPages = Math.ceil(total / limit);
     const startIndex = (page - 1) * limit;
@@ -44,8 +40,7 @@ export async function GET(request: NextRequest) {
       page,
       totalPages,
     });
-  } catch (error) {
-    console.error("Error fetching blog posts:", error);
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch blog posts" },
       { status: 500 },
@@ -55,24 +50,59 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    await connectDB();
-
     const body = await request.json();
 
-    // Check for API Key in headers for basic security
     const apiKey = request.headers.get("x-api-key");
     const adminKey = process.env.ADMIN_API_KEY;
 
-    // Only enforce if ADMIN_API_KEY is set in env
     if (adminKey && apiKey !== adminKey) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const post = await BlogPost.create(body);
+    const {
+      title,
+      slug,
+      date,
+      category,
+      excerpt,
+      content,
+      image,
+      author = "Eaysin Mia",
+    } = body;
 
-    return NextResponse.json(post, { status: 201 });
-  } catch (error) {
-    console.error("Error creating blog post:", error);
+    if (!title || !slug || !content) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
+    }
+
+    const fileContent = `---
+      title: "${title.replace(/"/g, '\\"')}"
+      date: "${date || new Date().toISOString().split("T")[0]}"
+      category: "${category || "Uncategorized"}"
+      excerpt: "${(excerpt || "").replace(/"/g, '\\"')}"
+      image: "${image || "/images/blog/placeholder.jpg"}"
+      author: "${author}"
+      ---
+
+      ${content}
+    `;
+
+    const filePath = path.join(process.cwd(), "src/data/posts", `${slug}.md`);
+
+    const dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    fs.writeFileSync(filePath, fileContent, "utf8");
+
+    return NextResponse.json(
+      { message: "Post created successfully", slug },
+      { status: 201 },
+    );
+  } catch {
     return NextResponse.json(
       { error: "Failed to create blog post" },
       { status: 500 },

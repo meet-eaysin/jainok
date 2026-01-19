@@ -12,9 +12,8 @@ export default function AboutPage() {
           My personal philosophy and professional journey.
         </p>
       </div>
-      <div className="">
-        <About />
-      </div>
+
+      <About />
     </Background>
   );
 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { getAllPostsFromFiles } from "@/lib/blog-server";
 import connectDB from "@/lib/db";
-import BlogPost from "@/models/BlogPost";
 import EmailSubscriber from "@/models/EmailSubscriber";
 
 function isAuthenticated(request: NextRequest) {
@@ -17,15 +17,10 @@ export async function GET(request: NextRequest) {
   try {
     await connectDB();
 
-    const [postsCount, subscribersCount, viewsData] = await Promise.all([
-      BlogPost.countDocuments(),
-      EmailSubscriber.countDocuments(),
-      BlogPost.aggregate([
-        { $group: { _id: null, totalViews: { $sum: "$views" } } },
-      ]),
-    ]);
+    const postsCount = getAllPostsFromFiles().length;
+    const subscribersCount = await EmailSubscriber.countDocuments();
 
-    const totalViews = viewsData.length > 0 ? viewsData[0].totalViews : 0;
+    const totalViews = 0;
 
     return NextResponse.json({
       posts: postsCount,
