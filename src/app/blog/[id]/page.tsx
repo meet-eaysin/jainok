@@ -171,7 +171,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <div className="my-8 flex flex-col items-center gap-2">
                       <div className="relative aspect-video w-full overflow-hidden rounded-xl border shadow-sm">
                         <Image
-                          src={props.src || ""}
+                          src={(props.src as string) || ""}
                           alt={props.alt || ""}
                           fill
                           className="object-cover"
