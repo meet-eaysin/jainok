@@ -1,41 +1,86 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import fs from "fs";
-import path from "path";
+import type { ContentType, SortOption } from "@/lib/blog-types";
+import connectDB from "@/lib/db";
+import BlogPost from "@/models/BlogPost";
 
-import { getAllPostsFromFiles } from "@/lib/blog-server";
-import type { SortOption, ContentType } from "@/lib/blog-types";
-import { filterPosts, sortPosts } from "@/lib/blog-utils";
+interface BlogPostQuery {
+  status?: string;
+  category?: string;
+  tags?: { $in: string[] };
+  contentType?: ContentType;
+  $or?: Array<{
+    title?: { $regex: string; $options: string };
+    excerpt?: { $regex: string; $options: string };
+    content?: { $regex: string; $options: string };
+  }>;
+}
 
 export async function GET(request: NextRequest) {
   try {
+    await connectDB();
+
     const { searchParams } = new URL(request.url);
     const category = searchParams.get("category");
     const tags = searchParams.get("tags")?.split(",").filter(Boolean);
-    const contentType = searchParams.get("contentType");
+    const contentType = searchParams.get("contentType") as ContentType | null;
     const searchQuery = searchParams.get("search");
     const sortBy = (searchParams.get("sortBy") as SortOption) || "newest";
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "10");
+    const status = searchParams.get("status") || "published";
 
-    const allPosts = getAllPostsFromFiles();
+    const query: BlogPostQuery = { status };
 
-    let filteredPosts = filterPosts(allPosts, {
-      category: category || undefined,
-      tags: tags || undefined,
-      contentType: (contentType as ContentType) || undefined,
-      searchQuery: searchQuery || undefined,
-    });
+    if (category) {
+      query.category = category;
+    }
 
-    filteredPosts = sortPosts(filteredPosts, sortBy);
+    if (tags && tags.length > 0) {
+      query.tags = { $in: tags };
+    }
 
-    const total = filteredPosts.length;
+    if (contentType) {
+      query.contentType = contentType;
+    }
+
+    if (searchQuery) {
+      query.$or = [
+        { title: { $regex: searchQuery, $options: "i" } },
+        { excerpt: { $regex: searchQuery, $options: "i" } },
+        { content: { $regex: searchQuery, $options: "i" } },
+      ];
+    }
+
+    let sortConfig: Record<string, 1 | -1> = { date: -1 };
+
+    switch (sortBy) {
+      case "newest":
+        sortConfig = { date: -1 };
+        break;
+      case "oldest":
+        sortConfig = { date: 1 };
+        break;
+      case "shortest":
+        sortConfig = { readTime: 1 };
+        break;
+      case "longest":
+        sortConfig = { readTime: -1 };
+        break;
+    }
+
+    const total = await BlogPost.countDocuments(query);
     const totalPages = Math.ceil(total / limit);
-    const startIndex = (page - 1) * limit;
-    const paginatedPosts = filteredPosts.slice(startIndex, startIndex + limit);
+    const skip = (page - 1) * limit;
+
+    const posts = await BlogPost.find(query)
+      .sort(sortConfig)
+      .skip(skip)
+      .limit(limit)
+      .lean();
 
     return NextResponse.json({
-      posts: paginatedPosts,
+      posts,
       total,
       page,
       totalPages,
@@ -50,6 +95,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    await connectDB();
+
     const body = await request.json();
 
     const apiKey = request.headers.get("x-api-key");
@@ -66,6 +113,7 @@ export async function POST(request: NextRequest) {
       category,
       tags,
       featured,
+      status,
       excerpt,
       content,
       image,
@@ -79,31 +127,38 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const fileContent = `---
-title: "${title.replace(/"/g, '\\"')}"
-date: "${date || new Date().toISOString().split("T")[0]}"
-category: "${category || "Uncategorized"}"
-tags: [${(tags || []).map((t: string) => `"${t}"`).join(", ")}]
-featured: ${featured || false}
-excerpt: "${(excerpt || "").replace(/"/g, '\\"')}"
-image: "${image || "/images/blog/placeholder.jpg"}"
-author: "${author}"
----
-
-${content}
-`;
-
-    const filePath = path.join(process.cwd(), "src/data/posts", `${slug}.md`);
-
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
+    const existingPost = await BlogPost.findOne({ slug });
+    if (existingPost) {
+      return NextResponse.json(
+        { error: "A post with this slug already exists" },
+        { status: 409 },
+      );
     }
 
-    fs.writeFileSync(filePath, fileContent, "utf8");
+    const wordCount = content.split(/\s+/).length;
+    const readTime = `${Math.ceil(wordCount / 200)} min read`;
+
+    const newPost = await BlogPost.create({
+      id: slug,
+      slug,
+      title,
+      excerpt: excerpt || "",
+      content,
+      category: category || "Uncategorized",
+      tags: tags || [],
+      date: date || new Date().toISOString().split("T")[0],
+      readTime,
+      image: image || "/images/blog/placeholder.jpg",
+      featured: featured || false,
+      status: status || "draft",
+      author,
+      authorImage: "",
+      contentType: "blog",
+      views: 0,
+    });
 
     return NextResponse.json(
-      { message: "Post created successfully", slug },
+      { message: "Post created successfully", slug, post: newPost },
       { status: 201 },
     );
   } catch {

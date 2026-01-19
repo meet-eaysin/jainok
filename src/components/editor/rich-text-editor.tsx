@@ -4,24 +4,24 @@ import { useCallback } from "react";
 
 import TiptapImage from "@tiptap/extension-image";
 import TiptapLink from "@tiptap/extension-link";
-import Placeholder from "@tiptap/extension-placeholder";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import TiptapPlaceholder from "@tiptap/extension-placeholder";
+import { EditorContent, useEditor } from "@tiptap/react";
+import TiptapStarterKit from "@tiptap/starter-kit";
 import {
   Bold,
-  Italic,
-  List,
-  ListOrdered,
+  Code,
+  Code2,
   Heading2,
   Heading3,
-  Quote,
-  Undo,
-  Redo,
-  Code,
   ImageIcon,
+  Italic,
   Link as LinkIcon,
+  List,
+  ListOrdered,
+  Quote,
+  Redo,
   Strikethrough,
-  Code2,
+  Undo,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -43,7 +43,7 @@ const RichTextEditor = ({
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit.configure({
+      TiptapStarterKit.configure({
         heading: {
           levels: [2, 3],
         },
@@ -60,7 +60,7 @@ const RichTextEditor = ({
             "text-primary underline underline-offset-4 hover:text-primary/80 transition-colors",
         },
       }),
-      Placeholder.configure({
+      TiptapPlaceholder.configure({
         placeholder,
         emptyEditorClass: "is-editor-empty",
       }),
@@ -109,9 +109,7 @@ const RichTextEditor = ({
 
   return (
     <div className="bg-background flex w-full flex-col rounded-lg border shadow-sm">
-      {/* Toolbar */}
       <div className="bg-muted/30 flex flex-wrap items-center gap-1 border-b p-3">
-        {/* Text Formatting */}
         <div className="flex items-center gap-0.5">
           <Toggle
             size="sm"
@@ -153,7 +151,6 @@ const RichTextEditor = ({
 
         <Separator orientation="vertical" className="mx-1 h-8" />
 
-        {/* Headings */}
         <div className="flex items-center gap-0.5">
           <Toggle
             size="sm"
@@ -181,7 +178,6 @@ const RichTextEditor = ({
 
         <Separator orientation="vertical" className="mx-1 h-8" />
 
-        {/* Lists */}
         <div className="flex items-center gap-0.5">
           <Toggle
             size="sm"
@@ -209,7 +205,6 @@ const RichTextEditor = ({
 
         <Separator orientation="vertical" className="mx-1 h-8" />
 
-        {/* Blocks */}
         <div className="flex items-center gap-0.5">
           <Toggle
             size="sm"
@@ -237,7 +232,6 @@ const RichTextEditor = ({
 
         <Separator orientation="vertical" className="mx-1 h-8" />
 
-        {/* Media */}
         <div className="flex items-center gap-0.5">
           <Button
             type="button"
@@ -266,7 +260,6 @@ const RichTextEditor = ({
 
         <div className="flex-1" />
 
-        {/* History */}
         <div className="flex items-center gap-0.5">
           <Button
             type="button"
@@ -293,10 +286,8 @@ const RichTextEditor = ({
         </div>
       </div>
 
-      {/* Editor Content */}
       <EditorContent editor={editor} className="min-h-[400px]" />
 
-      {/* Character Count (Optional) */}
       <div className="bg-muted/20 text-muted-foreground border-t px-4 py-2 text-xs">
         {editor.storage.characterCount?.characters() || 0} characters
       </div>

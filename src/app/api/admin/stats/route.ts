@@ -1,32 +1,50 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getAllPostsFromFiles } from "@/lib/blog-server";
 import connectDB from "@/lib/db";
+import BlogPost from "@/models/BlogPost";
 import EmailSubscriber from "@/models/EmailSubscriber";
 
-function isAuthenticated(request: NextRequest) {
-  const authHeader = request.headers.get("x-api-key");
-  return authHeader === process.env.ADMIN_API_KEY;
+interface StatsResponse {
+  totalPosts: number;
+  totalSubscribers: number;
+  totalViews: number;
+  publishedPosts: number;
+  draftPosts: number;
 }
 
 export async function GET(request: NextRequest) {
-  if (!isAuthenticated(request)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   try {
     await connectDB();
 
-    const postsCount = getAllPostsFromFiles().length;
-    const subscribersCount = await EmailSubscriber.countDocuments();
+    const apiKey = request.headers.get("x-api-key");
+    const adminKey = process.env.ADMIN_API_KEY;
 
-    const totalViews = 0;
+    if (adminKey && apiKey !== adminKey) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    return NextResponse.json({
-      posts: postsCount,
-      subscribers: subscribersCount,
-      views: totalViews,
-    });
+    const [totalPosts, totalSubscribers, publishedPosts, draftPosts, viewsAgg] =
+      await Promise.all([
+        BlogPost.countDocuments(),
+        EmailSubscriber.countDocuments(),
+        BlogPost.countDocuments({ status: "published" }),
+        BlogPost.countDocuments({ status: "draft" }),
+        BlogPost.aggregate([
+          { $group: { _id: null, totalViews: { $sum: "$views" } } },
+        ]),
+      ]);
+
+    const totalViews = viewsAgg[0]?.totalViews || 0;
+
+    const stats: StatsResponse = {
+      totalPosts,
+      totalSubscribers,
+      totalViews,
+      publishedPosts,
+      draftPosts,
+    };
+
+    return NextResponse.json(stats);
   } catch {
     return NextResponse.json(
       { error: "Failed to fetch stats" },
