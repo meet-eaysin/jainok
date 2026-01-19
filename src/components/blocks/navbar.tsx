@@ -19,7 +19,6 @@ import { cn } from "@/lib/utils";
 
 const ITEMS = [
   { label: "About", href: "/about" },
-  { label: "Case Studies", href: "/case-studies" },
   { label: "Experience", href: "/#experience" },
   { label: "Projects", href: "/#projects" },
   { label: "Blog", href: "/blog" },
