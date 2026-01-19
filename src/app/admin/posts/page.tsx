@@ -125,9 +125,10 @@ export default function AdminPostsPage() {
                         <ExternalLink className="h-4 w-4" />
                       </Link>
                     </Button>
-                    <Button variant="ghost" size="icon">
-                      {/* Edit functionality to be implemented */}
-                      <Edit className="h-4 w-4" />
+                    <Button variant="ghost" size="icon" asChild>
+                      <Link href={`/admin/posts/${post.slug}/edit`}>
+                        <Edit className="h-4 w-4" />
+                      </Link>
                     </Button>
                     <Button
                       variant="ghost"

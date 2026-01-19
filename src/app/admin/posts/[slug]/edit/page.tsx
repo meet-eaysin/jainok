@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, use, useState } from "react";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -42,15 +44,22 @@ const formSchema = z.object({
   content: z.string().min(1, "Content is required"),
 });
 
-export default function NewPostPage() {
+interface EditPostPageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+export default function EditPostPage(props: EditPostPageProps) {
+  const params = use(props.params);
   const router = useRouter();
+  const [loadingConfig, setLoadingConfig] = useState(true);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
       slug: "",
-      date: new Date(),
       category: "",
       excerpt: "",
       image: "",
@@ -58,10 +67,41 @@ export default function NewPostPage() {
     },
   });
 
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await fetch(`/api/blog/posts/${params.slug}`);
+        if (!res.ok) throw new Error("Failed to fetch post");
+        const post = await res.json();
+
+        // Populate form
+        // Parse date string to Date object
+        const postDate = post.date ? new Date(post.date) : new Date();
+
+        form.reset({
+          title: post.title,
+          slug: post.slug,
+          date: postDate,
+          category: post.category,
+          excerpt: post.excerpt || "",
+          image: post.image || "",
+          content: post.content, // This should be just the body, no frontmatter
+        });
+      } catch {
+        toast.error("Error", { description: "Failed to load post data" });
+        router.push("/admin/posts");
+      } finally {
+        setLoadingConfig(false);
+      }
+    };
+    fetchPost();
+  }, [params.slug, form, router]);
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const key = sessionStorage.getItem("adminKey");
 
+      // Format date back to YYYY-MM-DD for storage
       const formattedDate = format(values.date, "yyyy-MM-dd");
 
       const payload = {
@@ -69,8 +109,8 @@ export default function NewPostPage() {
         date: formattedDate,
       };
 
-      const res = await fetch("/api/blog/posts", {
-        method: "POST",
+      const res = await fetch(`/api/blog/posts/${params.slug}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "x-api-key": key || "",
@@ -79,11 +119,11 @@ export default function NewPostPage() {
       });
 
       if (res.ok) {
-        toast.success("Post created successfully");
+        toast.success("Post updated successfully");
         router.push("/admin/posts");
       } else {
         const error = await res.json();
-        throw new Error(error.error || "Failed to create post");
+        throw new Error(error.error || "Failed to update post");
       }
     } catch (error) {
       toast.error(
@@ -92,21 +132,13 @@ export default function NewPostPage() {
     }
   };
 
-  // Helper to auto-slugify title
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const title = e.target.value;
-    form.setValue("title", title);
-
-    // Auto-generate slug
-    const slug = title
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/[\s_-]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-
-    form.setValue("slug", slug);
-  };
+  if (loadingConfig) {
+    return (
+      <div className="flex h-40 items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl space-y-8">
@@ -116,7 +148,7 @@ export default function NewPostPage() {
             <ArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
-        <h2 className="text-3xl font-bold tracking-tight">Create New Post</h2>
+        <h2 className="text-3xl font-bold tracking-tight">Edit Post</h2>
       </div>
 
       <Form {...form}>
@@ -129,14 +161,7 @@ export default function NewPostPage() {
                 <FormItem>
                   <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Post title"
-                      {...field}
-                      onChange={(e) => {
-                        field.onChange(e);
-                        handleTitleChange(e);
-                      }}
-                    />
+                    <Input placeholder="Post title" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -188,8 +213,7 @@ export default function NewPostPage() {
                         selected={field.value}
                         onSelect={field.onChange}
                         disabled={(date) =>
-                          date > new Date("2100-01-01") ||
-                          date < new Date("1900-01-01")
+                          date > new Date() || date < new Date("1900-01-01")
                         }
                         initialFocus
                       />
@@ -276,7 +300,7 @@ export default function NewPostPage() {
               {!form.formState.isSubmitting && (
                 <Save className="mr-2 h-4 w-4" />
               )}
-              Create Post
+              Update Post
             </Button>
           </div>
         </form>

@@ -1,21 +1,22 @@
 ---
-title: "Node.js Performance Optimization"
-excerpt: "Techniques and strategies for optimizing Node.js applications for better performance and scalability."
-category: "Node.js"
-tags: ["performance", "optimization", "backend", "nodejs"]
-date: "2024-10-28"
-readTime: "6 min read"
-image: ""
-featured: false
-contentType: "blog"
-author: "Eaysin Mia"
-relatedPosts: ["why-redis-efficient"]
-seo:
-  metaTitle: "Node.js Performance Optimization - Best Practices"
-  metaDescription: "Learn proven techniques and strategies for optimizing Node.js applications for better performance and scalability."
-  keywords: ["nodejs", "performance", "optimization", "backend"]
----
+      title: "Node.js Performance Optimization"
+      date: "2026-01-19"
+      category: "Node.js"
+      excerpt: ""
+      image: "/images/blog/placeholder.jpg"
+      author: "Eaysin Mia"
+      ---
 
+      ---
+      title: "Node.js Performance Optimization"
+      date: "2024-10-28"
+      category: "Node.js"
+      excerpt: "Techniques and strategies for optimizing Node.js applications for better performance and scalability."
+      image: "/images/blog/placeholder.jpg"
+      author: "Eaysin Mia"
+      ---
+
+      
 # Node.js Performance Optimization
 
 Node.js applications can achieve high performance with proper optimization techniques. Let's explore the most effective strategies.
@@ -83,3 +84,6 @@ Node.js applications can achieve high performance with proper optimization techn
 - Set up alerting for performance issues
 
 Implementing these optimization techniques will significantly improve your Node.js application's performance and scalability.
+
+    
+    
