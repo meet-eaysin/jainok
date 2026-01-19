@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,24 +36,18 @@ export const BlogFilterBar = ({
   onSortChange,
 }: BlogFilterBarProps) => {
   const [searchQuery, setSearchQuery] = useState(filters.searchQuery || "");
-  const [showFilters, setShowFilters] = useState(false);
+  // We use this key to force re-render/reset the Tag Select component after selection
+  const [tagSelectKey, setTagSelectKey] = useState(0);
 
-  const handleCategoryClick = (category: string) => {
+  // Sync internal state with props
+  useEffect(() => {
+    setSearchQuery(filters.searchQuery || "");
+  }, [filters.searchQuery]);
+
+  const handleCategoryChange = (category: string) => {
     onFilterChange({
       ...filters,
       category: category === "all" ? undefined : category,
-    });
-  };
-
-  const handleTagToggle = (tag: string) => {
-    const currentTags = filters.tags || [];
-    const newTags = currentTags.includes(tag)
-      ? currentTags.filter((t) => t !== tag)
-      : [...currentTags, tag];
-
-    onFilterChange({
-      ...filters,
-      tags: newTags.length > 0 ? newTags : undefined,
     });
   };
 
@@ -64,9 +58,36 @@ export const BlogFilterBar = ({
     });
   };
 
+  const addTag = (tag: string) => {
+    const currentTags = filters.tags || [];
+    if (!currentTags.includes(tag)) {
+      onFilterChange({
+        ...filters,
+        tags: [...currentTags, tag],
+      });
+    }
+    setTagSelectKey((prev) => prev + 1);
+  };
+
+  const removeTag = (tag: string) => {
+    const currentTags = filters.tags || [];
+    const newTags = currentTags.filter((t) => t !== tag);
+    onFilterChange({
+      ...filters,
+      tags: newTags.length > 0 ? newTags : undefined,
+    });
+  };
+
+  const removeCategory = () => {
+    onFilterChange({ ...filters, category: undefined });
+  };
+
+  const removeContentType = () => {
+    onFilterChange({ ...filters, contentType: undefined });
+  };
+
   const handleSearchChange = (value: string) => {
     setSearchQuery(value);
-    // Debounce search
     const timer = setTimeout(() => {
       onFilterChange({
         ...filters,
@@ -88,155 +109,172 @@ export const BlogFilterBar = ({
     filters.contentType ||
     filters.searchQuery;
 
+  const availableTags = tags.filter((t) => !filters.tags?.includes(t));
+
   return (
     <div className="space-y-4">
-      <div className="flex flex-col gap-4 sm:flex-row">
-        <div className="relative flex-1">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center">
+        <div className="relative grow">
           <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
           <Input
             type="text"
             placeholder="Search posts..."
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
-            className="pl-10"
+            className="bg-muted/50 h-9 border-none pl-9 shadow-none focus-visible:ring-1"
           />
         </div>
 
-        <Select
-          value={sortBy}
-          onValueChange={(v) => onSortChange(v as SortOption)}
-        >
-          <SelectTrigger className="w-full sm:w-[180px]">
-            <SelectValue placeholder="Sort by" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="newest">Newest First</SelectItem>
-            <SelectItem value="oldest">Oldest First</SelectItem>
-            <SelectItem value="shortest">Shortest Read</SelectItem>
-            <SelectItem value="longest">Longest Read</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex flex-wrap items-center gap-2">
+          <Select
+            value={filters.category || "all"}
+            onValueChange={handleCategoryChange}
+          >
+            <SelectTrigger className="bg-muted/50 h-9 w-[130px] border-none shadow-none focus:ring-1">
+              <SelectValue placeholder="Category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Categories</SelectItem>
+              {categories.map((c) => (
+                <SelectItem key={c} value={c}>
+                  {c}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
-        {/* Toggle Filters Button (Mobile) */}
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setShowFilters(!showFilters)}
-          className="sm:hidden"
-        >
-          <SlidersHorizontal className="h-4 w-4" />
-        </Button>
+          <Select
+            value={filters.contentType || "all"}
+            onValueChange={handleContentTypeChange}
+          >
+            <SelectTrigger className="bg-muted/50 h-9 w-[110px] border-none shadow-none focus:ring-1">
+              <SelectValue placeholder="Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="blog">Blog</SelectItem>
+              <SelectItem value="case-study">Case Study</SelectItem>
+              <SelectItem value="article">Article</SelectItem>
+              <SelectItem value="external">External</SelectItem>
+            </SelectContent>
+          </Select>
+
+          <Select key={tagSelectKey} onValueChange={addTag}>
+            <SelectTrigger className="bg-muted/50 h-9 w-[110px] border-none shadow-none focus:ring-1">
+              <span className="text-muted-foreground">Tags</span>
+            </SelectTrigger>
+            <SelectContent>
+              {availableTags.length > 0 ? (
+                availableTags.slice(0, 20).map((t) => (
+                  <SelectItem key={t} value={t}>
+                    {t}
+                  </SelectItem>
+                ))
+              ) : (
+                <div className="text-muted-foreground p-2 text-xs">
+                  No more tags
+                </div>
+              )}
+            </SelectContent>
+          </Select>
+
+          <div className="bg-border hidden h-8 w-px md:block" />
+
+          <Select
+            value={sortBy}
+            onValueChange={(v) => onSortChange(v as SortOption)}
+          >
+            <SelectTrigger className="hover:bg-muted/50 h-9 w-[140px] border-none bg-transparent shadow-none focus:ring-1">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent align="end">
+              <SelectItem value="newest">Newest First</SelectItem>
+              <SelectItem value="oldest">Oldest First</SelectItem>
+              <SelectItem value="shortest">Shortest Read</SelectItem>
+              <SelectItem value="longest">Longest Read</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
-      {/* Filters Section */}
-      <div className={`space-y-4 ${showFilters ? "block" : "hidden sm:block"}`}>
-        {/* Category Pills */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-muted-foreground text-sm font-medium">
-            Category:
+      {hasActiveFilters && (
+        <div className="flex flex-wrap items-center gap-2 px-1">
+          <span className="text-muted-foreground text-xs font-medium">
+            Active filters:
           </span>
-          <Badge
-            variant={!filters.category ? "default" : "outline"}
-            className="cursor-pointer"
-            onClick={() => handleCategoryClick("all")}
-          >
-            All
-          </Badge>
-          {categories.map((category) => (
+
+          {filters.category && (
             <Badge
-              key={category}
-              variant={filters.category === category ? "default" : "outline"}
-              className="cursor-pointer"
-              onClick={() => handleCategoryClick(category)}
+              variant="secondary"
+              className="hover:bg-secondary/80 flex items-center gap-1"
             >
-              {category}
+              Category: {filters.category}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-muted/20 h-3 w-3 rounded-full"
+                onClick={removeCategory}
+              >
+                <X className="h-2 w-2" />
+              </Button>
+            </Badge>
+          )}
+
+          {filters.contentType && (
+            <Badge
+              variant="secondary"
+              className="hover:bg-secondary/80 flex items-center gap-1"
+            >
+              Type: {filters.contentType}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-muted/20 h-3 w-3 rounded-full"
+                onClick={removeContentType}
+              >
+                <X className="h-2 w-2" />
+              </Button>
+            </Badge>
+          )}
+
+          {filters.tags?.map((tag) => (
+            <Badge
+              key={tag}
+              variant="secondary"
+              className="hover:bg-secondary/80 flex items-center gap-1"
+            >
+              #{tag}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-muted/20 h-3 w-3 rounded-full"
+                onClick={() => removeTag(tag)}
+              >
+                <X className="h-2 w-2" />
+              </Button>
             </Badge>
           ))}
-        </div>
 
-        {/* Content Type Filter */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-muted-foreground text-sm font-medium">
-            Type:
-          </span>
-          <Badge
-            variant={!filters.contentType ? "default" : "outline"}
-            className="cursor-pointer"
-            onClick={() => handleContentTypeChange("all")}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={clearFilters}
+            className="text-muted-foreground hover:text-foreground ml-auto h-6 px-2 text-xs"
           >
-            All
-          </Badge>
-          <Badge
-            variant={filters.contentType === "blog" ? "default" : "outline"}
-            className="cursor-pointer"
-            onClick={() => handleContentTypeChange("blog")}
-          >
-            Blog
-          </Badge>
-          <Badge
-            variant={
-              filters.contentType === "case-study" ? "default" : "outline"
-            }
-            className="cursor-pointer"
-            onClick={() => handleContentTypeChange("case-study")}
-          >
-            Case Study
-          </Badge>
-          <Badge
-            variant={filters.contentType === "article" ? "default" : "outline"}
-            className="cursor-pointer"
-            onClick={() => handleContentTypeChange("article")}
-          >
-            Article
-          </Badge>
-          <Badge
-            variant={filters.contentType === "external" ? "default" : "outline"}
-            className="cursor-pointer"
-            onClick={() => handleContentTypeChange("external")}
-          >
-            External
-          </Badge>
-        </div>
+            Clear all
+          </Button>
 
-        {/* Tags */}
-        {tags.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-muted-foreground text-sm font-medium">
-              Tags:
-            </span>
-            {tags.slice(0, 10).map((tag) => (
-              <Badge
-                key={tag}
-                variant={filters.tags?.includes(tag) ? "default" : "secondary"}
-                className="cursor-pointer"
-                onClick={() => handleTagToggle(tag)}
-              >
-                #{tag}
-              </Badge>
-            ))}
+          <div className="text-muted-foreground ml-2 text-xs">
+            Showing {resultsCount} result{resultsCount !== 1 ? "s" : ""}
           </div>
-        )}
-      </div>
-
-      {/* Active Filters & Results Count */}
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <span className="text-muted-foreground text-sm">
-            Showing {resultsCount} {resultsCount === 1 ? "post" : "posts"}
-          </span>
-          {hasActiveFilters && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={clearFilters}
-              className="h-auto p-1 text-xs"
-            >
-              <X className="mr-1 h-3 w-3" />
-              Clear filters
-            </Button>
-          )}
         </div>
-      </div>
+      )}
+
+      {!hasActiveFilters && (
+        <div className="text-muted-foreground px-1 text-xs">
+          Showing {resultsCount} result{resultsCount !== 1 ? "s" : ""}
+        </div>
+      )}
     </div>
   );
 };
