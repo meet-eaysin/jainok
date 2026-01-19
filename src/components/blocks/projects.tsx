@@ -19,8 +19,7 @@ export const Projects = ({ projects: propProjects }: ProjectsProps) => {
         {/* Header - Subtle and Sophisticated */}
         <div className="mb-20">
           <h2 className="font-display mb-6 text-4xl font-bold md:text-6xl lg:text-7xl">
-            Selected{" "}
-            <span className="text-muted-foreground/40 italic">Works</span>
+            Selected Works
           </h2>
           <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed font-light">
             A curated selection of my professional projects, full-stack
@@ -140,7 +139,7 @@ export const Projects = ({ projects: propProjects }: ProjectsProps) => {
             <span className="text-muted-foreground text-[10px] font-bold tracking-[0.3em] uppercase">
               Curious for more?
             </span>
-            <div className="group-hover:text-primary flex items-center gap-2 text-xl font-bold transition-colors">
+            <div className="group-hover:text-primary text-primary hover:text-primary/80 flex inline-flex items-center gap-2 text-xl font-bold font-medium transition-colors">
               View full archive on GitHub
               <span className="transition-transform group-hover:translate-x-1">
                 →
