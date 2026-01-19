@@ -44,14 +44,19 @@ export const Blog = ({
               <div className="md:flex">
                 <div className="md:w-1/2">
                   <div className="group relative aspect-video md:aspect-auto md:h-full">
-                    {featuredPost?.image ? (
-                      <Image
-                        src={featuredPost.image}
-                        alt={featuredPost.title}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : null}
+                    <Link
+                      href={`/blog/${featuredPost.id}`}
+                      className="block h-full"
+                    >
+                      {featuredPost?.image ? (
+                        <Image
+                          src={featuredPost.image}
+                          alt={featuredPost.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : null}
+                    </Link>
                   </div>
                 </div>
                 <div className="p-8 md:w-1/2">
@@ -101,14 +106,16 @@ export const Blog = ({
               className="group bg-muted/5 flex flex-col overflow-hidden border transition-all duration-300 hover:shadow-md"
             >
               <div className="relative aspect-video overflow-hidden">
-                {post?.image !== "" ? (
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                  />
-                ) : null}
+                <Link href={`/blog/${post.id}`} className="block h-full">
+                  {post?.image !== "" ? (
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : null}
+                </Link>
                 <div className="absolute top-4 left-4">
                   <Badge
                     variant="secondary"

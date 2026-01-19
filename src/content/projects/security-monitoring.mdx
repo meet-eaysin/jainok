@@ -1,0 +1,41 @@
+---
+title: "Cybersecurity Monitoring Solution"
+description: "Developed a comprehensive cybersecurity dashboard that provides real-time threat detection, automated incident response, and detailed vulnerability reporting."
+date: "2024-01-20"
+image: "/projects/security-monitoring.webp"
+githubUrl: "https://github.com/meet-eaysin/security-monitoring"
+techStack: ["Go", "React", "Grafana", "TimescaleDB", "Docker", "Prometheus"]
+featured: true
+---
+
+# Cybersecurity Monitoring Solution
+
+## Securing the Enterprise
+
+Security is not just about perimeter defense; it's about visibility and rapid response. This project delivered a state-of-the-art monitoring solution for modern enterprise environments.
+
+### Real-time Threat Detection
+
+We implemented a high-performance data pipeline in **Go** to process millions of events per second.
+
+```go
+func processSecurityEvents(events <-chan Event) {
+    for e := range events {
+        if isThreat(e) {
+            triggerAlert(e)
+        }
+    }
+}
+```
+
+### Visualizing the Invisible
+
+By integrating **Grafana** and custom **React** visualizations, we made complex security data understandable at a glance.
+
+- **Geographic heatmaps** of intrusion attempts
+- **Network topology** visualizations
+- **Real-time vulnerability** score tracking
+
+### Business Outcome
+
+SafeGuard Systems now empowers security teams to stay ahead of attackers, significantly reducing the risk of data breaches and downtime.

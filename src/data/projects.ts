@@ -58,14 +58,43 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "techconnect",
-    title: "TechConnect - Employee Management",
+    id: "ecommerce-optimization",
+    title: "E-commerce Platform Optimization",
     description:
-      "Employee management platform for tracking performance and internal communication.",
+      "Revolutionized a high-traffic e-commerce platform by optimizing performance and search.",
     longDescription:
-      "TechConnect is an employee management platform that helps organizations track employee performance, generate reports, and manage internal communication efficiently.",
-    techStack: ["React", "Node.js", "TypeScript", "Tailwind CSS"],
-    githubUrl: "https://github.com/meet-eaysin/techconnect",
-    image: "",
+      "Rebuilt the frontend using Next.js for SSR, implemented Elasticsearch for lightning-fast search capabilities, and streamlined the multi-step checkout into a seamless single-page experience.",
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Elasticsearch",
+      "Node.js",
+      "Redis",
+      "AWS",
+    ],
+    githubUrl: "https://github.com/meet-eaysin/ecommerce-optimization",
+    image:
+      "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=2000",
+    featured: true,
+  },
+  {
+    id: "security-monitoring",
+    title: "Cybersecurity Monitoring Solution",
+    description:
+      "Developed a comprehensive cybersecurity dashboard that provides real-time threat detection.",
+    longDescription:
+      "Built a centralized monitoring hub that aggregates logs from multiple sources, uses rule-based engines for threat detection, and provides instant visualizations of security postures.",
+    techStack: [
+      "Go",
+      "React",
+      "Grafana",
+      "TimescaleDB",
+      "Docker",
+      "Prometheus",
+    ],
+    githubUrl: "https://github.com/meet-eaysin/security-monitoring",
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000",
+    featured: true,
   },
 ];

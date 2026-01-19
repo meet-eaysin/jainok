@@ -12,13 +12,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
-import RichTextEditor from "@/components/editor/rich-text-editor";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -134,7 +134,7 @@ export default function EditPostPage(props: EditPostPageProps) {
         toast.success("Post updated successfully");
         router.push("/admin/posts");
       } else {
-        const error = await res.json();
+        const error: { error: string } = await res.json();
         throw new Error(error.error || "Failed to update post");
       }
     } catch (error) {
@@ -320,14 +320,17 @@ export default function EditPostPage(props: EditPostPageProps) {
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Content</FormLabel>
+                <FormLabel>Content (Markdown)</FormLabel>
                 <FormControl>
-                  <RichTextEditor
-                    content={field.value}
-                    onChange={field.onChange}
-                    placeholder="Start writing your blog post..."
+                  <Textarea
+                    placeholder="Paste your markdown content here..."
+                    className="min-h-[400px] font-mono text-sm"
+                    {...field}
                   />
                 </FormControl>
+                <FormDescription>
+                  Write or paste your blog post content in Markdown format
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

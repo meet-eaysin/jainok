@@ -1,0 +1,90 @@
+/* Blog Content Styles - Enhanced Markdown Rendering */
+
+.blog-content {
+  @apply prose prose-lg dark:prose-invert max-w-none;
+}
+
+.blog-content p {
+  @apply mb-6 text-base leading-relaxed;
+}
+
+.blog-content h1 {
+  @apply mt-12 mb-6 text-4xl leading-tight font-bold;
+}
+
+.blog-content h2 {
+  @apply mt-10 mb-5 text-3xl leading-tight font-bold;
+}
+
+.blog-content h3 {
+  @apply mt-8 mb-4 text-2xl leading-snug font-semibold;
+}
+
+.blog-content h4 {
+  @apply mt-6 mb-3 text-xl font-semibold;
+}
+
+.blog-content ul,
+.blog-content ol {
+  @apply my-6 space-y-2;
+}
+
+.blog-content li {
+  @apply leading-relaxed;
+}
+
+.blog-content ul {
+  @apply list-disc pl-6;
+}
+
+.blog-content ol {
+  @apply list-decimal pl-6;
+}
+
+.blog-content blockquote {
+  @apply border-primary text-muted-foreground bg-muted/30 my-6 rounded-r border-l-4 py-2 pl-6 italic;
+}
+
+.blog-content code {
+  @apply bg-muted rounded px-1.5 py-0.5 font-mono text-sm;
+}
+
+.blog-content pre {
+  @apply my-6 overflow-hidden rounded-lg;
+}
+
+.blog-content pre code {
+  @apply bg-transparent p-0 text-sm;
+}
+
+.blog-content img {
+  @apply my-8 w-full rounded-lg shadow-lg;
+}
+
+.blog-content a {
+  @apply text-primary hover:text-primary/80 underline underline-offset-4 transition-colors;
+}
+
+.blog-content table {
+  @apply my-6 w-full border-collapse;
+}
+
+.blog-content th {
+  @apply bg-muted border p-3 text-left font-semibold;
+}
+
+.blog-content td {
+  @apply border p-3;
+}
+
+.blog-content hr {
+  @apply border-border my-8 border-t-2;
+}
+
+.blog-content strong {
+  @apply font-semibold;
+}
+
+.blog-content em {
+  @apply italic;
+}

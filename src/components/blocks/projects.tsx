@@ -32,16 +32,21 @@ export const Projects = () => {
             <Card className="group bg-muted/5 overflow-hidden border transition-all duration-300 hover:shadow-md">
               <div className="grid md:grid-cols-2">
                 <div className="bg-muted/10 relative aspect-video min-h-[300px] overflow-hidden border-b md:aspect-auto md:h-full md:border-b-0">
-                  {featuredProjects[0].image ? (
-                    <Image
-                      src={featuredProjects[0].image}
-                      alt={featuredProjects[0].title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <ProjectPlaceholder title={featuredProjects[0].title} />
-                  )}
+                  <Link
+                    href={`/projects/${featuredProjects[0].id}`}
+                    className="block h-full"
+                  >
+                    {featuredProjects[0].image ? (
+                      <Image
+                        src={featuredProjects[0].image}
+                        alt={featuredProjects[0].title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <ProjectPlaceholder title={featuredProjects[0].title} />
+                    )}
+                  </Link>
                 </div>
 
                 <div className="flex flex-col justify-center p-6 md:p-8">
@@ -102,16 +107,21 @@ export const Projects = () => {
                   className="group bg-muted/5 flex flex-col overflow-hidden border transition-all duration-300 hover:shadow-md"
                 >
                   <div className="bg-muted/10 relative aspect-video overflow-hidden border-b">
-                    {project.image ? (
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <ProjectPlaceholder title={project.title} />
-                    )}
+                    <Link
+                      href={`/projects/${project.id}`}
+                      className="block h-full"
+                    >
+                      {project.image ? (
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <ProjectPlaceholder title={project.title} />
+                      )}
+                    </Link>
                   </div>
 
                   <CardContent className="flex grow flex-col p-6">

@@ -93,7 +93,7 @@ export default function NewPostPage() {
         toast.success("Post created successfully");
         router.push("/admin/posts");
       } else {
-        const error = await res.json();
+        const error: { error: string } = await res.json();
         throw new Error(error.error || "Failed to create post");
       }
     } catch (error) {

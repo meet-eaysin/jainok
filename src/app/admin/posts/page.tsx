@@ -40,8 +40,13 @@ export default function AdminPostsPage() {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch("/api/blog/posts");
-      const data = await res.json();
+      const key = sessionStorage.getItem("adminKey");
+      const res = await fetch("/api/blog/posts?status=draft&status=published", {
+        headers: {
+          "x-api-key": key || "",
+        },
+      });
+      const data: { posts: BlogPost[] } = await res.json();
       setPosts(data.posts || []);
     } catch {
       toast.error("Error", {
