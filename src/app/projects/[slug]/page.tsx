@@ -13,7 +13,21 @@ import ReactMarkdown from "react-markdown";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getProjectData, getAllProjects } from "@/lib/project-utils";
+import type { BlogPost as Project } from "@/lib/blog-types";
+async function getProject(slug: string) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  try {
+    const res = await fetch(`${baseUrl}/api/blog/posts/${slug}`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.post;
+  } catch {
+    return null;
+  }
+}
 
 interface PageProps {
   params: Promise<{
@@ -22,34 +36,43 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const projects = getAllProjects();
-  return projects.map((project) => ({
-    slug: project.id,
-  }));
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  try {
+    const res = await fetch(
+      `${baseUrl}/api/blog/posts?contentType=case-study`,
+      {
+        cache: "no-store",
+      },
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.posts.map((post: Project) => ({
+      slug: post.slug,
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  try {
-    const project = getProjectData(slug);
-    return {
-      title: `${project.title} | Eaysin Mia`,
-      description: project.description,
-    };
-  } catch {
-    return {
-      title: "Project Not Found",
-    };
+  const project = await getProject(slug);
+
+  if (!project) {
+    return { title: "Project Not Found" };
   }
+
+  return {
+    title: `${project.title} | Eaysin Mia`,
+    description: project.excerpt,
+  };
 }
 
 export default async function ProjectPage({ params }: PageProps) {
   const { slug } = await params;
-  let project;
+  const project = await getProject(slug);
 
-  try {
-    project = getProjectData(slug);
-  } catch {
+  if (!project) {
     notFound();
   }
 
@@ -129,7 +152,7 @@ export default async function ProjectPage({ params }: PageProps) {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            {project.techStack.map((tech) => (
+            {project.tags.map((tech: string) => (
               <Badge
                 key={tech}
                 variant="secondary"

@@ -19,52 +19,40 @@ Full Stack Engineer with 2+ years of experience building scalable web applicatio
 - **DevOps & Tools:** Docker, RabbitMQ, Redis, Kong API Gateway, CI/CD (GitHub Actions), Git
 - **Other:** RESTful APIs, JWT, Socket.io, Microservices
 
-## 📝 Blog Platform Features
+## 📝 Blog & Portfolio Platform Features
 
-This portfolio includes a full-featured blog platform with:
+This portfolio includes a high-performance content management system for blogs and case studies:
 
 ### Content Management
 
-- **Rich Text Editor**: Professional Tiptap-based WYSIWYG editor with:
-  - Text formatting (Bold, Italic, Strikethrough, Inline Code)
-  - Headings (H2, H3)
-  - Lists (Bullet, Numbered)
-  - Blockquotes and Code Blocks
-  - Link and Image insertion
-  - Undo/Redo functionality
-  - Character counter
-  - Live placeholder text
+- **Markdown-First Editor**: A streamlined developer-centric experience allowing you to paste and edit raw Markdown directly.
+- **Rich Rendering**: Beautifully rendered Markdown with:
+  - **Syntax Highlighting**: Professional code blocks with Prism OneDark theme.
+  - **Responsive Media**: Automatic image optimization and responsive layouts.
+  - **GFM Support**: Full GitHub Flavored Markdown support including tables, lists, and task lists.
+- **Unified Schema**: Both blog posts and case studies are managed through a unified database schema.
 
-### Blog Features
+### Core Features
 
-- **Draft/Publish Workflow**: Save posts as drafts or publish them
-- **Rich Metadata**: SEO-friendly with custom meta titles, descriptions, and keywords
-- **Tags & Categories**: Organize content with tags and categories
-- **Featured Posts**: Highlight important content
-- **Table of Contents**: Auto-generated from headings
-- **Reading Progress**: Visual progress indicator
-- **Social Sharing**: Share to social platforms
-- **Related Posts**: Automatic related content suggestions
-- **Post Navigation**: Previous/Next post navigation
-- **Responsive Design**: Mobile-first, fully responsive
+- **Draft/Publish Workflow**: full control over visibility of your content.
+- **SEO Optimization**: Custom meta titles, descriptions, and Open Graph image support for every post.
+- **Dynamic Projects**: Portfolio projects are now dynamic and fetched directly from MongoDB.
+- **Reading Enhancements**: Table of Contents, reading time, and reading progress indicators.
+- **Interactive Layers**: Social sharing, related content suggestions, and easy navigation between posts.
 
 ### Admin Dashboard
 
-- **Secure Authentication**: API key-based admin access
-- **Post Management**: Create, edit, delete posts with confirmation modals
-- **Subscriber Management**: Track and manage email subscribers
-- **Analytics Dashboard**: View post statistics and engagement metrics
-- **Real-time Stats**: Live updates on posts, subscribers, and views
+- **Secure Access**: Protected via API key authentication.
+- **Unified Management**: Manage both blog posts and projects from a single admin interface.
+- **Real-time Analytics**: track views, engagement, and subscriber growth instantly.
 
-### Technical Implementation
+### Technical Architecture
 
-- **Database**: MongoDB with Mongoose ODM
-- **API Routes**: RESTful API with Next.js Route Handlers
-- **Server Components**: Optimized with Next.js App Router
-- **Type Safety**: Full TypeScript implementation
-- **Form Validation**: React Hook Form with Zod schemas
-- **UI Components**: Shadcn UI component library
-- **Styling**: Tailwind CSS with custom design system
+- **Database**: MongoDB Atlas with Mongoose for robust data modeling.
+- **Frontend**: Next.js 15 (App Router) for optimal performance and SEO.
+- **Type Safety**: 100% TypeScript with zero `any` types for maximum stability.
+- **Styling**: Modern, responsive design system built with Tailwind CSS and Shadcn UI.
+- **Deployment**: Optimized for Vercel with serverless functions and edge-ready API routes.
 
 ## 💼 Professional Experience
 

@@ -7,7 +7,37 @@ import { Hero } from "@/components/blocks/hero";
 import { Projects } from "@/components/blocks/projects";
 import { Button } from "@/components/ui/button";
 
-export default function Home() {
+async function getData() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+  try {
+    const [blogsRes, projectsRes] = await Promise.all([
+      fetch(`${baseUrl}/api/blog/posts?status=published&contentType=blog`, {
+        cache: "no-store",
+      }),
+      fetch(
+        `${baseUrl}/api/blog/posts?status=published&contentType=case-study`,
+        {
+          cache: "no-store",
+        },
+      ),
+    ]);
+
+    const blogs = blogsRes.ok ? await blogsRes.json() : { posts: [] };
+    const projects = projectsRes.ok ? await projectsRes.json() : { posts: [] };
+
+    return {
+      blogs: blogs.posts || [],
+      projects: projects.posts || [],
+    };
+  } catch {
+    return { blogs: [], projects: [] };
+  }
+}
+
+export default async function Home() {
+  const { blogs, projects } = await getData();
+
   return (
     <>
       <Background className="via-muted to-muted/80">
@@ -16,8 +46,8 @@ export default function Home() {
       </Background>
 
       <Background variant="bottom">
-        <Projects />
-        <Blog />
+        <Projects projects={projects} />
+        <Blog blogPosts={blogs} />
 
         <section className="py-28 lg:py-32 lg:pt-10">
           <div className="container">

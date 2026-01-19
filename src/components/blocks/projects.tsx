@@ -6,10 +6,14 @@ import { ExternalLink, Github } from "lucide-react";
 import { ProjectPlaceholder } from "@/components/blocks/project-placeholder";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { projects as defaultProjects } from "@/data/projects";
+import type { BlogPost as Project } from "@/lib/blog-types";
 
-export const Projects = () => {
-  const projects = defaultProjects;
+interface ProjectsProps {
+  projects?: Project[];
+}
+
+export const Projects = ({ projects: propProjects }: ProjectsProps) => {
+  const projects = propProjects || [];
   const featuredProjects = projects
     .filter((project) => project.featured)
     .slice(0, 3);
@@ -54,12 +58,11 @@ export const Projects = () => {
                     {featuredProjects[0].title}
                   </h3>
                   <p className="text-muted-foreground mb-6 text-base leading-relaxed">
-                    {featuredProjects[0].longDescription ||
-                      featuredProjects[0].description}
+                    {featuredProjects[0].excerpt}
                   </p>
 
                   <div className="mb-6 flex flex-wrap gap-2">
-                    {featuredProjects[0].techStack.map((tech) => (
+                    {featuredProjects[0].tags.map((tech: string) => (
                       <Badge
                         key={tech}
                         variant="secondary"
@@ -71,9 +74,9 @@ export const Projects = () => {
                   </div>
 
                   <div className="mt-auto flex items-center gap-4">
-                    {featuredProjects[0].githubUrl && (
+                    {featuredProjects[0].slug && (
                       <Link
-                        href={featuredProjects[0].githubUrl}
+                        href={`https://github.com/meet-eaysin/${featuredProjects[0].slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm font-medium transition-colors"
@@ -82,9 +85,9 @@ export const Projects = () => {
                         Code
                       </Link>
                     )}
-                    {featuredProjects[0].liveUrl && (
+                    {featuredProjects[0].externalUrl && (
                       <Link
-                        href={featuredProjects[0].liveUrl}
+                        href={featuredProjects[0].externalUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm font-medium transition-colors"
@@ -129,11 +132,11 @@ export const Projects = () => {
                       {project.title}
                     </h3>
                     <p className="text-muted-foreground mb-4 line-clamp-3 text-sm leading-relaxed">
-                      {project.description}
+                      {project.excerpt}
                     </p>
 
                     <div className="mt-auto flex flex-wrap gap-2">
-                      {project.techStack.slice(0, 3).map((tech) => (
+                      {project.tags.slice(0, 3).map((tech: string) => (
                         <Badge
                           key={tech}
                           variant="secondary"
@@ -142,20 +145,20 @@ export const Projects = () => {
                           {tech}
                         </Badge>
                       ))}
-                      {project.techStack.length > 3 && (
+                      {project.tags.length > 3 && (
                         <Badge
                           variant="secondary"
                           className="px-2 py-0.5 text-[10px] font-medium"
                         >
-                          +{project.techStack.length - 3}
+                          +{project.tags.length - 3}
                         </Badge>
                       )}
                     </div>
 
                     <div className="mt-6 flex items-center gap-4 border-t pt-4">
-                      {project.githubUrl && (
+                      {project.slug && (
                         <Link
-                          href={project.githubUrl}
+                          href={`https://github.com/meet-eaysin/${project.slug}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-muted-foreground hover:text-foreground inline-flex items-center text-xs font-medium transition-colors"
@@ -164,9 +167,9 @@ export const Projects = () => {
                           Code
                         </Link>
                       )}
-                      {project.liveUrl && (
+                      {project.externalUrl && (
                         <Link
-                          href={project.liveUrl}
+                          href={project.externalUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-muted-foreground hover:text-foreground inline-flex items-center text-xs font-medium transition-colors"
@@ -183,7 +186,7 @@ export const Projects = () => {
           )}
         </div>
 
-        {featuredProjects.length && (
+        {featuredProjects.length > 0 && (
           <div className="mt-12 text-center">
             <Link
               href="https://github.com/eaysinmia"
