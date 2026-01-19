@@ -2,18 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import {
-  ArrowLeft,
-  Github,
-  Calendar,
-  ExternalLink,
-  BookOpen,
-} from "lucide-react";
+import { ArrowLeft, Github, Calendar, ExternalLink } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { BlogPost as Project } from "@/lib/blog-types";
+
 async function getProject(slug: string) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   try {
@@ -23,7 +18,7 @@ async function getProject(slug: string) {
 
     if (!res.ok) return null;
     const data = await res.json();
-    return data.post;
+    return data;
   } catch {
     return null;
   }
@@ -95,10 +90,10 @@ export default async function ProjectPage({ params }: PageProps) {
             </h1>
 
             <div className="flex shrink-0 gap-2">
-              {project.githubUrl && (
+              {project.slug && (
                 <Button size="icon" variant="outline" asChild>
                   <a
-                    href={project.githubUrl}
+                    href={`https://github.com/meet-eaysin/${project.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     title="View Source Code"
@@ -108,11 +103,10 @@ export default async function ProjectPage({ params }: PageProps) {
                   </a>
                 </Button>
               )}
-              {/* Future: Live URL Button */}
-              {project.liveUrl && (
+              {project.externalUrl && (
                 <Button size="icon" variant="outline" asChild>
                   <a
-                    href={project.liveUrl}
+                    href={project.externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     title="View Live Demo"
@@ -122,25 +116,11 @@ export default async function ProjectPage({ params }: PageProps) {
                   </a>
                 </Button>
               )}
-              {/* Future: API Docs Button */}
-              {project.docsUrl && (
-                <Button size="icon" variant="outline" asChild>
-                  <a
-                    href={project.docsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="View API Docs"
-                  >
-                    <BookOpen className="h-5 w-5" />
-                    <span className="sr-only">View API Docs</span>
-                  </a>
-                </Button>
-              )}
             </div>
           </div>
 
           <p className="text-muted-foreground text-xl leading-relaxed">
-            {project.description}
+            {project.excerpt}
           </p>
         </div>
 

@@ -39,7 +39,7 @@ export const Projects = ({ projects: propProjects }: ProjectsProps) => {
               {/* Project Image Area - Slightly Smaller for Alignment */}
               <div className="w-full md:w-[48%]">
                 <Link
-                  href={`/projects/${project.id}`}
+                  href={`/projects/${project.slug}`}
                   className="bg-muted/5 block aspect-[16/9] w-full overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-xl"
                 >
                   {project.image ? (
@@ -70,7 +70,9 @@ export const Projects = ({ projects: propProjects }: ProjectsProps) => {
                 </div>
 
                 <h3 className="font-display group-hover:text-primary mb-4 text-2xl font-bold transition-colors md:text-3xl lg:text-4xl">
-                  <Link href={`/projects/${project.id}`}>{project.title}</Link>
+                  <Link href={`/projects/${project.slug}`}>
+                    {project.title}
+                  </Link>
                 </h3>
 
                 <p className="text-muted-foreground mb-6 line-clamp-3 text-base leading-relaxed font-light">
@@ -91,7 +93,7 @@ export const Projects = ({ projects: propProjects }: ProjectsProps) => {
 
                 <div className="flex flex-wrap items-center gap-6">
                   <Link
-                    href={`/projects/${project.id}`}
+                    href={`/projects/${project.slug}`}
                     className="text-foreground hover:text-primary flex items-center gap-2 text-sm font-bold tracking-tight uppercase transition-colors"
                   >
                     Case Study
