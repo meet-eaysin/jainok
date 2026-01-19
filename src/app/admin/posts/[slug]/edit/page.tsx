@@ -14,6 +14,7 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -39,6 +40,8 @@ const formSchema = z.object({
     .regex(/^[a-z0-9-]+$/, "Slug must be lowercase, numbers, and hyphens only"),
   date: z.date(),
   category: z.string().min(1, "Category is required"),
+  tags: z.string().optional(),
+  featured: z.boolean(),
   excerpt: z.string().optional(),
   image: z.string().optional(),
   content: z.string().min(1, "Content is required"),
@@ -60,7 +63,10 @@ export default function EditPostPage(props: EditPostPageProps) {
     defaultValues: {
       title: "",
       slug: "",
+      date: new Date(),
       category: "",
+      tags: "",
+      featured: false,
       excerpt: "",
       image: "",
       content: "",
@@ -74,8 +80,6 @@ export default function EditPostPage(props: EditPostPageProps) {
         if (!res.ok) throw new Error("Failed to fetch post");
         const post = await res.json();
 
-        // Populate form
-        // Parse date string to Date object
         const postDate = post.date ? new Date(post.date) : new Date();
 
         form.reset({
@@ -83,9 +87,11 @@ export default function EditPostPage(props: EditPostPageProps) {
           slug: post.slug,
           date: postDate,
           category: post.category,
+          tags: Array.isArray(post.tags) ? post.tags.join(", ") : "",
+          featured: post.featured || false,
           excerpt: post.excerpt || "",
           image: post.image || "",
-          content: post.content, // This should be just the body, no frontmatter
+          content: post.content,
         });
       } catch {
         toast.error("Error", { description: "Failed to load post data" });
@@ -101,12 +107,17 @@ export default function EditPostPage(props: EditPostPageProps) {
     try {
       const key = sessionStorage.getItem("adminKey");
 
-      // Format date back to YYYY-MM-DD for storage
       const formattedDate = format(values.date, "yyyy-MM-dd");
 
       const payload = {
         ...values,
         date: formattedDate,
+        tags: values.tags
+          ? values.tags
+              .split(",")
+              .map((t) => t.trim())
+              .filter(Boolean)
+          : [],
       };
 
       const res = await fetch(`/api/blog/posts/${params.slug}`, {
@@ -234,6 +245,38 @@ export default function EditPostPage(props: EditPostPageProps) {
                     <Input placeholder="e.g. Technology" {...field} />
                   </FormControl>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="tags"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Tags (comma separated)</FormLabel>
+                  <FormControl>
+                    <Input placeholder="react, nextjs, web" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="featured"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center space-y-0 space-x-3 rounded-md border p-4">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>Featured Post</FormLabel>
+                  </div>
                 </FormItem>
               )}
             />

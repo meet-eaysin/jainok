@@ -46,6 +46,8 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       slug: newSlug,
       date,
       category,
+      tags,
+      featured,
       excerpt,
       content,
       image,
@@ -86,6 +88,8 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 title: "${title.replace(/"/g, '\\"')}"
 date: "${date || new Date().toISOString().split("T")[0]}"
 category: "${category || "Uncategorized"}"
+tags: [${(tags || []).map((t: string) => `"${t}"`).join(", ")}]
+featured: ${featured || false}
 excerpt: "${(excerpt || "").replace(/"/g, '\\"')}"
 image: "${image || "/images/blog/placeholder.jpg"}"
 author: "${author}"

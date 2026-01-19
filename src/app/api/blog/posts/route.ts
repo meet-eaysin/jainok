@@ -64,6 +64,8 @@ export async function POST(request: NextRequest) {
       slug,
       date,
       category,
+      tags,
+      featured,
       excerpt,
       content,
       image,
@@ -78,16 +80,18 @@ export async function POST(request: NextRequest) {
     }
 
     const fileContent = `---
-      title: "${title.replace(/"/g, '\\"')}"
-      date: "${date || new Date().toISOString().split("T")[0]}"
-      category: "${category || "Uncategorized"}"
-      excerpt: "${(excerpt || "").replace(/"/g, '\\"')}"
-      image: "${image || "/images/blog/placeholder.jpg"}"
-      author: "${author}"
-      ---
+title: "${title.replace(/"/g, '\\"')}"
+date: "${date || new Date().toISOString().split("T")[0]}"
+category: "${category || "Uncategorized"}"
+tags: [${(tags || []).map((t: string) => `"${t}"`).join(", ")}]
+featured: ${featured || false}
+excerpt: "${(excerpt || "").replace(/"/g, '\\"')}"
+image: "${image || "/images/blog/placeholder.jpg"}"
+author: "${author}"
+---
 
-      ${content}
-    `;
+${content}
+`;
 
     const filePath = path.join(process.cwd(), "src/data/posts", `${slug}.md`);
 
