@@ -1,142 +1,83 @@
-# Eaysin Mia - Full Stack Developer Portfolio
+# Eaysin Mia - Full Stack Engineer
 
-A modern, responsive portfolio website showcasing the work and experience of Eaysin Mia, a Full Stack Developer specializing in React, Node.js, and modern web technologies.
+**Rajshahi, Dhaka** • [meet.eaysin@gmail.com](mailto:meet.eaysin@gmail.com) • (+880) 1643-226078  
+[GitHub](https://github.com/meet-eaysin) • [LinkedIn](https://www.linkedin.com/in/meet-eaysin/) • [Portfolio](https://meet-eaysin.vercel.app/)
 
-- [Portfolio](meet-eaysin.vercel.app/)
-- [GitHub](https://github.com/meet-eaysin)
-- [LinkedIn](https://www.linkedin.com/in/meet-eaysin/)
+---
 
-## Getting Started
+## 🚀 Professional Summary
+
+Full Stack Engineer with 2+ years of experience building scalable web applications and backend solutions. Expert in the MERN stack (MongoDB, Express, React, Node.js) and Next.js ecosystem. Proven track record in API design, modular architecture, containerization, and CI/CD practices. Experienced in developing ERP systems, healthcare platforms, and AI-powered reporting tools.
+
+## 🛠 Skills & Technologies
+
+- **Languages:** JavaScript (ES6+), TypeScript
+- **Frontend:** React.js (19+), Next.js, Tailwind CSS, Shadcn UI
+- **Backend:** Node.js, Express.js, Nest.js
+- **Databases:** MongoDB, PostgreSQL (Prisma)
+- **State Management:** Redux, Zustand
+- **DevOps & Tools:** Docker, RabbitMQ, Redis, Kong API Gateway, CI/CD (GitHub Actions), Git
+- **Other:** RESTful APIs, JWT, Socket.io, Microservices
+
+## 💼 Professional Experience
+
+### **Full Stack Engineer** | Next Level Media (Bangladesh Branch)
+
+_Rajshahi, Bangladesh (On Site) | April 2025–Present_
+
+Building "My Manager" - A large-scale ERP solution.
+
+- **Modules Contributed:** Contributed to all system modules.
+- **Key Achievements:**
+  - Managed Google Ads integration via REST APIs.
+  - Implemented Twilio A2P 10DLC SMS automation.
+  - Optimized employee schedule management (positions, shifts).
+  - Built dynamic AI-powered reporting and analytics with data visualization.
+  - Developed Door-to-Door campaign management features (fundraising/crowdfunding).
+  - Designed Workflow Automation module and editor.
+
+### **Software Engineer** | Blackrock IT Solutions
+
+_Mesa, Arizona, US (Remote, Contract) | March 2024 – December 2024_
+
+- **Hybrid Chart Evolve:** Led the report module for a real-time healthcare staff scheduling system. Managed provider schedules, patient flow, and permissions across facilities.
+- **TechConnect:** Implemented employee timesheet management, record-keeping, and file management modules.
+
+### **Frontend Developer** | Excel Technologies Ltd.
+
+_Banani, Dhaka (On-site) | Jan 2023 – Feb 2024_
+
+- **SmartCare Pro:** Contributed to a comprehensive hospital management system including modules for Birth/Death Records, COVID, Diagnosis, and more. Primarily responsible for ANC, Vitals, Family Planning, and Treatment Plans.
+- **Tuso:** Implemented User Authentication, Role-based Access Control (RBAC), and RDP modules.
+
+## 💻 Featured Projects
+
+### **PFMS - Personal Finance Management System**
+
+_[GitHub](https://github.com/meet-eaysin/pfms)_
+
+- Scalable financial platform built with **NestJS**, **Express**, and **Next.js**.
+- Designed **14+ microservices** routed via **Kong API Gateway**.
+- Utilized **RabbitMQ** for event-driven communication and **Docker Compose** for containerization.
+- Implemented secure authentication with **Better-Auth** (JWT/JWKS).
+- Hybrid database approach: **PostgreSQL** for core data, **MongoDB** for analytics.
+
+## 🎓 Education
+
+**M.Sc. in Geography & Environment**  
+Ananda Mohan College, Mymensingh, Dhaka | May 2021  
+_(GPA: 2.81/4.0)_
+
+## 📦 Project Setup
+
+To run this portfolio locally:
 
 ```bash
+# Install dependencies
 npm install
-```
 
-```bash
+# Run development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## About Eaysin Mia
-
-**Full Stack Developer** with 2+ years of experience building scalable web applications using modern technologies.
-
-### Technical Expertise
-- **Frontend**: React.js (19+), Next.js, TypeScript, JavaScript (ES6+)
-- **Backend**: Node.js, Express.js, MongoDB, PostgreSQL, Prisma
-- **State Management**: Redux, Zustand
-- **APIs**: RESTful APIs, GraphQL, JWT Authentication
-- **Tools**: Docker, Git, Testing & Debugging, Socket.io
-- **Cloud**: AWS, Vercel, CI/CD practices
-
-### Professional Experience
-- **Full Stack Developer** at Next Level Media (Bangladesh Branch) - Leading ERP development with MERN Stack
-- **Software Engineer** at BlackRock IT Solutions - Healthcare staff scheduling system
-- **Frontend Developer** at Excel Technologies Ltd. - SmartCare Pro healthcare platform
-
-### Featured Projects
-- **Second Brain**: Note-taking application with multiple view types
-- **React Form Interactions**: Reusable React library for form validation
-- **TechConnect**: Employee management platform
-
-## Portfolio Features
-
-### Core Technology Stack
-- **Next.js 15** with App Router
-- **Tailwind CSS 4** for styling
-- **shadcn/ui** components
-- **TypeScript** support
-- **React 19**
-
-### Key Features
-- **Responsive Design**: Mobile-first approach with perfect mobile experience
-- **Dark/Light Theme**: System-aware theme switching
-- **SEO Optimized**: Structured data, meta tags, and performance optimized
-- **Image Fallbacks**: Graceful error handling for missing images
-- **Contact Form**: Functional contact form with validation
-- **Testimonials**: Professional recommendations from colleagues
-- **Blog Section**: Ready for technical writing and insights
-- **Accessibility**: WCAG compliant with proper ARIA labels
-
-### Portfolio Sections
-- **Hero**: Professional introduction with skills and contact info
-- **Experience**: Detailed work history with company logos
-- **Projects**: Featured projects with GitHub links and live demos
-- **Testimonials**: Professional recommendations
-- **Blog**: Technical articles and insights
-- **Contact**: Contact form and information
-- **About**: Detailed background and education
-
-### Technical Implementation
-- **Server Components**: Optimized with Next.js App Router
-- **Client Components**: Strategic use for interactivity
-- **Image Optimization**: Next.js Image component with fallbacks
-- **Form Validation**: React Hook Form with Zod schemas
-- **Type Safety**: Full TypeScript implementation
-- **Performance**: Optimized bundle size and loading
-
-## Project Structure
-
-```
-eaysin-portfolio/
-├── public/
-│   ├── favicon/          # Favicon files
-│   ├── fonts/            # DM Sans font files
-│   ├── logos/            # Company logos
-│   ├── testimonials/     # Testimonial images
-│   └── og-image.jpg      # Open Graph image
-├── src/
-│   ├── app/              # Next.js App Router pages
-│   │   ├── about/        # About page
-│   │   ├── blog/         # Blog pages
-│   │   ├── case-studies/ # Case studies page
-│   │   ├── contact/      # Contact page
-│   │   ├── faq/          # FAQ page
-│   │   ├── login/        # Login page
-│   │   ├── pricing/      # Pricing page
-│   │   ├── privacy/      # Privacy policy
-│   │   └── signup/       # Signup page
-│   ├── components/
-│   │   ├── blocks/       # Page section components
-│   │   │   ├── about.tsx
-│   │   │   ├── blog.tsx
-│   │   │   ├── contact.tsx
-│   │   │   ├── experience.tsx
-│   │   │   ├── footer.tsx
-│   │   │   ├── hero.tsx
-│   │   │   ├── navbar.tsx
-│   │   │   ├── projects.tsx
-│   │   │   └── testimonials.tsx
-│   │   ├── ui/           # Reusable UI components
-│   │   └── background.tsx
-│   ├── lib/              # Utility functions
-│   └── styles/           # Global styles
-├── package.json
-├── tailwind.config.ts
-├── next.config.ts
-└── README.md
-```
-
-## Deployment
-
-Production-ready and tested for deployment on [Vercel](https://vercel.com)
-
-## Contact
-
-**Eaysin Mia**
-- Email: meet.eaysin@gmail.com
-- Phone: (+880) 1643-226078
-- Location: Rajshahi, Dhaka, Bangladesh
-- [GitHub](https://github.com/meet-eaysin)
-- [LinkedIn](https://www.linkedin.com/in/meet-eaysin/)
-
-## Credits
-
-This portfolio is built using the Mainline template by [shadcnblocks.com](https://shadcnblocks.com)
-
-- Template by [shadcnblocks.com](https://shadcnblocks.com)
-- Design by [Callum Flack](https://x.com/callumflack)
-- Dev by [Yassine Zaanouni](https://x.com/YassineZaanouni)
-- Produced by [Rob Austin](https://x.com/ausrobdev)
-- Portfolio Owner: **Eaysin Mia**
+Open [http://localhost:3000](http://localhost:3000) to view the application.
