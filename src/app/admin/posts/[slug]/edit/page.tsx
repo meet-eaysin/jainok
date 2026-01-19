@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
+import RichTextEditor from "@/components/editor/rich-text-editor";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -319,12 +320,12 @@ export default function EditPostPage(props: EditPostPageProps) {
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Content (Markdown)</FormLabel>
+                <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <Textarea
-                    placeholder="# H1 Heading..."
-                    className="min-h-[400px] font-mono"
-                    {...field}
+                  <RichTextEditor
+                    content={field.value}
+                    onChange={field.onChange}
+                    placeholder="Start writing your blog post..."
                   />
                 </FormControl>
                 <FormMessage />

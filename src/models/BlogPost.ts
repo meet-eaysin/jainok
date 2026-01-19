@@ -15,6 +15,11 @@ const blogPostSchema = new Schema<BlogPostType>(
     readTime: { type: String, required: true },
     image: { type: String, default: "" },
     featured: { type: Boolean, default: false },
+    status: {
+      type: String,
+      enum: ["draft", "published", "archived"],
+      default: "draft",
+    },
     author: { type: String, required: true },
     authorImage: { type: String, default: "" },
     contentType: {
@@ -41,6 +46,7 @@ const blogPostSchema = new Schema<BlogPostType>(
 blogPostSchema.index({ category: 1 });
 blogPostSchema.index({ tags: 1 });
 blogPostSchema.index({ contentType: 1 });
+blogPostSchema.index({ status: 1 });
 blogPostSchema.index({ date: -1 });
 
 const BlogPost: Model<BlogPostType> =

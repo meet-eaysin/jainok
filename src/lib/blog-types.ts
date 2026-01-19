@@ -20,6 +20,7 @@ export interface BlogPost {
   image: string;
   views?: number;
   featured?: boolean;
+  status: "draft" | "published" | "archived";
 
   // Enhanced metadata
   tags: string[];
