@@ -28,17 +28,17 @@ export const Projects = ({ projects: propProjects }: ProjectsProps) => {
           </p>
         </div>
 
-        {/* Project List - Compact Alternating Layout */}
+        {/* Project List - Balanced Proportions Alternating Layout */}
         <div className="flex flex-col gap-24 md:gap-32">
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className={`group flex flex-col gap-8 md:flex-row md:items-center md:gap-16 ${
+              className={`group flex flex-col gap-10 md:flex-row md:items-center md:justify-between ${
                 index % 2 === 1 ? "md:flex-row-reverse" : ""
               }`}
             >
-              {/* Project Image Area */}
-              <div className="w-full md:w-1/2 lg:w-3/5">
+              {/* Project Image Area - Slightly Smaller for Alignment */}
+              <div className="w-full md:w-[48%]">
                 <Link
                   href={`/projects/${project.id}`}
                   className="bg-muted/5 block aspect-[16/9] w-full overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-xl"
@@ -61,8 +61,8 @@ export const Projects = ({ projects: propProjects }: ProjectsProps) => {
                 </Link>
               </div>
 
-              {/* Project Content Area */}
-              <div className="flex w-full flex-col md:w-1/2 lg:w-2/5">
+              {/* Project Content Area - Sized to Align */}
+              <div className="flex w-full flex-col md:w-[48%]">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="text-primary text-xs font-bold tracking-[0.2em] uppercase">
                     {project.category || "Project"}
