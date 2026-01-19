@@ -7,11 +7,23 @@ import { Background } from "@/components/background";
 const Page = () => {
   return (
     <Background>
-      <section className="py-28 lg:pt-44 lg:pb-32">
-        <article className="prose prose-lg dark:prose-invert container px-4">
+      <div className="container pt-12 pb-20 lg:pt-16 lg:pb-28">
+        {/* Header */}
+        <div className="mb-12">
+          <h1 className="font-display mb-3 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
+            Privacy Policy
+          </h1>
+          <p className="text-muted-foreground max-w-2xl text-base font-light sm:text-lg">
+            We value your privacy. This policy outlines how we handle your data
+            and protect your information.
+          </p>
+        </div>
+
+        {/* Content */}
+        <article className="prose prose-lg dark:prose-invert max-w-none">
           <Privacy />
         </article>
-      </section>
+      </div>
     </Background>
   );
 };
