@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     default: `${profile.name} - ${profile.role}`,
     template: `%s | ${profile.name}`,
   },
+  metadataBase: new URL(profile.metadata.url),
   description: profile.metadata.description,
   keywords: profile.metadata.keywords,
   authors: [{ name: profile.name }],

@@ -13,16 +13,14 @@ interface MongooseCache {
   promise: Promise<typeof mongoose> | null;
 }
 
-// Use global cache to prevent multiple connections in development
-declare global {
-  // eslint-disable-next-line no-var
-  var mongoose: MongooseCache | undefined;
-}
+const globalWithMongoose = global as typeof global & {
+  mongoose: MongooseCache;
+};
 
-const cached: MongooseCache = global.mongoose || { conn: null, promise: null };
+let cached = globalWithMongoose.mongoose;
 
-if (!global.mongoose) {
-  global.mongoose = cached;
+if (!cached) {
+  cached = globalWithMongoose.mongoose = { conn: null, promise: null };
 }
 
 async function connectDB() {
