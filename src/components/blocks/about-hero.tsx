@@ -2,20 +2,16 @@ import { DashedLine } from "@/components/dashed-line";
 
 const stats = [
   {
-    value: "2+",
+    value: "3+",
     label: "Years Experience",
   },
   {
     value: "15+",
-    label: "Projects Completed",
+    label: "Projects Shipped",
   },
   {
     value: "3",
-    label: "Companies Worked",
-  },
-  {
-    value: "10+",
-    label: "Technologies Mastered",
+    label: "Companies",
   },
 ];
 
@@ -25,26 +21,25 @@ export function AboutHero() {
       <div className="container flex flex-col justify-between gap-8 md:gap-20 lg:flex-row lg:items-center lg:gap-24 xl:gap-24">
         <div className="flex-[1.5]">
           <h1 className="text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            Full Stack Developer
+            Full Stack Engineer
           </h1>
 
           <p className="text-muted-foreground mt-5 text-2xl md:text-3xl lg:text-4xl">
-            Building scalable web applications with modern technologies
+            I build things for the web — and lately, with AI.
           </p>
 
           <p className="text-muted-foreground mt-8 hidden max-w-lg space-y-6 text-lg text-balance md:block lg:mt-12">
-            I am a Full Stack Engineer with a unique background in Geography &
-            Environment. This interdisciplinary path has shaped my approach to
-            problem-solving—viewing technical challenges as complex,
-            interconnected systems rather than isolated issues.
+            I came into software from a Geography & Environment background,
+            which gave me a habit of thinking in systems. I taught myself to
+            code, and over the past three years I've worked on ERP platforms,
+            healthcare applications, and microservice architectures.
             <br />
             <br />
-            Transitioning from environmental science to software engineering was
-            driven by a passion for building tangible solutions. I leverage my
-            analytical skills to architect scalable web applications, focusing
-            on clean code, performance, and user-centric design. From optimizing
-            ERP systems to orchestrating microservices, I bring a holistic
-            perspective to every project.
+            I care about writing code that's easy to read, easy to change, and
+            built to last. Right now I'm deep into AI/ML — building with local
+            LLMs, vector databases, and intelligent document processing
+            pipelines. I enjoy debugging hard problems and understanding how
+            things work under the surface.
           </p>
         </div>
 

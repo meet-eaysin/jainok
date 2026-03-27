@@ -12,6 +12,8 @@ const social = [
   { name: "Facebook", href: profile.social.facebook, icon: Facebook },
   { name: "Twitter", href: profile.social.twitter, icon: Code },
   { name: "LeetCode", href: profile.social.leetcode, icon: Code },
+  { name: "Hashnode", href: profile.social.hashnode, icon: Code },
+  { name: "StackOverflow", href: profile.social.stackoverflow, icon: Code },
   { name: "Email", href: `mailto:${profile.email}`, icon: Mail },
 ];
 
@@ -24,11 +26,10 @@ export function Footer() {
           <div className="flex-1 space-y-3">
             <h3 className="text-xl font-bold tracking-tight">{profile.name}</h3>
             <p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
-              {profile.role} specializing in modern web technologies. Building
-              scalable applications with 2+ years of experience.
+              {profile.role} building web applications with modern technologies.
             </p>
             <div className="text-muted-foreground flex items-center gap-2 text-sm">
-              <MapPin className="size-4 flex-shrink-0" />
+              <MapPin className="size-4 shrink-0" />
               <span>{profile.location}</span>
             </div>
           </div>

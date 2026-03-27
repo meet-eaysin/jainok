@@ -11,120 +11,71 @@ const About = () => {
           My Journey & <span className="text-muted-foreground">Philosophy</span>
         </h2>
 
-        <div className="prose prose-neutral dark:prose-invert lg:prose-xl prose-p:leading-relaxed prose-strong:text-foreground prose-strong:font-bold prose-ul:list-disc prose-li:mt-2 max-w-none">
+        <div className="prose prose-neutral dark:prose-invert lg:prose-xl prose-p:leading-relaxed prose-strong:text-foreground prose-strong:font-bold max-w-none">
           <p>
-            Hi there, I'm <strong className="font-semibold">Eaysin Mia</strong>.
-            I have a little over{" "}
-            <strong>two years of professional experience</strong> working with{" "}
-            <strong>JavaScript</strong> and <strong>TypeScript</strong> across
-            both frontend and backend development.
+            I'm <strong>Eaysin Mia</strong>, a Full Stack Engineer with over
+            three years of professional experience working with{" "}
+            <strong>JavaScript</strong> and <strong>TypeScript</strong>.
           </p>
 
           <p>
-            Currently, I work at <strong>Next Level Media</strong>, where I
-            contribute to our in-house ERP product <strong>MyManager</strong>,
-            built on the <strong>MERN stack</strong>. My primary
-            responsibilities include:
-          </p>
-
-          <ul>
-            <li>
-              <strong>Google Ads Manager</strong> integration
-            </li>
-            <li>
-              <strong>Twilio A2P 10DLC SMS</strong> automation
-            </li>
-            <li>
-              Developing the <strong>employee scheduling system</strong>
-            </li>
-            <li>
-              Supporting <strong>workflow automation</strong> and{" "}
-              <strong>AI-powered dynamic reporting</strong> modules
-            </li>
-          </ul>
-
-          <p>
-            Recently, I designed the entire <strong>database schema</strong> and{" "}
-            <strong>API architecture</strong> for the{" "}
-            <strong>Seating and Ticketing module</strong>, which is now in the{" "}
-            <em>staging phase</em>.
+            Currently I work at <strong>Next Level Media</strong>, where I'm
+            part of the team building <strong>MyManager</strong>, a large-scale
+            ERP product on the MERN stack. I've worked on Google Ads integration,
+            Twilio SMS automation, the employee scheduling system, and recently
+            designed the database schema and API architecture for a new Seating
+            & Ticketing module.
           </p>
 
           <p>
-            Previously, I worked remotely with{" "}
-            <strong>Blackrock IT Solutions</strong>, where I contributed to{" "}
-            <strong>HybridChart</strong>, a healthcare application. There, I
-            worked on the <strong>reporting module</strong> of the scheduling
-            system, including:
-          </p>
-
-          <ul>
-            <li>Real-time staff scheduling</li>
-            <li>Permission management</li>
-            <li>Location-based reporting</li>
-          </ul>
-
-          <p>
-            Earlier in my career, I worked as a{" "}
-            <strong>Frontend Developer</strong> in the healthcare domain,
-            contributing to projects like <strong>Health CarePro</strong> (a
-            Zambian government healthcare system) and the{" "}
-            <strong>TUSO ticket management system</strong>.
+            Before that, I worked remotely with{" "}
+            <strong>Blackrock IT Solutions</strong> on{" "}
+            <strong>HybridChart</strong> — a healthcare scheduling application
+            where I led the reporting module, including real-time staff
+            scheduling, permissions, and location-based reporting. I also built
+            timesheet and file management features for their TechConnect
+            platform.
           </p>
 
           <p>
-            In addition to my professional work, I have built a personal
-            project—a{" "}
-            <strong>microservices-based financial management system</strong>. In
-            this project, I use:
-          </p>
-
-          <ul>
-            <li>
-              <strong>NestJS</strong>
-            </li>
-            <li>
-              <strong>Docker</strong>
-            </li>
-            <li>
-              <strong>RabbitMQ</strong>
-            </li>
-            <li>
-              <strong>Kong API Gateway</strong>
-            </li>
-            <li>
-              <strong>Redis</strong>
-            </li>
-          </ul>
-
-          <p>
-            The system consists of <strong>14+ services</strong>. Through this
-            project, I actively experiment with{" "}
-            <strong>backend architecture</strong>,{" "}
-            <strong>system design</strong>, and{" "}
-            <strong>distributed systems</strong>.
+            Earlier in my career at <strong>Excel Technologies</strong>, I
+            worked on <strong>SmartCare Pro</strong> (a Zambian government
+            healthcare system) and <strong>TUSO</strong>, a ticket management
+            system with rule-based access control.
           </p>
 
           <p>
-            I am a <strong>self-taught developer</strong> and have not taken any
-            formal programming courses. I follow my own learning philosophy and
-            approach to understanding technology. I focus on <em>why</em> things
-            work, not just <em>how</em>. Because of this, I often revisit
-            documentation, which helps me build deeper understanding.
+            Outside of work, I build things to learn. My main side projects are{" "}
+            <strong>PFMS</strong>, a microservices-based financial management
+            system with 14+ services (NestJS, Docker, RabbitMQ, Kong,
+            PostgreSQL), and <strong>Recall</strong>, an AI-powered document
+            processing platform where I work with local LLMs (Ollama), vector
+            embeddings, and retrieval-augmented generation using Qdrant and
+            Next.js.
           </p>
 
           <p>
-            I enjoy <strong>debugging</strong> and consider it one of my
-            strengths. I also enjoy <strong>writing</strong>—I have written and
-            published several technical articles and case studies, which I
-            regularly share on platforms like <strong>daily.dev</strong>.
+            AI and machine learning are where most of my learning energy goes
+            right now. I'm actively exploring embeddings, document chunking
+            strategies, LLM orchestration, and how to build useful AI-powered
+            features into real applications — not just demos.
           </p>
 
           <p>
-            Currently, I am consistently studying <strong>DevOps</strong>,{" "}
-            <strong>cloud technologies</strong>, <strong>microservices</strong>,
-            and <strong>data structures</strong>, and I'm always looking to grow
-            both technically and professionally.
+            I'm self-taught — no formal CS degree. I came from a Geography &
+            Environment background, which taught me to think in systems. I
+            believe in understanding <em>why</em> things work, not just{" "}
+            <em>how</em>. I revisit documentation often, enjoy debugging, and
+            write about what I learn on{" "}
+            <a
+              href="https://eaysin-dev.hashnode.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-primary/80 font-medium"
+            >
+              Hashnode
+            </a>
+            .
           </p>
         </div>
 
@@ -145,11 +96,11 @@ const About = () => {
         </h2>
         <p className="text-lg leading-relaxed">
           <strong className="text-foreground font-semibold">
-            M.Sc. in Geography & Environment
+            B.Sc. (Honours) in Geography & Environment
           </strong>
           <br />
           <span className="text-muted-foreground">
-            Ananda Mohan College, Mymensingh
+            Ananda Mohan College, Mymensingh • 2018–2021
           </span>
         </p>
       </div>

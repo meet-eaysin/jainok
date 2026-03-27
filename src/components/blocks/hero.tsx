@@ -17,10 +17,6 @@ export const Hero = () => {
           <p className="max-w-2xl text-lg font-normal text-zinc-700 md:text-xl dark:text-zinc-300">
             {profile.bio}
           </p>
-
-          <p className="max-w-2xl text-base font-light text-zinc-600 md:text-lg dark:text-zinc-400">
-            {profile.detailedBio}
-          </p>
         </div>
         <div className="flex flex-wrap items-center gap-4">
           <Button asChild size="lg">
